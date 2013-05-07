@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web;
+﻿using System.Web;
 
 namespace Nonae.Core
 {
@@ -9,6 +8,6 @@ namespace Nonae.Core
 		{
 		}
 
-		public bool IsReusable { get; private set; }
+		public bool IsReusable { get { return true; } }
 	}
 }
