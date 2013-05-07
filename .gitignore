@@ -1,0 +1,11 @@
+_ReSharper*
+bin
+obj
+logs
+*.user
+*.suo
+*.cache
+*.docstates
+*.DotSettings*
+*.ncrunch*
+_NCrunch_*
