@@ -66,10 +66,10 @@ namespace Nonae.Tests.EndToEnd
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("200 Ok")]
-        public virtual void _200Ok()
+        [NUnit.Framework.DescriptionAttribute("Call GET on the root")]
+        public virtual void CallGETOnTheRoot()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("200 Ok", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call GET on the root", ((string[])(null)));
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7

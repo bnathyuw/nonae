@@ -3,6 +3,6 @@
 	In order to use it correctly
 	I want to know when everything has gone to plan
 
-Scenario: 200 Ok
+Scenario: Call GET on the root
 	When I call GET on the root
 	Then I get a 200 OK response
