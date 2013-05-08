@@ -6,9 +6,9 @@ namespace Nonae.Web
 	{
 		public HttpHandler()
 		{
-			AddAllowedMethods("/nonae", HttpMethod.Get, HttpMethod.Head, HttpMethod.Options);
-			AddAllowedMethods("/nonae/users", HttpMethod.Get, HttpMethod.Head, HttpMethod.Post, HttpMethod.Options);
-			AddAllowedMethods("/nonae/users/1", HttpMethod.Get, HttpMethod.Head, HttpMethod.Put, HttpMethod.Delete, HttpMethod.Options);
+			AddEndpoint("/nonae").WithMethods(HttpMethod.Get, HttpMethod.Head, HttpMethod.Options);
+			AddEndpoint("/nonae/users").WithMethods(HttpMethod.Get, HttpMethod.Head, HttpMethod.Post, HttpMethod.Options);
+			AddEndpoint("/nonae/users/1").WithMethods(HttpMethod.Get, HttpMethod.Head, HttpMethod.Put, HttpMethod.Delete, HttpMethod.Options);
 		}
 	}
 }
