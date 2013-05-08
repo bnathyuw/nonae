@@ -18,12 +18,21 @@ namespace Nonae.Tests.EndToEnd
 			_response = Request.Options("http://localhost/nonae/users").GetResponse();
 		}
 
-		[Then(@"I am told I can POST")]
+		[When(@"I call OPTIONS on a single resource")]
 // ReSharper disable UnusedMember.Global
-		public void ThenIAmToldICanPost()
+		public void WhenICallOptionsOnASingleResource()
 // ReSharper restore UnusedMember.Global
 		{
-			Assert.That(_response.Allow, Is.StringContaining("POST"));
+			_response = Request.Options("http://localhost/nonae/users/1").GetResponse();
+		}
+
+
+		[Then(@"I am told I can (.*)")]
+// ReSharper disable UnusedMember.Global
+		public void ThenIAmToldICanDo(string verb)
+// ReSharper restore UnusedMember.Global
+		{
+			Assert.That(_response.Allow, Is.StringContaining(verb));
 		}
 	}
 }
