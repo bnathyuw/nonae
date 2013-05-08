@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Net;
+using NUnit.Framework;
 using TechTalk.SpecFlow;
 
 namespace Nonae.Tests.EndToEnd
@@ -24,6 +25,14 @@ namespace Nonae.Tests.EndToEnd
 // ReSharper restore UnusedMember.Global
 		{
 			_response = Request.Options("http://localhost/nonae/users/1").GetResponse();
+		}
+
+		[Then(@"I get a (.*) OK response")]
+// ReSharper disable UnusedMember.Global
+		public void ThenIGetSuchAndSuchAResponse(HttpStatusCode expectedStatusCode)
+// ReSharper restore UnusedMember.Global
+		{
+			Assert.That(_response.StatusCode, Is.EqualTo(expectedStatusCode));
 		}
 
 

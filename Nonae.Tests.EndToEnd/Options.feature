@@ -5,13 +5,15 @@
 
 Scenario: Call OPTIONS on a collection
 	When I call OPTIONS on a collection
-	Then I am told I can POST
-	Then I am told I can GET
-	Then I am told I can HEAD
+	Then I get a 200 OK response
+	And I am told I can POST
+	And I am told I can GET
+	And I am told I can HEAD
 
 Scenario: Call OPTIONS on a single resource
 	When I call OPTIONS on a single resource
-	Then I am told I can GET
+	Then I get a 200 OK response
+	And I am told I can GET
 	And I am told I can PUT
 	And I am told I can HEAD
 	And I am told I can DELETE

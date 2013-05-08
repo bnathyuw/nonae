@@ -9,15 +9,15 @@ namespace Nonae.Tests.EndToEnd
     public class OkSteps
 // ReSharper restore UnusedMember.Global
     {
-	    private Request _request;
+	    private Response _response;
 
 	    [When(@"I make a request")]
 // ReSharper disable UnusedMember.Global
         public void WhenIMakeARequest()
 // ReSharper restore UnusedMember.Global
         {
-	        var request = Request.Get("http://localhost/nonae");
-	        _request = request;
+		    _response = Request.Get("http://localhost/nonae").GetResponse();
+
         }
 
 	    [Then(@"the response should be 200 OK")]
@@ -25,8 +25,7 @@ namespace Nonae.Tests.EndToEnd
         public void ThenTheResponseShouldBeOk()
 // ReSharper restore UnusedMember.Global
 	    {
-		    var response = _request.GetResponse();
-		    Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+		    Assert.That(_response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 	    }
     }
 }
