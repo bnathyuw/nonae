@@ -6,6 +6,7 @@ namespace Nonae.Core
 	{
 		public void ProcessRequest(HttpContext context)
 		{
+			context.Response.Headers.Add("Allow", "POST");
 		}
 
 		public bool IsReusable { get { return true; } }
