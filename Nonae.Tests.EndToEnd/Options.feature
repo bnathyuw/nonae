@@ -9,6 +9,8 @@ Scenario: Call OPTIONS on a collection
 	And I am told I can POST
 	And I am told I can GET
 	And I am told I can HEAD
+	And I am not told I can DELETE
+	And I am not told I can PUT
 
 Scenario: Call OPTIONS on a single resource
 	When I call OPTIONS on a single resource
@@ -17,3 +19,13 @@ Scenario: Call OPTIONS on a single resource
 	And I am told I can PUT
 	And I am told I can HEAD
 	And I am told I can DELETE
+	And I am not told I can POST
+
+Scenario: Call OPTIONS on the root
+	When I call OPTIONS on the root
+	Then I get a 200 OK response
+	And I am told I can GET
+	And I am told I can HEAD
+	And I am not told I can DELETE
+	And I am not told I can PUT
+	And I am not told I can POST

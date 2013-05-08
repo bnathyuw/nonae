@@ -46,6 +46,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Context.cs" />
     <Compile Include="Ok.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
