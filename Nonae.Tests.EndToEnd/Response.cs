@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using NUnit.Framework;
@@ -10,6 +11,7 @@ namespace Nonae.Tests.EndToEnd
 		private readonly HttpStatusCode _statusCode;
 		private readonly string _body;
 		private readonly WebHeaderCollection _headers;
+		private IEnumerable<string> _allow;
 
 		public Response(HttpWebResponse httpWebResponse)
 		{
@@ -33,9 +35,14 @@ namespace Nonae.Tests.EndToEnd
 			get { return _headers["Location"]; }
 		}
 
-		public string Allow
+		public IEnumerable<string> Allow
 		{
-			get { return _headers["Allow"]; }
+			get { return _allow ?? (_allow = GetHeaderValues("Allow")); }
+		}
+
+		private IEnumerable<string> GetHeaderValues(string headerName)
+		{
+			return _headers[headerName].Split(new[] {',', ' '}, StringSplitOptions.RemoveEmptyEntries);
 		}
 
 		public string ETag

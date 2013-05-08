@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 
@@ -35,12 +33,13 @@ namespace Nonae.Tests.EndToEnd
 		[Then(@"I am told I can (.*)")]
 		public void ThenIAmToldICanDo(string verb)
 		{
-			Assert.That(_context.Response.Allow, Is.StringContaining(verb));
+			Assert.That(_context.Response.Allow, Has.Member(verb));
 		}
+
 		[Then(@"I am not told I can (.*)")]
 		public void ThenIAmNotToldICanDo(string verb)
 		{
-			Assert.That(_context.Response.Allow, Is.Not.StringContaining(verb));
+			Assert.That(_context.Response.Allow, Has.No.Member(verb));
 		}
 	}
 // ReSharper restore UnusedMember.Global
