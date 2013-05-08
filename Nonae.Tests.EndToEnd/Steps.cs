@@ -15,7 +15,7 @@ namespace Nonae.Tests.EndToEnd
 			_context = context;
 		}
 
-		[When(@"I call (.*) on (.*)")]
+		[When(@"I call ([A-Z]*) on (.*)")]
 		public void WhenICallOptionsOnACollection(string httpMethod, string resourceKey)
 		{
 			var createRequest = Configuration.RequestFactories[httpMethod];
@@ -23,20 +23,20 @@ namespace Nonae.Tests.EndToEnd
 			_context.Request = createRequest(url);
 		}
 
-		[Then(@"I get a (.*) .* response")]
+		[Then(@"I get a (\d*) .* response")]
 		public void ThenIGetSuchAndSuchAResponse(HttpStatusCode expectedStatusCode)
 		{
 			Assert.That(_context.Response.StatusCode, Is.EqualTo(expectedStatusCode));
 		}
 
 
-		[Then(@"I am told I can (.*)")]
+		[Then(@"I am told I can ([A-Z]*)")]
 		public void ThenIAmToldICanDo(string verb)
 		{
 			Assert.That(_context.Response.Allow, Has.Member(verb));
 		}
 
-		[Then(@"I am not told I can (.*)")]
+		[Then(@"I am not told I can ([A-Z]*)")]
 		public void ThenIAmNotToldICanDo(string verb)
 		{
 			Assert.That(_context.Response.Allow, Has.No.Member(verb));

@@ -14,8 +14,10 @@ namespace Nonae.Tests.EndToEnd
 
 		public static readonly Dictionary<string, Func<string, Request>> RequestFactories = new Dictionary<string, Func<string, Request>>
 			                                                                                    {
+				                                                                                    {"DELETE", Request.Delete},
 				                                                                                    {"GET", Request.Get},
-				                                                                                    {"OPTIONS", Request.Options}
+				                                                                                    {"HEAD", Request.Head},
+				                                                                                    {"OPTIONS", Request.Options},
 			                                                                                    };
 	}
 }
