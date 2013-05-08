@@ -51,13 +51,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Ok.feature</DependentUpon>
     </Compile>
-    <Compile Include="OkSteps.cs" />
     <Compile Include="Options.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Options.feature</DependentUpon>
     </Compile>
-    <Compile Include="OptionsSteps.cs" />
+    <Compile Include="Steps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request.cs" />
     <Compile Include="Response.cs" />
