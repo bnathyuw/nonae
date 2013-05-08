@@ -16,7 +16,7 @@ namespace Nonae.Tests.EndToEnd
         public void WhenIMakeARequest()
 // ReSharper restore UnusedMember.Global
         {
-	        var request = Request.Get("http://localhost/nonae/");
+	        var request = Request.Get("http://localhost/nonae");
 	        _request = request;
         }
 
