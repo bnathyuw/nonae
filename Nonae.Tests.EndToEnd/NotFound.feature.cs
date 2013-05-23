@@ -66,14 +66,18 @@ namespace Nonae.Tests.EndToEnd
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Call verb on a silly url")]
-        [NUnit.Framework.TestCaseAttribute("DELETE", null)]
-        [NUnit.Framework.TestCaseAttribute("GET", null)]
-        [NUnit.Framework.TestCaseAttribute("HEAD", null)]
-        [NUnit.Framework.TestCaseAttribute("POST", null)]
-        public virtual void CallVerbOnASillyUrl(string verb, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Call verb on a non-existent url")]
+        [NUnit.Framework.TestCaseAttribute("DELETE", "a silly url", null)]
+        [NUnit.Framework.TestCaseAttribute("GET", "a silly url", null)]
+        [NUnit.Framework.TestCaseAttribute("HEAD", "a silly url", null)]
+        [NUnit.Framework.TestCaseAttribute("POST", "a silly url", null)]
+        [NUnit.Framework.TestCaseAttribute("DELETE", "a resource that doesn\'t exist", null)]
+        [NUnit.Framework.TestCaseAttribute("GET", "a resource that doesn\'t exist", null)]
+        [NUnit.Framework.TestCaseAttribute("HEAD", "a resource that doesn\'t exist", null)]
+        [NUnit.Framework.TestCaseAttribute("POST", "a resource that doesn\'t exist", null)]
+        public virtual void CallVerbOnANon_ExistentUrl(string verb, string url, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call verb on a silly url", exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call verb on a non-existent url", exampleTags);
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7

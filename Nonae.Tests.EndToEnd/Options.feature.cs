@@ -82,6 +82,11 @@ namespace Nonae.Tests.EndToEnd
         [NUnit.Framework.TestCaseAttribute("the root", "not told", "DELETE", null)]
         [NUnit.Framework.TestCaseAttribute("the root", "not told", "PUT", null)]
         [NUnit.Framework.TestCaseAttribute("the root", "not told", "POST", null)]
+        [NUnit.Framework.TestCaseAttribute("a silly url", "not told", "DELETE", null)]
+        [NUnit.Framework.TestCaseAttribute("a silly url", "not told", "GET", null)]
+        [NUnit.Framework.TestCaseAttribute("a silly url", "not told", "HEAD", null)]
+        [NUnit.Framework.TestCaseAttribute("a silly url", "not told", "PUT", null)]
+        [NUnit.Framework.TestCaseAttribute("a silly url", "not told", "POST", null)]
         public virtual void CallOPTIONSOnAnEndpoint(string endpoint, string status, string verb, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call OPTIONS on an endpoint", exampleTags);

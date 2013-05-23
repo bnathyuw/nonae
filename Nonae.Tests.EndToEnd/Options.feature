@@ -25,3 +25,8 @@ Scenarios:
 	| the root          | not told | DELETE |
 	| the root          | not told | PUT    |
 	| the root          | not told | POST   |
+	| a silly url       | not told | DELETE |
+	| a silly url       | not told | GET    |
+	| a silly url       | not told | HEAD   |
+	| a silly url       | not told | PUT    |
+	| a silly url       | not told | POST   |

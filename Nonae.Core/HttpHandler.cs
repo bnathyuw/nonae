@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Web;
 
 namespace Nonae.Core
@@ -16,7 +17,13 @@ namespace Nonae.Core
 
 			if (endpoint == null)
 			{
-				context.Response.StatusCode = (int) HttpStatusCode.NotFound;
+				if (context.Request.HttpMethod == HttpMethod.Options.ToString())
+				{
+					context.Response.StatusCode = (int) HttpStatusCode.OK;
+					context.Response.Headers.Add("Allow", " ");
+				}
+				else
+					context.Response.StatusCode = (int) HttpStatusCode.NotFound;
 			}
 			else
 			{
