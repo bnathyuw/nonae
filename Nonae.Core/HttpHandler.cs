@@ -14,10 +14,17 @@ namespace Nonae.Core
 
 			var endpoint = GetBlah(path);
 
-			if (!endpoint.SupportsMethod(context))
-				context.Response.StatusCode = (int) HttpStatusCode.MethodNotAllowed;
+			if (endpoint == null)
+			{
+				context.Response.StatusCode = (int) HttpStatusCode.NotFound;
+			}
+			else
+			{
+				if (!endpoint.SupportsMethod(context))
+					context.Response.StatusCode = (int) HttpStatusCode.MethodNotAllowed;
 
-			SetAllowHeader(context, endpoint);
+				SetAllowHeader(context, endpoint);
+			}
 		}
 
 		private static void SetAllowHeader(HttpContext context, Endpoint endpoint)
@@ -28,7 +35,7 @@ namespace Nonae.Core
 
 		private Endpoint GetBlah(string path)
 		{
-			return _allow[path];
+			return _allow.ContainsKey(path) ? _allow[path] : null;
 		}
 
 		public bool IsReusable { get { return true; } }
