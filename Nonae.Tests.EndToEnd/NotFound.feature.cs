@@ -66,17 +66,19 @@ namespace Nonae.Tests.EndToEnd
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Call GET on a silly url")]
-        [NUnit.Framework.CategoryAttribute("inprogress")]
-        public virtual void CallGETOnASillyUrl()
+        [NUnit.Framework.DescriptionAttribute("Call verb on a silly url")]
+        [NUnit.Framework.TestCaseAttribute("DELETE", null)]
+        [NUnit.Framework.TestCaseAttribute("GET", null)]
+        [NUnit.Framework.TestCaseAttribute("HEAD", null)]
+        [NUnit.Framework.TestCaseAttribute("POST", null)]
+        public virtual void CallVerbOnASillyUrl(string verb, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call GET on a silly url", new string[] {
-                        "inprogress"});
-#line 7
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call verb on a silly url", exampleTags);
+#line 6
 this.ScenarioSetup(scenarioInfo);
+#line 7
+ testRunner.When(string.Format("I call {0} on a silly url", verb), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 8
- testRunner.When("I call GET on a silly url", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 9
  testRunner.Then("I get a 404 Not Found response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

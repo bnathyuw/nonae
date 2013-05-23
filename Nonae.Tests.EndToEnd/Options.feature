@@ -3,29 +3,25 @@
 	As a consumer of the API
 	I want to be make OPTIONS calls
 
-Scenario: Call OPTIONS on a collection
-	When I call OPTIONS on a collection
+Scenario Outline: Call OPTIONS on an endpoint
+	When I call OPTIONS on <endpoint>
 	Then I get a 200 OK response
-	And I am told I can POST
-	And I am told I can GET
-	And I am told I can HEAD
-	And I am not told I can DELETE
-	And I am not told I can PUT
+	And I am <status> I can <verb>
 
-Scenario: Call OPTIONS on a single resource
-	When I call OPTIONS on a single resource
-	Then I get a 200 OK response
-	And I am told I can GET
-	And I am told I can PUT
-	And I am told I can HEAD
-	And I am told I can DELETE
-	And I am not told I can POST
-
-Scenario: Call OPTIONS on the root
-	When I call OPTIONS on the root
-	Then I get a 200 OK response
-	And I am told I can GET
-	And I am told I can HEAD
-	And I am not told I can DELETE
-	And I am not told I can PUT
-	And I am not told I can POST
+Scenarios:
+	| endpoint          | status   | verb   |
+	| a collection      | told     | POST   |
+	| a collection      | told     | GET    |
+	| a collection      | told     | HEAD   |
+	| a collection      | not told | DELETE |
+	| a collection      | not told | PUT    |
+	| a single resource | told     | GET    |
+	| a single resource | told     | PUT    |
+	| a single resource | told     | HEAD   |
+	| a single resource | told     | DELETE |
+	| a single resource | not told | POST   |
+	| the root          | told     | GET    |
+	| the root          | told     | HEAD   |
+	| the root          | not told | DELETE |
+	| the root          | not told | PUT    |
+	| the root          | not told | POST   |

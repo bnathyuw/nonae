@@ -66,76 +66,33 @@ namespace Nonae.Tests.EndToEnd
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Call OPTIONS on a collection")]
-        public virtual void CallOPTIONSOnACollection()
+        [NUnit.Framework.DescriptionAttribute("Call OPTIONS on an endpoint")]
+        [NUnit.Framework.TestCaseAttribute("a collection", "told", "POST", null)]
+        [NUnit.Framework.TestCaseAttribute("a collection", "told", "GET", null)]
+        [NUnit.Framework.TestCaseAttribute("a collection", "told", "HEAD", null)]
+        [NUnit.Framework.TestCaseAttribute("a collection", "not told", "DELETE", null)]
+        [NUnit.Framework.TestCaseAttribute("a collection", "not told", "PUT", null)]
+        [NUnit.Framework.TestCaseAttribute("a single resource", "told", "GET", null)]
+        [NUnit.Framework.TestCaseAttribute("a single resource", "told", "PUT", null)]
+        [NUnit.Framework.TestCaseAttribute("a single resource", "told", "HEAD", null)]
+        [NUnit.Framework.TestCaseAttribute("a single resource", "told", "DELETE", null)]
+        [NUnit.Framework.TestCaseAttribute("a single resource", "not told", "POST", null)]
+        [NUnit.Framework.TestCaseAttribute("the root", "told", "GET", null)]
+        [NUnit.Framework.TestCaseAttribute("the root", "told", "HEAD", null)]
+        [NUnit.Framework.TestCaseAttribute("the root", "not told", "DELETE", null)]
+        [NUnit.Framework.TestCaseAttribute("the root", "not told", "PUT", null)]
+        [NUnit.Framework.TestCaseAttribute("the root", "not told", "POST", null)]
+        public virtual void CallOPTIONSOnAnEndpoint(string endpoint, string status, string verb, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call OPTIONS on a collection", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call OPTIONS on an endpoint", exampleTags);
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
- testRunner.When("I call OPTIONS on a collection", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When(string.Format("I call OPTIONS on {0}", endpoint), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 8
  testRunner.Then("I get a 200 OK response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 9
- testRunner.And("I am told I can POST", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 10
- testRunner.And("I am told I can GET", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 11
- testRunner.And("I am told I can HEAD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 12
- testRunner.And("I am not told I can DELETE", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 13
- testRunner.And("I am not told I can PUT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Call OPTIONS on a single resource")]
-        public virtual void CallOPTIONSOnASingleResource()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call OPTIONS on a single resource", ((string[])(null)));
-#line 15
-this.ScenarioSetup(scenarioInfo);
-#line 16
- testRunner.When("I call OPTIONS on a single resource", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 17
- testRunner.Then("I get a 200 OK response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 18
- testRunner.And("I am told I can GET", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 19
- testRunner.And("I am told I can PUT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 20
- testRunner.And("I am told I can HEAD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 21
- testRunner.And("I am told I can DELETE", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 22
- testRunner.And("I am not told I can POST", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Call OPTIONS on the root")]
-        public virtual void CallOPTIONSOnTheRoot()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call OPTIONS on the root", ((string[])(null)));
-#line 24
-this.ScenarioSetup(scenarioInfo);
-#line 25
- testRunner.When("I call OPTIONS on the root", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 26
- testRunner.Then("I get a 200 OK response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 27
- testRunner.And("I am told I can GET", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
- testRunner.And("I am told I can HEAD", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
- testRunner.And("I am not told I can DELETE", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 30
- testRunner.And("I am not told I can PUT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
- testRunner.And("I am not told I can POST", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I am {0} I can {1}", status, verb), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

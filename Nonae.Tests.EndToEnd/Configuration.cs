@@ -19,6 +19,7 @@ namespace Nonae.Tests.EndToEnd
 				                                                                                    {"GET", Request.Get},
 				                                                                                    {"HEAD", Request.Head},
 				                                                                                    {"OPTIONS", Request.Options},
+				                                                                                    {"POST", url => Request.Post(url, "")},
 			                                                                                    };
 	}
 }
