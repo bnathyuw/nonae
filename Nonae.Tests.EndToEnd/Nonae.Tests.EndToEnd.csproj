@@ -53,6 +53,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MethodNotAllowed.feature</DependentUpon>
     </Compile>
+    <Compile Include="NotFound.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotFound.feature</DependentUpon>
+    </Compile>
     <Compile Include="Ok.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -73,6 +78,10 @@
     <None Include="MethodNotAllowed.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>MethodNotAllowed.feature.cs</LastGenOutput>
+    </None>
+    <None Include="NotFound.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>NotFound.feature.cs</LastGenOutput>
     </None>
     <None Include="Ok.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

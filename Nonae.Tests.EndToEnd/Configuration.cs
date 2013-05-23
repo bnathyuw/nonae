@@ -9,7 +9,8 @@ namespace Nonae.Tests.EndToEnd
 			                                                         {
 				                                                         {"the root", "http://localhost/nonae"},
 				                                                         {"a collection", "http://localhost/nonae/users"},
-				                                                         {"a single resource", "http://localhost/nonae/users/1"}
+				                                                         {"a single resource", "http://localhost/nonae/users/1"},
+				                                                         {"a silly url", "http://localhost/nonae/i/am/a/teapot"}
 			                                                         };
 
 		public static readonly Dictionary<string, Func<string, Request>> RequestFactories = new Dictionary<string, Func<string, Request>>
