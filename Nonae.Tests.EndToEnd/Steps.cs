@@ -23,6 +23,19 @@ namespace Nonae.Tests.EndToEnd
 			_context.Request = createRequest(url);
 		}
 
+		[When(@"I do not specify credentials")]
+		public void WhenIDoNotSpecifyCredentials()
+		{
+			
+		}
+
+		[When(@"I specify username '(.*)' and password '(.*)'")]
+		public void WhenISpecifyUsernameAndPassword(string username, string password)
+		{
+			_context.SetBasicAuthentication(username, password);
+		}
+
+
 		[Then(@"I get a (\d*) .* response")]
 		public void ThenIGetSuchAndSuchAResponse(HttpStatusCode expectedStatusCode)
 		{

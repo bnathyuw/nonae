@@ -46,6 +46,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Authentication.feature</DependentUpon>
+    </Compile>
     <Compile Include="Configuration.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="MethodNotAllowed.feature.cs">
@@ -75,6 +80,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Authentication.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Authentication.feature.cs</LastGenOutput>
+    </None>
     <None Include="MethodNotAllowed.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>MethodNotAllowed.feature.cs</LastGenOutput>

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web;
 
 namespace Nonae.Core
@@ -11,6 +13,18 @@ namespace Nonae.Core
 
 		public void ProcessRequest(HttpContext context)
 		{
+			var authorizationHeader = context.Request.Headers["Authorization"];
+			if (authorizationHeader != null)
+			{
+				var bits = authorizationHeader.Split(' ');
+				var authorizationType = bits[0];
+				if (authorizationType != "Basic") context.Response.StatusCode = (int) HttpStatusCode.Unauthorized;
+				var encodedCredentials = bits[1];
+				var credentialBytes = Convert.FromBase64String(encodedCredentials);
+				var credentials = Encoding.Unicode.GetString(credentialBytes);
+				if (credentials != "username:password") context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+			}
+
 			var path = context.Request.Path;
 
 			var endpoint = FindEndpoint(path);

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 
 namespace Nonae.Tests.EndToEnd
 {
@@ -102,6 +103,15 @@ REQUEST {0:o}
 
 {3}
 {4}", DateTime.UtcNow, _httpMethod, _url, _webRequest.Headers, _entity).Replace("\n", "\n--> ");
+		}
+
+		public void SetBasicAuthentication(string username, string password)
+		{
+			var text = string.Format("{0}:{1}", username, password);
+			var bytes = Encoding.Unicode.GetBytes(text);
+			var base64String = Convert.ToBase64String(bytes);
+			var header = string.Format("Basic {0}", base64String);
+			_webRequest.Headers["Authorization"] = header;
 		}
 	}
 }
