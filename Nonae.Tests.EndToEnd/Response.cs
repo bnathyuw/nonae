@@ -50,6 +50,11 @@ namespace Nonae.Tests.EndToEnd
 			get { return _headers["ETag"]; }
 		}
 
+		public object WwwAuthenticate
+		{
+			get { return _headers["WWW-Authenticate"]; }
+		}
+
 		private static string ReadBody(WebResponse webResponse)
 		{
 			using (var responseStream = webResponse.GetResponseStream())

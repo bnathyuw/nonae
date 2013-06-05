@@ -12,6 +12,7 @@ Scenario: Incorrect credentials
 	When I call GET on the root
 	And I specify username 'username' and password 'not the password'
 	Then I get a 401 Unauthorized response
+	And I get a WWW-Authenticate header requesting Basic authentication
 
 Scenario: Correct credentials
 	When I call GET on the root

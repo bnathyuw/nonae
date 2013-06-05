@@ -29,6 +29,13 @@ namespace Nonae.Tests.EndToEnd
 			
 		}
 
+		[Then(@"I get a WWW-Authenticate header requesting Basic authentication")]
+		public void ThenIGetAWWW_AuthenticateHeaderRequestingBasicAuthentication()
+		{
+			Assert.That(_context.Response.WwwAuthenticate, Is.StringStarting("Basic"));
+		}
+
+
 		[When(@"I specify username '(.*)' and password '(.*)'")]
 		public void WhenISpecifyUsernameAndPassword(string username, string password)
 		{
