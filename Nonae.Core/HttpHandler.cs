@@ -49,10 +49,8 @@ namespace Nonae.Core
 
 			if (!endpoint.SupportsMethod(context))
 				return new MethodNotAllowedResult(endpoint);
-
-			var allowHeader = endpoint.GetAllowHeader();
-			context.Response.Headers.Add("Allow", allowHeader);
-			return new NotActuallyAnException();
+			
+			return new OkResponse(endpoint);
 		}
 
 		private static bool IsOptions(HttpContext context)
@@ -100,10 +98,19 @@ namespace Nonae.Core
 		}
 	}
 
-	internal class NotActuallyAnException : IResult
+	internal class OkResponse : IResult
 	{
+		private readonly Endpoint _endpoint;
+
+		public OkResponse(Endpoint endpoint)
+		{
+			_endpoint = endpoint;
+		}
+
 		public void Update(HttpResponse response)
 		{
+			var allowHeader = _endpoint.GetAllowHeader();
+			response.Headers.Add("Allow", allowHeader);
 		}
 	}
 
