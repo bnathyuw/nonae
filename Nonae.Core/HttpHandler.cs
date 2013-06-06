@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -9,47 +10,73 @@ namespace Nonae.Core
 {
 	public class HttpHandler : IHttpHandler
 	{
-		private readonly Dictionary<string, Endpoint> _endpoints = new Dictionary<string, Endpoint>();
+		private static readonly Dictionary<string, Endpoint> Endpoints = new Dictionary<string, Endpoint>();
 
 		public void ProcessRequest(HttpContext context)
 		{
-			var exception = GetValue(context);
-			exception.Update(context.Response);
+			var result = GetResult(context);
+			result.Update(context.Response);
 		}
 
-		private IResult GetValue(HttpContext context)
+		private static IResult GetResult(HttpContext context)
 		{
 			var authorizationHeader = context.Request.Headers["Authorization"];
-			if (authorizationHeader != null)
-			{
-				var bits = authorizationHeader.Split(' ');
-				var authorizationType = bits[0];
-				if (authorizationType != "Basic")
-					return UnauthorizedResult.ForUnsupportedAuthorizationMethod();
-				var encodedCredentials = bits[1];
-				var credentialBytes = Convert.FromBase64String(encodedCredentials);
-				var credentials = Encoding.Unicode.GetString(credentialBytes);
-				if (credentials != "username:password")
-					return UnauthorizedResult.ForInvalidCredentials();
-			}
+			return authorizationHeader != null ? 
+				CheckAuthentication(context, authorizationHeader) : 
+				CheckIsOptions(context, context.Request.Path);
+		}
 
+		private static IResult CheckAuthentication(HttpContext context, string authorizationHeader)
+		{
+			var bits = authorizationHeader.Split(' ');
+			var authorizationType = bits[0];
+			var isBasicAuth = authorizationType == "Basic";
+			return isBasicAuth
+				       ? CheckIsAuthenticated(context, bits[1])
+				       : UnauthorizedResult.ForUnsupportedAuthorizationMethod();
+		}
+
+		private static IResult CheckIsAuthenticated(HttpContext context, string encodedCredentials)
+		{
+			var credentials = DecodeCredentials(encodedCredentials);
+			var isAuthenticated = credentials == "username:password";
+			return isAuthenticated
+				       ? CheckIsOptions(context, context.Request.Path)
+				       : UnauthorizedResult.ForInvalidCredentials();
+		}
+
+		private static string DecodeCredentials(string encodedCredentials)
+		{
+			var credentialBytes = Convert.FromBase64String(encodedCredentials);
+			return Encoding.Unicode.GetString(credentialBytes);
+		}
+
+		private static IResult CheckIsOptions(HttpContext context, string path)
+		{
 			// TODO: Authorize against endpoint?
 
-			var path = context.Request.Path;
+			return IsOptions(context)
+				       ? DoOptions(path)
+				       : CheckEndpointExists(context, path);
+		}
 
-			if (IsOptions(context))
-			{
-				return DoOptions(context, path);
-			}
+		private static IResult CheckEndpointExists(HttpContext context, string path)
+		{
+			var endpoint = GetEndpoint(path);
+			return endpoint == null
+				       ? new NotFoundResult()
+				       : CheckMethodIsSupported(context, endpoint);
+		}
 
-			if (!_endpoints.ContainsKey(path))
-				return new NotFoundResult();
+		private static IResult CheckMethodIsSupported(HttpContext context, Endpoint endpoint)
+		{
+			return endpoint.SupportsMethod(context)
+				       ? Ok(endpoint)
+				       : new MethodNotAllowedResult(endpoint);
+		}
 
-			var endpoint = _endpoints[path];
-
-			if (!endpoint.SupportsMethod(context))
-				return new MethodNotAllowedResult(endpoint);
-			
+		private static IResult Ok(Endpoint endpoint)
+		{
 			return new OkResponse(endpoint);
 		}
 
@@ -58,15 +85,15 @@ namespace Nonae.Core
 			return context.Request.HttpMethod == HttpMethod.Options.ToString();
 		}
 
-		private OptionsResult DoOptions(HttpContext context, string path)
+		private static OptionsResult DoOptions(string path)
 		{
-			context.Response.StatusCode = (int) HttpStatusCode.OK;
+			var endpoint = GetEndpoint(path);
+			return new OptionsResult(endpoint);
+		}
 
-			if (!_endpoints.ContainsKey(path))
-				return new OptionsResult(" ");
-			var endpoint = _endpoints[path];
-			var allow = endpoint.GetAllowHeader();
-			return new OptionsResult(allow);
+		private static Endpoint GetEndpoint(string path)
+		{
+			return Endpoints.FirstOrDefault(e => e.Key == path).Value;
 		}
 
 		public bool IsReusable
@@ -74,27 +101,36 @@ namespace Nonae.Core
 			get { return true; }
 		}
 
-		protected Endpoint AddEndpoint(string url)
+		protected static Endpoint AddEndpoint(string url)
 		{
 			var endpoint = new Endpoint();
-			_endpoints.Add(url, endpoint);
+			Endpoints.Add(url, endpoint);
 			return endpoint;
 		}
 	}
 
 	internal class OptionsResult : IResult
 	{
-		private readonly string _allow;
+		private readonly Endpoint _endpoint;
 
-		public OptionsResult(string allow)
+		public OptionsResult(Endpoint endpoint)
 		{
-			_allow = allow;
+			_endpoint = endpoint;
 		}
 
 		public void Update(HttpResponse response)
 		{
 			response.StatusCode = (int) HttpStatusCode.OK;
-			response.Headers.Add("Allow", _allow);
+			if (_endpoint == null)
+			{
+				response.Headers.Add("Allow", " ");
+			}
+			else
+			{
+				response.StatusCode = (int) HttpStatusCode.OK;
+				var allowHeader = _endpoint.GetAllowHeader();
+				response.Headers.Add("Allow", allowHeader);
+			}
 		}
 	}
 
