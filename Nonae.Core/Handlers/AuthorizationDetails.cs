@@ -1,26 +1,8 @@
-using System;
-using System.Text;
-
 namespace Nonae.Core.Handlers
 {
-	public class AuthorizationDetails
+	public abstract class AuthorizationDetails
 	{
-		private readonly string _encodedCredentials;
-
-		private AuthorizationDetails(string encodedCredentials)
-		{
-			_encodedCredentials = encodedCredentials;
-		}
-
-		public bool IsAuthenticated
-		{
-			get
-			{
-				var credentialBytes = Convert.FromBase64String(_encodedCredentials);
-				var credentials = Encoding.Unicode.GetString(credentialBytes);
-				return credentials == "username:password";
-			}
-		}
+		public abstract bool IsAuthenticated { get; }
 
 		public static AuthorizationDetails From(string authorizationHeader)
 		{
@@ -28,7 +10,7 @@ namespace Nonae.Core.Handlers
 
 			var authorizationType = authorizationHeaderBits[0];
 
-			return authorizationType != "Basic" ? null : new AuthorizationDetails(authorizationHeaderBits[1]);
+			return authorizationType != "Basic" ? null : new BasicAuthorizationDetails(authorizationHeaderBits[1]);
 		}
 	}
 }
