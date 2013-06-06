@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
+using Nonae.Core.Handlers;
 
 namespace Nonae.Core
 {
@@ -14,9 +15,9 @@ namespace Nonae.Core
 			_url = url;
 		}
 
-		public bool Allows(string httpMethod)
+		public bool Allows(RequestDetails requestDetails)
 		{
-			return _methods.ToList().Contains(new HttpMethod(httpMethod));
+			return _methods.Any(requestDetails.Matches);
 		}
 
 		public string GetAllowHeader()
@@ -29,9 +30,9 @@ namespace Nonae.Core
 			_methods = methods;
 		}
 
-		public bool IsAt(string path)
+		public bool IsAt(RequestDetails requestDetails)
 		{
-			return _url == path;
+			return requestDetails.Matches(_url);
 		}
 	}
 }

@@ -1,23 +1,23 @@
-using System.Web;
 using Nonae.Core.Results;
 
 namespace Nonae.Core.Handlers
 {
-	internal class EndpointExistsHandler
+	internal class EndpointExistsHandler : IHandler
 	{
-		private readonly MethodIsSupportedHandler _methodIsSupportedHandler;
+		private readonly IHandler _successor;
 
 		public EndpointExistsHandler()
 		{
-			_methodIsSupportedHandler = new MethodIsSupportedHandler();
+			_successor = new MethodIsSupportedHandler();
 		}
 
-		public IResult CheckEndpointExists(HttpContext context, string path)
+		public IResult Handle(RequestDetails requestDetails)
 		{
-			var endpoint = EndpointStore.Get(path);
+			var endpoint = EndpointStore.Get(requestDetails);
+			requestDetails.Endpoint = endpoint;
 			return endpoint == null
 				       ? new NotFoundResult()
-				       : _methodIsSupportedHandler.CheckMethodIsSupported(context, endpoint);
+				       : _successor.Handle(requestDetails);
 		}
 	}
 }

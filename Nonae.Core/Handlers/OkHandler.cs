@@ -2,11 +2,11 @@ using Nonae.Core.Results;
 
 namespace Nonae.Core.Handlers
 {
-	internal class OkHandler
+	internal class OkHandler : IHandler
 	{
-		public IResult Ok(Endpoint endpoint)
+		public IResult Handle(RequestDetails requestDetails)
 		{
-			return new OkResponse(endpoint);
+			return new OkResponse(requestDetails.Endpoint);
 		}
 	}
 }

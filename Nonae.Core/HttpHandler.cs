@@ -5,7 +5,7 @@ namespace Nonae.Core
 {
 	public class HttpHandler : IHttpHandler
 	{
-		private readonly AuthenticationHandler _authenticationHandler;
+		private readonly IHandler _authenticationHandler;
 
 		protected HttpHandler()
 		{
@@ -14,7 +14,8 @@ namespace Nonae.Core
 
 		public void ProcessRequest(HttpContext context)
 		{
-			var result = _authenticationHandler.CheckAuthentication(context);
+			var requestDetails = new RequestDetails(context.Request.Path, context.Request.HttpMethod, context.Request.Headers);
+			var result = _authenticationHandler.Handle(requestDetails);
 			result.Update(context.Response);
 		}
 

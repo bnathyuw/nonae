@@ -1,30 +1,29 @@
 using System.Net.Http;
-using System.Web;
 using Nonae.Core.Results;
 
 namespace Nonae.Core.Handlers
 {
-	internal class OptionsHandler
+	internal class OptionsHandler : IHandler
 	{
-		private readonly EndpointExistsHandler _endpointExistsHandler;
+		private readonly IHandler _successor;
 
 		public OptionsHandler()
 		{
-			_endpointExistsHandler = new EndpointExistsHandler();
+			_successor = new EndpointExistsHandler();
 		}
 
-		public IResult CheckIsOptions(HttpContext context, string path)
+		public IResult Handle(RequestDetails requestDetails)
 		{
 			// TODO: Authorize against endpoint?
 
-			return IsOptions(context)
-				       ? new OptionsResult(EndpointStore.Get(path))
-				       : _endpointExistsHandler.CheckEndpointExists(context, path);
+			return IsOptions(requestDetails)
+				       ? new OptionsResult(EndpointStore.Get(requestDetails))
+				       : _successor.Handle(requestDetails);
 		}
 
-		private static bool IsOptions(HttpContext context)
+		private static bool IsOptions(RequestDetails requestDetails)
 		{
-			return context.Request.HttpMethod == HttpMethod.Options.ToString();
+			return requestDetails.Matches(HttpMethod.Options);
 		}
 	}
 }

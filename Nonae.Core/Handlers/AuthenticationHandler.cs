@@ -1,39 +1,38 @@
-using System.Web;
 using Nonae.Core.Results;
 
 namespace Nonae.Core.Handlers
 {
-	internal class AuthenticationHandler
+	internal class AuthenticationHandler : IHandler
 	{
-		private readonly OptionsHandler _optionsHandler;
+		private readonly IHandler _successor;
 
 		public AuthenticationHandler()
 		{
-			_optionsHandler = new OptionsHandler();
+			_successor = new OptionsHandler();
 		}
 
-		public IResult CheckAuthentication(HttpContext context)
+		public IResult Handle(RequestDetails requestDetails)
 		{
-			var authorizationHeader = context.Request.Headers["Authorization"];
+			var authorizationHeader = requestDetails.Headers["Authorization"];
 
 			return authorizationHeader == null 
-				? _optionsHandler.CheckIsOptions(context, context.Request.Path) 
-				: CheckAuthenticationFromHeader(context, authorizationHeader);
+				? _successor.Handle(requestDetails) 
+				: CheckAuthenticationFromHeader(authorizationHeader, requestDetails);
 		}
 
-		private IResult CheckAuthenticationFromHeader(HttpContext context, string authorizationHeader)
+		private IResult CheckAuthenticationFromHeader(string authorizationHeader, RequestDetails requestDetails)
 		{
 			var authorizationDetails = AuthorizationDetails.From(authorizationHeader);
 
 			return authorizationDetails == null
 				       ? UnauthorizedResult.ForUnsupportedAuthorizationMethod()
-				       : CheckBasicAuth(authorizationDetails, context);
+				       : CheckBasicAuth(authorizationDetails, requestDetails);
 		}
 
-		private IResult CheckBasicAuth(AuthorizationDetails authorizationDetails, HttpContext context)
+		private IResult CheckBasicAuth(AuthorizationDetails authorizationDetails, RequestDetails requestDetails)
 		{
 			return authorizationDetails.IsAuthenticated
-				       ? _optionsHandler.CheckIsOptions(context, context.Request.Path)
+				       ? _successor.Handle(requestDetails)
 				       : UnauthorizedResult.ForInvalidCredentials();
 		}
 	}

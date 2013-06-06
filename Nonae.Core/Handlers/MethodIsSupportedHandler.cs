@@ -1,22 +1,21 @@
-using System.Web;
 using Nonae.Core.Results;
 
 namespace Nonae.Core.Handlers
 {
-	internal class MethodIsSupportedHandler
+	internal class MethodIsSupportedHandler : IHandler
 	{
-		private readonly OkHandler _okHandler;
+		private readonly IHandler _successor;
 
 		public MethodIsSupportedHandler()
 		{
-			_okHandler = new OkHandler();
+			_successor = new OkHandler();
 		}
 
-		public IResult CheckMethodIsSupported(HttpContext context, Endpoint endpoint)
+		public IResult Handle(RequestDetails requestDetails)
 		{
-			return endpoint.Allows(context.Request.HttpMethod)
-				       ? _okHandler.Ok(endpoint)
-				       : new MethodNotAllowedResult(endpoint);
+			return requestDetails.Endpoint.Allows(requestDetails)
+				       ? _successor.Handle(requestDetails)
+				       : new MethodNotAllowedResult(requestDetails.Endpoint);
 		}
 	}
 }
