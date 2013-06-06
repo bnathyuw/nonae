@@ -10,11 +10,16 @@ Scenario: Anonymous access
 
 Scenario: Incorrect credentials
 	When I call GET on the root
-	And I specify username 'username' and password 'not the password'
+	And I specify username 'username' and password 'not the password' for Basic authentication
 	Then I get a 401 Unauthorized response
 	And I get a WWW-Authenticate header requesting Basic authentication
 
+Scenario: Incorrect authentication method
+	When I call GET on the root
+	And I specify username 'username' and password 'password' for Dodgy authentication
+	Then I get a 401 Unauthorized response
+
 Scenario: Correct credentials
 	When I call GET on the root
-	And I specify username 'username' and password 'password'
+	And I specify username 'username' and password 'password' for Basic authentication
 	Then I get a 200 OK response

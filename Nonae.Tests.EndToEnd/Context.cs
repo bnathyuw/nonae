@@ -15,9 +15,9 @@
 			set { _request = value; }
 		}
 
-		public void SetBasicAuthentication(string username, string password)
+		public void SetAuthentication(string authMethod, string username, string password)
 		{
-			_request.SetBasicAuthentication(username, password);
+			_request.SetAuthentication(authMethod, username, password);
 		}
 	}
 }

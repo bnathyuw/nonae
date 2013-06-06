@@ -36,10 +36,10 @@ namespace Nonae.Tests.EndToEnd
 		}
 
 
-		[When(@"I specify username '(.*)' and password '(.*)'")]
-		public void WhenISpecifyUsernameAndPassword(string username, string password)
+		[When(@"I specify username '(.*)' and password '(.*)' for (.*) authentication")]
+		public void WhenISpecifyUsernameAndPassword(string username, string password, string authMethod)
 		{
-			_context.SetBasicAuthentication(username, password);
+			_context.SetAuthentication(authMethod, username, password);
 		}
 
 

@@ -105,12 +105,12 @@ REQUEST {0:o}
 {4}", DateTime.UtcNow, _httpMethod, _url, _webRequest.Headers, _entity).Replace("\n", "\n--> ");
 		}
 
-		public void SetBasicAuthentication(string username, string password)
+		public void SetAuthentication(string authMethod, string username, string password)
 		{
 			var text = string.Format("{0}:{1}", username, password);
 			var bytes = Encoding.Unicode.GetBytes(text);
 			var base64String = Convert.ToBase64String(bytes);
-			var header = string.Format("Basic {0}", base64String);
+			var header = string.Format("{0} {1}", authMethod, base64String);
 			_webRequest.Headers["Authorization"] = header;
 		}
 	}
