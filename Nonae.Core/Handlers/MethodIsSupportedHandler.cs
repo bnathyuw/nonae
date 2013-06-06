@@ -14,7 +14,7 @@ namespace Nonae.Core.Handlers
 
 		public IResult CheckMethodIsSupported(HttpContext context, Endpoint endpoint)
 		{
-			return endpoint.SupportsMethod(context)
+			return endpoint.Allows(context.Request.HttpMethod)
 				       ? _okHandler.Ok(endpoint)
 				       : new MethodNotAllowedResult(endpoint);
 		}

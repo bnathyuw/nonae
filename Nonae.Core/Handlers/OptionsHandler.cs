@@ -18,7 +18,7 @@ namespace Nonae.Core.Handlers
 			// TODO: Authorize against endpoint?
 
 			return IsOptions(context)
-				       ? new OptionsResult(HttpHandler.GetEndpoint(path))
+				       ? new OptionsResult(EndpointStore.Get(path))
 				       : _endpointExistsHandler.CheckEndpointExists(context, path);
 		}
 

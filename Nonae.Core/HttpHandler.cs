@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using Nonae.Core.Handlers;
 
 namespace Nonae.Core
 {
 	public class HttpHandler : IHttpHandler
 	{
-		private static readonly Dictionary<string, Endpoint> Endpoints = new Dictionary<string, Endpoint>();
 		private readonly AuthenticationHandler _authenticationHandler;
 
 		protected HttpHandler()
@@ -21,11 +18,6 @@ namespace Nonae.Core
 			result.Update(context.Response);
 		}
 
-		public static Endpoint GetEndpoint(string path)
-		{
-			return Endpoints.FirstOrDefault(e => e.Key == path).Value;
-		}
-
 		public bool IsReusable
 		{
 			get { return true; }
@@ -33,9 +25,7 @@ namespace Nonae.Core
 
 		protected static Endpoint AddEndpoint(string url)
 		{
-			var endpoint = new Endpoint();
-			Endpoints.Add(url, endpoint);
-			return endpoint;
+			return EndpointStore.Add(url);
 		}
 	}
 }

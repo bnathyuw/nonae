@@ -14,7 +14,7 @@ namespace Nonae.Core.Handlers
 
 		public IResult CheckEndpointExists(HttpContext context, string path)
 		{
-			var endpoint = HttpHandler.GetEndpoint(path);
+			var endpoint = EndpointStore.Get(path);
 			return endpoint == null
 				       ? new NotFoundResult()
 				       : _methodIsSupportedHandler.CheckMethodIsSupported(context, endpoint);
