@@ -16,11 +16,6 @@ namespace Nonae.Core.Handlers
 			_headers = headers;
 		}
 
-		public NameValueCollection Headers
-		{
-			get { return _headers; }
-		}
-
 		public Endpoint Endpoint { get; set; }
 
 		public bool Matches(string url)
@@ -31,6 +26,31 @@ namespace Nonae.Core.Handlers
 		public bool Matches(HttpMethod options)
 		{
 			return _httpMethod == options.ToString();
+		}
+
+		private string Authorization
+		{
+			get { return _headers["Authorization"]; }
+		}
+
+		public bool HasAuthorization
+		{
+			get { return Authorization == null; }
+		}
+
+		private Credentials Credentials
+		{
+			get { return Credentials.From(Authorization); }
+		}
+
+		public bool CanGetCredentials
+		{
+			get { return Credentials == null; }
+		}
+
+		public bool IsAuthenticated
+		{
+			get { return Credentials.IsAuthenticated; }
 		}
 	}
 }

@@ -43,9 +43,9 @@
   <ItemGroup>
     <Compile Include="EndpointStore.cs" />
     <Compile Include="Handlers\AuthenticationHandler.cs" />
-    <Compile Include="Handlers\AuthorizationDetails.cs" />
+    <Compile Include="Handlers\Credentials.cs" />
     <Compile Include="Endpoint.cs" />
-    <Compile Include="Handlers\BasicAuthorizationDetails.cs" />
+    <Compile Include="Handlers\BasicCredentials.cs" />
     <Compile Include="Handlers\EndpointExistsHandler.cs" />
     <Compile Include="Handlers\IHandler.cs" />
     <Compile Include="Handlers\RequestDetails.cs" />

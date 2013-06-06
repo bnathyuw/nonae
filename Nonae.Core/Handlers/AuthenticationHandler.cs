@@ -13,25 +13,21 @@ namespace Nonae.Core.Handlers
 
 		public IResult Handle(RequestDetails requestDetails)
 		{
-			var authorizationHeader = requestDetails.Headers["Authorization"];
-
-			return authorizationHeader == null 
+			return requestDetails.HasAuthorization 
 				? _successor.Handle(requestDetails) 
-				: CheckAuthenticationFromHeader(authorizationHeader, requestDetails);
+				: CheckAuthenticationFromHeader(requestDetails);
 		}
 
-		private IResult CheckAuthenticationFromHeader(string authorizationHeader, RequestDetails requestDetails)
+		private IResult CheckAuthenticationFromHeader(RequestDetails requestDetails)
 		{
-			var authorizationDetails = AuthorizationDetails.From(authorizationHeader);
-
-			return authorizationDetails == null
+			return requestDetails.CanGetCredentials
 				       ? UnauthorizedResult.ForUnsupportedAuthorizationMethod()
-				       : CheckBasicAuth(authorizationDetails, requestDetails);
+				       : CheckCredentials(requestDetails);
 		}
 
-		private IResult CheckBasicAuth(AuthorizationDetails authorizationDetails, RequestDetails requestDetails)
+		private IResult CheckCredentials(RequestDetails requestDetails)
 		{
-			return authorizationDetails.IsAuthenticated
+			return requestDetails.IsAuthenticated
 				       ? _successor.Handle(requestDetails)
 				       : UnauthorizedResult.ForInvalidCredentials();
 		}

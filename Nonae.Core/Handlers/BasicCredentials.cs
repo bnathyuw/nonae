@@ -3,11 +3,11 @@ using System.Text;
 
 namespace Nonae.Core.Handlers
 {
-	public class BasicAuthorizationDetails:AuthorizationDetails
+	public class BasicCredentials:Credentials
 	{
 		private readonly string _encodedCredentials;
 
-		internal BasicAuthorizationDetails(string encodedCredentials)
+		internal BasicCredentials(string encodedCredentials)
 		{
 			_encodedCredentials = encodedCredentials;
 		}
