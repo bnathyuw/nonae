@@ -60,5 +60,10 @@ namespace Nonae.Core.Handlers
 		{
 			get { return _endpoint.AllowHeader; }
 		}
+
+		public bool IsOptionsRequest
+		{
+			get { return Matches(HttpMethod.Options); }
+		}
 	}
 }

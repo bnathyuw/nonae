@@ -16,14 +16,9 @@ namespace Nonae.Core.Handlers
 		{
 			// TODO: Authorize against endpoint?
 
-			return IsOptions(requestDetails)
+			return requestDetails.IsOptionsRequest
 				       ? new OptionsResult(EndpointStore.Get(requestDetails))
 				       : _successor.Handle(requestDetails);
-		}
-
-		private static bool IsOptions(RequestDetails requestDetails)
-		{
-			return requestDetails.Matches(HttpMethod.Options);
 		}
 	}
 }
