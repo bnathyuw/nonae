@@ -1,5 +1,7 @@
 using System.Net.Http;
 using System.Web;
+using Nonae.Core.Authentication;
+using Nonae.Core.Endpoints;
 
 namespace Nonae.Core.Handlers
 {

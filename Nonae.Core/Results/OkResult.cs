@@ -2,11 +2,11 @@
 
 namespace Nonae.Core.Results
 {
-	internal class OkResponse : IResult
+	internal class OkResult : IResult
 	{
 		private readonly RequestDetails _requestDetails;
 
-		public OkResponse(RequestDetails requestDetails)
+		public OkResult(RequestDetails requestDetails)
 		{
 			_requestDetails = requestDetails;
 		}

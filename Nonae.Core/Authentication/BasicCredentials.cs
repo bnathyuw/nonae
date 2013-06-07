@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Nonae.Core.Handlers
+namespace Nonae.Core.Authentication
 {
 	public class BasicCredentials:Credentials
 	{

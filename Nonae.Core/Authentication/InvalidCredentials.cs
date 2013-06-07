@@ -1,4 +1,4 @@
-namespace Nonae.Core.Handlers
+namespace Nonae.Core.Authentication
 {
 	public class InvalidCredentials : Credentials
 	{

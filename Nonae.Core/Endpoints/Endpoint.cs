@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net.Http;
 using Nonae.Core.Handlers;
 
-namespace Nonae.Core
+namespace Nonae.Core.Endpoints
 {
 	public class Endpoint : IEndpoint
 	{

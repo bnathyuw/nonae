@@ -1,6 +1,6 @@
 ﻿using Nonae.Core.Handlers;
 
-namespace Nonae.Core
+namespace Nonae.Core.Endpoints
 {
 	public interface IEndpoint
 	{

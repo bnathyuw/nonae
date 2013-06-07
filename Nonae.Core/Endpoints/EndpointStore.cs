@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Nonae.Core.Handlers;
 
-namespace Nonae.Core
+namespace Nonae.Core.Endpoints
 {
 	static internal class EndpointStore
 	{
