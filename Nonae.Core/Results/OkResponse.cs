@@ -1,5 +1,4 @@
-﻿using System.Web;
-using Nonae.Core.Handlers;
+﻿using Nonae.Core.Handlers;
 
 namespace Nonae.Core.Results
 {

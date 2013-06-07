@@ -12,10 +12,5 @@ namespace Nonae.Core
 		public string AllowHeader { get { return " "; } }
 
 		public bool Exists { get { return false; } }
-
-		public bool IsAt(RequestDetails requestDetails)
-		{
-			return false;
-		}
 	}
 }

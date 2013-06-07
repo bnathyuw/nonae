@@ -7,6 +7,5 @@ namespace Nonae.Core
 		bool Allows(RequestDetails requestDetails);
 		string AllowHeader { get; }
 		bool Exists { get; }
-		bool IsAt(RequestDetails requestDetails);
 	}
 }

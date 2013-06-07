@@ -1,6 +1,4 @@
-﻿using System.Web;
-
-namespace Nonae.Core.Results
+﻿namespace Nonae.Core.Results
 {
 	public interface IResult
 	{

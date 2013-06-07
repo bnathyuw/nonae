@@ -1,4 +1,3 @@
-using System.Net.Http;
 using Nonae.Core.Results;
 
 namespace Nonae.Core.Handlers
