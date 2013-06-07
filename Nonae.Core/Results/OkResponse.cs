@@ -12,10 +12,9 @@ namespace Nonae.Core.Results
 			_requestDetails = requestDetails;
 		}
 
-		public void Update(HttpResponse response)
+		public void Update(ResponseDetails responseDetails)
 		{
-			var allowHeader = _requestDetails.AllowHeader;
-			response.Headers.Add("Allow", allowHeader);
+			responseDetails.Allow = _requestDetails.AllowHeader;
 		}
 	}
 }

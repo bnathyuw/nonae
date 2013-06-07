@@ -12,10 +12,10 @@ namespace Nonae.Core.Results
 			_endpoint = endpoint;
 		}
 
-		public void Update(HttpResponse response)
+		public void Update(ResponseDetails responseDetails)
 		{
-			response.StatusCode = (int) HttpStatusCode.OK;
-			response.Headers.Add("Allow", _endpoint.AllowHeader);
+			responseDetails.StatusCode = HttpStatusCode.OK;
+			responseDetails.Allow = _endpoint.AllowHeader;
 		}
 	}
 }

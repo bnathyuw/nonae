@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using Nonae.Core.Handlers;
+using Nonae.Core.Results;
 
 namespace Nonae.Core
 {
@@ -16,7 +17,9 @@ namespace Nonae.Core
 		{
 			var requestDetails = new RequestDetails(context.Request);
 			var result = _authenticationHandler.Handle(requestDetails);
-			result.Update(context.Response);
+
+			var responseDetails = new ResponseDetails(context.Response);
+			result.Update(responseDetails);
 		}
 
 		public bool IsReusable

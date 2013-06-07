@@ -13,11 +13,10 @@ namespace Nonae.Core.Results
 			_requestDetails = requestDetails;
 		}
 
-		public void Update(HttpResponse response)
+		public void Update(ResponseDetails responseDetails)
 		{
-			response.StatusCode = (int) HttpStatusCode.MethodNotAllowed;
-			var allowHeader = _requestDetails.AllowHeader;
-			response.Headers.Add("Allow", allowHeader);
+			responseDetails.StatusCode = HttpStatusCode.MethodNotAllowed;
+			responseDetails.Allow = _requestDetails.AllowHeader;
 		}
 	}
 }

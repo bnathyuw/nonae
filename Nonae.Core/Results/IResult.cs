@@ -4,6 +4,6 @@ namespace Nonae.Core.Results
 {
 	public interface IResult
 	{
-		void Update(HttpResponse response);
+		void Update(ResponseDetails responseDetails);
 	}
 }

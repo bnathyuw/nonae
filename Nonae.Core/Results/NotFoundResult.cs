@@ -5,9 +5,9 @@ namespace Nonae.Core.Results
 {
 	public class NotFoundResult : IResult
 	{
-		public void Update(HttpResponse response)
+		public void Update(ResponseDetails responseDetails)
 		{
-			response.StatusCode = (int) HttpStatusCode.NotFound;
+			responseDetails.StatusCode = HttpStatusCode.NotFound;
 		}
 	}
 }
