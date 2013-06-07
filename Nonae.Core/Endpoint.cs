@@ -5,7 +5,7 @@ using Nonae.Core.Handlers;
 
 namespace Nonae.Core
 {
-	public class Endpoint
+	public class Endpoint : IEndpoint
 	{
 		private HttpMethod[] _methods;
 		private readonly string _url;
@@ -20,10 +20,12 @@ namespace Nonae.Core
 			return _methods.Any(requestDetails.Matches);
 		}
 
-		public string GetAllowHeader()
+		public string AllowHeader
 		{
-			return String.Join(", ", _methods.ToList());
+			get { return String.Join(", ", _methods.ToList()); }
 		}
+
+		public bool Exists { get { return true; } }
 
 		public void WithMethods(params HttpMethod[] methods)
 		{

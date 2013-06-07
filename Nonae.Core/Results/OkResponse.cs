@@ -1,19 +1,20 @@
 ﻿using System.Web;
+using Nonae.Core.Handlers;
 
 namespace Nonae.Core.Results
 {
 	internal class OkResponse : IResult
 	{
-		private readonly Endpoint _endpoint;
+		private readonly RequestDetails _requestDetails;
 
-		public OkResponse(Endpoint endpoint)
+		public OkResponse(RequestDetails requestDetails)
 		{
-			_endpoint = endpoint;
+			_requestDetails = requestDetails;
 		}
 
 		public void Update(HttpResponse response)
 		{
-			var allowHeader = _endpoint.GetAllowHeader();
+			var allowHeader = _requestDetails.AllowHeader;
 			response.Headers.Add("Allow", allowHeader);
 		}
 	}

@@ -1,26 +1,29 @@
-using System.Collections.Specialized;
 using System.Net.Http;
+using System.Web;
 
 namespace Nonae.Core.Handlers
 {
 	public class RequestDetails
 	{
-		private readonly string _path;
-		private readonly string _httpMethod;
-		private readonly NameValueCollection _headers;
+		private readonly HttpRequest _request;
 
-		public RequestDetails(string path, string httpMethod, NameValueCollection headers)
+		public RequestDetails(HttpRequest request)
 		{
-			_path = path;
-			_httpMethod = httpMethod;
-			_headers = headers;
+			_request = request;
+			_endpoint = EndpointStore.Get(this);
+			_authorizationHeader = _request.Headers["Authorization"];
+			_credentials = Credentials.From(_authorizationHeader);
+			_httpMethod = _request.HttpMethod;
 		}
 
-		public Endpoint Endpoint { get; set; }
+		private readonly IEndpoint _endpoint;
+		private readonly string _authorizationHeader;
+		private readonly Credentials _credentials;
+		private readonly string _httpMethod;
 
 		public bool Matches(string url)
 		{
-			return url == _path;
+			return url == _request.Path;
 		}
 
 		public bool Matches(HttpMethod options)
@@ -28,29 +31,34 @@ namespace Nonae.Core.Handlers
 			return _httpMethod == options.ToString();
 		}
 
-		private string Authorization
-		{
-			get { return _headers["Authorization"]; }
-		}
-
 		public bool HasAuthorization
 		{
-			get { return Authorization == null; }
+			get { return _authorizationHeader == null; }
 		}
 
-		private Credentials Credentials
+		public bool AuthorizationMethodIsSupported
 		{
-			get { return Credentials.From(Authorization); }
-		}
-
-		public bool CanGetCredentials
-		{
-			get { return Credentials == null; }
+			get { return _credentials.AuthorizationMethodIsSupported; }
 		}
 
 		public bool IsAuthenticated
 		{
-			get { return Credentials.IsAuthenticated; }
+			get { return _credentials.IsAuthenticated; }
+		}
+
+		public bool MethodIsSupported
+		{
+			get { return _endpoint.Allows(this); }
+		}
+
+		public bool EndpointExists
+		{
+			get { return _endpoint.Exists; }
+		}
+
+		public string AllowHeader
+		{
+			get { return _endpoint.AllowHeader; }
 		}
 	}
 }

@@ -13,9 +13,9 @@ namespace Nonae.Core.Handlers
 
 		public IResult Handle(RequestDetails requestDetails)
 		{
-			return requestDetails.Endpoint.Allows(requestDetails)
+			return requestDetails.MethodIsSupported
 				       ? _successor.Handle(requestDetails)
-				       : new MethodNotAllowedResult(requestDetails.Endpoint);
+				       : new MethodNotAllowedResult(requestDetails);
 		}
 	}
 }

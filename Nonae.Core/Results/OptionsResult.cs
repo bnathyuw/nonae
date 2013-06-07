@@ -5,9 +5,9 @@ namespace Nonae.Core.Results
 {
 	internal class OptionsResult : IResult
 	{
-		private readonly Endpoint _endpoint;
+		private readonly IEndpoint _endpoint;
 
-		public OptionsResult(Endpoint endpoint)
+		public OptionsResult(IEndpoint endpoint)
 		{
 			_endpoint = endpoint;
 		}
@@ -15,16 +15,7 @@ namespace Nonae.Core.Results
 		public void Update(HttpResponse response)
 		{
 			response.StatusCode = (int) HttpStatusCode.OK;
-			if (_endpoint == null)
-			{
-				response.Headers.Add("Allow", " ");
-			}
-			else
-			{
-				response.StatusCode = (int) HttpStatusCode.OK;
-				var allowHeader = _endpoint.GetAllowHeader();
-				response.Headers.Add("Allow", allowHeader);
-			}
+			response.Headers.Add("Allow", _endpoint.AllowHeader);
 		}
 	}
 }

@@ -96,7 +96,7 @@ namespace Nonae.Tests.EndToEnd
 
 		public override string ToString()
 		{
-			return string.Format(@"
+			return String.Format(@"
 REQUEST {0:o}
 
 {1} {2}
@@ -107,10 +107,10 @@ REQUEST {0:o}
 
 		public void SetAuthentication(string authMethod, string username, string password)
 		{
-			var text = string.Format("{0}:{1}", username, password);
+			var text = String.Format("{0}:{1}", username, password);
 			var bytes = Encoding.Unicode.GetBytes(text);
 			var base64String = Convert.ToBase64String(bytes);
-			var header = string.Format("{0} {1}", authMethod, base64String);
+			var header = String.Format("{0} {1}", authMethod, base64String);
 			_webRequest.Headers["Authorization"] = header;
 		}
 	}

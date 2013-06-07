@@ -13,11 +13,9 @@ namespace Nonae.Core.Handlers
 
 		public IResult Handle(RequestDetails requestDetails)
 		{
-			var endpoint = EndpointStore.Get(requestDetails);
-			requestDetails.Endpoint = endpoint;
-			return endpoint == null
-				       ? new NotFoundResult()
-				       : _successor.Handle(requestDetails);
+			return requestDetails.EndpointExists
+				       ? _successor.Handle(requestDetails)
+				       : new NotFoundResult();
 		}
 	}
 }

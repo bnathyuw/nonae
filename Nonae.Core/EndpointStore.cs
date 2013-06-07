@@ -8,9 +8,10 @@ namespace Nonae.Core
 	{
 		private static readonly List<Endpoint> Endpoints = new List<Endpoint>();
 
-		public static Endpoint Get(RequestDetails requestDetails)
+		public static IEndpoint Get(RequestDetails requestDetails)
 		{
-			return Endpoints.FirstOrDefault(e => e.IsAt(requestDetails));
+			var endpoint = Endpoints.FirstOrDefault(e => e.IsAt(requestDetails));
+			return (IEndpoint) endpoint ?? new NullEndpoint();
 		}
 
 		public static Endpoint Add(string url)

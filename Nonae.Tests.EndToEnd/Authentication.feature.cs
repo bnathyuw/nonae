@@ -97,6 +97,8 @@ this.ScenarioSetup(scenarioInfo);
 #line 14
  testRunner.Then("I get a 401 Unauthorized response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 15
+ testRunner.And("the reason is \'Invalid credentials\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 16
  testRunner.And("I get a WWW-Authenticate header requesting Basic authentication", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -107,14 +109,16 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void IncorrectAuthenticationMethod()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Incorrect authentication method", ((string[])(null)));
-#line 17
-this.ScenarioSetup(scenarioInfo);
 #line 18
- testRunner.When("I call GET on the root", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 19
- testRunner.And("I specify username \'username\' and password \'password\' for Dodgy authentication", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I call GET on the root", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 20
+ testRunner.And("I specify username \'username\' and password \'password\' for Dodgy authentication", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 21
  testRunner.Then("I get a 401 Unauthorized response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 22
+ testRunner.And("the reason is \'Unsupported Authorization Method\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -124,13 +128,13 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void CorrectCredentials()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Correct credentials", ((string[])(null)));
-#line 22
-this.ScenarioSetup(scenarioInfo);
-#line 23
- testRunner.When("I call GET on the root", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 24
- testRunner.And("I specify username \'username\' and password \'password\' for Basic authentication", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+this.ScenarioSetup(scenarioInfo);
 #line 25
+ testRunner.When("I call GET on the root", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 26
+ testRunner.And("I specify username \'username\' and password \'password\' for Basic authentication", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 27
  testRunner.Then("I get a 200 OK response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

@@ -14,7 +14,7 @@ namespace Nonae.Core
 
 		public void ProcessRequest(HttpContext context)
 		{
-			var requestDetails = new RequestDetails(context.Request.Path, context.Request.HttpMethod, context.Request.Headers);
+			var requestDetails = new RequestDetails(context.Request);
 			var result = _authenticationHandler.Handle(requestDetails);
 			result.Update(context.Response);
 		}

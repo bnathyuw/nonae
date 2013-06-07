@@ -21,5 +21,10 @@ namespace Nonae.Core.Handlers
 				return credentials == "username:password";
 			}
 		}
+
+		public override bool AuthorizationMethodIsSupported
+		{
+			get { return true; }
+		}
 	}
 }

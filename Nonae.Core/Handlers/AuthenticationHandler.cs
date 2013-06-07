@@ -20,9 +20,9 @@ namespace Nonae.Core.Handlers
 
 		private IResult CheckAuthenticationFromHeader(RequestDetails requestDetails)
 		{
-			return requestDetails.CanGetCredentials
-				       ? UnauthorizedResult.ForUnsupportedAuthorizationMethod()
-				       : CheckCredentials(requestDetails);
+			return requestDetails.AuthorizationMethodIsSupported
+				       ? CheckCredentials(requestDetails)
+				       : UnauthorizedResult.ForUnsupportedAuthorizationMethod();
 		}
 
 		private IResult CheckCredentials(RequestDetails requestDetails)

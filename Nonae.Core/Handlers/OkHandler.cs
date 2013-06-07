@@ -6,7 +6,7 @@ namespace Nonae.Core.Handlers
 	{
 		public IResult Handle(RequestDetails requestDetails)
 		{
-			return new OkResponse(requestDetails.Endpoint);
+			return new OkResponse(requestDetails);
 		}
 	}
 }

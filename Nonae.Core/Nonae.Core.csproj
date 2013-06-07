@@ -42,17 +42,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EndpointStore.cs" />
+    <Compile Include="Handlers\AnonymousCredentials.cs" />
     <Compile Include="Handlers\AuthenticationHandler.cs" />
     <Compile Include="Handlers\Credentials.cs" />
     <Compile Include="Endpoint.cs" />
     <Compile Include="Handlers\BasicCredentials.cs" />
     <Compile Include="Handlers\EndpointExistsHandler.cs" />
     <Compile Include="Handlers\IHandler.cs" />
+    <Compile Include="Handlers\InvalidCredentials.cs" />
     <Compile Include="Handlers\RequestDetails.cs" />
     <Compile Include="HttpHandler.cs" />
     <Compile Include="Handlers\MethodIsSupportedHandler.cs" />
     <Compile Include="Handlers\OkHandler.cs" />
     <Compile Include="Handlers\OptionsHandler.cs" />
+    <Compile Include="IEndpoint.cs" />
+    <Compile Include="NullEndpoint.cs" />
     <Compile Include="Results\IResult.cs" />
     <Compile Include="Results\MethodNotAllowedResult.cs" />
     <Compile Include="Results\NotFoundResult.cs" />

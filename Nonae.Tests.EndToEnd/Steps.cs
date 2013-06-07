@@ -29,6 +29,13 @@ namespace Nonae.Tests.EndToEnd
 			
 		}
 
+		[Then(@"the reason is '(.*)'")]
+		public void ThenTheReasonIs(string reason)
+		{
+			Assert.That(_context.Response.Body, Is.EqualTo(reason));
+		}
+
+
 		[Then(@"I get a WWW-Authenticate header requesting Basic authentication")]
 		public void ThenIGetAWWW_AuthenticateHeaderRequestingBasicAuthentication()
 		{
