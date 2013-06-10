@@ -1,23 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
-using Nonae.Core.Handlers;
 
 namespace Nonae.Core.Endpoints
 {
-	static internal class EndpointStore
+	public class EndpointStore
 	{
-		private static readonly List<Endpoint> Endpoints = new List<Endpoint>();
+		private readonly List<Endpoint> _endpoints = new List<Endpoint>();
 
-		public static IEndpoint Get(RequestDetails requestDetails)
+		public IEndpoint Get(string path)
 		{
-			var endpoint = Endpoints.FirstOrDefault(e => e.IsAt(requestDetails));
+			var endpoint = _endpoints.FirstOrDefault(e => e.IsAt(path));
 			return (IEndpoint) endpoint ?? new NullEndpoint();
 		}
 
-		public static Endpoint Add(string url)
+		public Endpoint Add(string url)
 		{
 			var endpoint = new Endpoint(url);
-			Endpoints.Add(endpoint);
+			_endpoints.Add(endpoint);
 			return endpoint;
 		}
 	}

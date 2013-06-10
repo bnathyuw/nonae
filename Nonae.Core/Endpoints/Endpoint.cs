@@ -32,9 +32,9 @@ namespace Nonae.Core.Endpoints
 			_methods = methods;
 		}
 
-		public bool IsAt(RequestDetails requestDetails)
+		public bool IsAt(string path)
 		{
-			return requestDetails.Matches(_url);
+			return _url == path;
 		}
 	}
 }

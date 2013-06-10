@@ -25,3 +25,8 @@ Scenario: Correct credentials
 	When I call GET on the root
 	And I specify username 'username' and password 'password' for Basic authentication
 	Then I get a 200 OK response
+
+Scenario: Sufficient privileges
+	When I call GET on a protected resource
+	And I specify username 'admin' and password 'password' for Basic authentication
+	Then I get a 200 OK response

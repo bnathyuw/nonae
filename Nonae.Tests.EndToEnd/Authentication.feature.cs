@@ -139,6 +139,23 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Sufficient privileges")]
+        public virtual void SufficientPrivileges()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sufficient privileges", ((string[])(null)));
+#line 29
+this.ScenarioSetup(scenarioInfo);
+#line 30
+ testRunner.When("I call GET on a protected resource", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 31
+ testRunner.And("I specify username \'admin\' and password \'password\' for Basic authentication", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 32
+ testRunner.Then("I get a 200 OK response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

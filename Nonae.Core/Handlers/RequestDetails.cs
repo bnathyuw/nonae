@@ -9,10 +9,10 @@ namespace Nonae.Core.Handlers
 	{
 		private readonly HttpRequest _request;
 
-		public RequestDetails(HttpRequest request)
+		public RequestDetails(HttpRequest request, IEndpoint endpoint)
 		{
 			_request = request;
-			_endpoint = EndpointStore.Get(this);
+			_endpoint = endpoint;
 			_authorizationHeader = _request.Headers["Authorization"];
 			_credentials = Credentials.From(_authorizationHeader);
 			_httpMethod = _request.HttpMethod;

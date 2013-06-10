@@ -1,4 +1,3 @@
-using Nonae.Core.Endpoints;
 using Nonae.Core.Results;
 
 namespace Nonae.Core.Handlers
@@ -17,7 +16,7 @@ namespace Nonae.Core.Handlers
 			// TODO: Authorize against endpoint?
 
 			return requestDetails.IsOptionsRequest
-				       ? new OptionsResult(EndpointStore.Get(requestDetails))
+				       ? new OptionsResult(requestDetails)
 				       : _successor.Handle(requestDetails);
 		}
 	}
