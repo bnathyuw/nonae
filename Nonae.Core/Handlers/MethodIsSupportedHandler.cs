@@ -6,9 +6,9 @@ namespace Nonae.Core.Handlers
 	{
 		private readonly IHandler _successor;
 
-		public MethodIsSupportedHandler()
+		public MethodIsSupportedHandler(IHandler okHandler)
 		{
-			_successor = new OkHandler();
+			_successor = okHandler;
 		}
 
 		public IResult Handle(RequestDetails requestDetails)

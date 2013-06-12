@@ -7,20 +7,31 @@ namespace Nonae.Core
 {
 	public class HttpHandler : IHttpHandler
 	{
-		private readonly IHandler _authenticationHandler;
+		private readonly IHandler _handler;
 		private readonly EndpointStore _endpointStore;
 
 		protected HttpHandler()
 		{
-			_authenticationHandler = new AuthenticationHandler();
+			_handler = GetHandler();
 			_endpointStore = new EndpointStore();
+		}
+
+		private static AuthenticationHandler GetHandler()
+		{
+			var okHandler = new OkHandler();
+			var methodIsSupportedHandler = new MethodIsSupportedHandler(okHandler);
+			var endpointExistsHandler = new EndpointExistsHandler(methodIsSupportedHandler);
+			var optionsHandler = new OptionsHandler(endpointExistsHandler);
+			var authorizationHandler = new AuthorizationHandler(optionsHandler);
+			var authenticationHandler = new AuthenticationHandler(authorizationHandler);
+			return authenticationHandler;
 		}
 
 		public void ProcessRequest(HttpContext context)
 		{
 			var endpoint = _endpointStore.Get(context.Request.Path);
 			var requestDetails = new RequestDetails(context.Request, endpoint);
-			var result = _authenticationHandler.Handle(requestDetails);
+			var result = _handler.Handle(requestDetails);
 
 			var responseDetails = new ResponseDetails(context.Response);
 			result.Update(responseDetails);

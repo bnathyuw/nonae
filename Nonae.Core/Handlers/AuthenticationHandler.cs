@@ -6,9 +6,9 @@ namespace Nonae.Core.Handlers
 	{
 		private readonly IHandler _successor;
 
-		public AuthenticationHandler()
+		public AuthenticationHandler(IHandler authorizationHandler)
 		{
-			_successor = new AuthorizationHandler();
+			_successor = authorizationHandler;
 		}
 
 		public IResult Handle(RequestDetails requestDetails)
@@ -30,23 +30,6 @@ namespace Nonae.Core.Handlers
 			return requestDetails.IsAuthenticated
 				       ? _successor.Handle(requestDetails)
 				       : UnauthorizedResult.ForInvalidCredentials();
-		}
-	}
-
-	internal class AuthorizationHandler : IHandler
-	{
-		private readonly IHandler _successor;
-
-		public AuthorizationHandler()
-		{
-			_successor = new OptionsHandler();
-		}
-
-		public IResult Handle(RequestDetails requestDetails)
-		{
-			return requestDetails.IsAuthorized
-				       ? _successor.Handle(requestDetails)
-				       : UnauthorizedResult.ForInsufficientPrivileges();
 		}
 	}
 }

@@ -47,6 +47,7 @@
     <Compile Include="Authentication\Credentials.cs" />
     <Compile Include="Endpoints\Endpoint.cs" />
     <Compile Include="Authentication\BasicCredentials.cs" />
+    <Compile Include="Handlers\AuthorizationHandler.cs" />
     <Compile Include="Handlers\EndpointExistsHandler.cs" />
     <Compile Include="Handlers\IHandler.cs" />
     <Compile Include="Authentication\InvalidCredentials.cs" />

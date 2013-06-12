@@ -6,9 +6,9 @@ namespace Nonae.Core.Handlers
 	{
 		private readonly IHandler _successor;
 
-		public OptionsHandler()
+		public OptionsHandler(IHandler endpointExistsHandler)
 		{
-			_successor = new EndpointExistsHandler();
+			_successor = endpointExistsHandler;
 		}
 
 		public IResult Handle(RequestDetails requestDetails)
