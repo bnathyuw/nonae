@@ -45,7 +45,7 @@ namespace Nonae.Core.Endpoints
 			return _url == path;
 		}
 
-		public Endpoint Authorize(Func<Credentials, bool> func)
+		public Endpoint AuthorizedWhen(Func<Credentials, bool> func)
 		{
 			_authorize = func;
 			return this;
