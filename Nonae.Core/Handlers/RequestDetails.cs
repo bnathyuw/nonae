@@ -5,7 +5,19 @@ using Nonae.Core.Endpoints;
 
 namespace Nonae.Core.Handlers
 {
-	public class RequestDetails
+	public interface IRequestDetails
+	{
+		bool HasAuthorization { get; }
+		bool AuthorizationMethodIsSupported { get; }
+		bool IsAuthenticated { get; }
+		bool IsAuthorized { get; }
+		bool EndpointExists { get; }
+		bool MethodIsSupported { get; }
+		bool IsOptionsRequest { get; }
+		string AllowHeader { get; }
+	}
+
+	public class RequestDetails : IRequestDetails
 	{
 		private readonly HttpRequest _request;
 
@@ -35,7 +47,7 @@ namespace Nonae.Core.Handlers
 
 		public bool HasAuthorization
 		{
-			get { return _authorizationHeader == null; }
+			get { return _authorizationHeader != null; }
 		}
 
 		public bool AuthorizationMethodIsSupported

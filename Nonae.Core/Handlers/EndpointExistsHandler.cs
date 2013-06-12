@@ -6,12 +6,12 @@ namespace Nonae.Core.Handlers
 	{
 		private readonly IHandler _successor;
 
-		public EndpointExistsHandler(IHandler methodIsSupportedHandler)
+		public EndpointExistsHandler(IHandler successor)
 		{
-			_successor = methodIsSupportedHandler;
+			_successor = successor;
 		}
 
-		public IResult Handle(RequestDetails requestDetails)
+		public IResult Handle(IRequestDetails requestDetails)
 		{
 			return requestDetails.EndpointExists
 				       ? _successor.Handle(requestDetails)

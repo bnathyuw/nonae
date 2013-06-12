@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8CA14BD8-A9CB-4DAC-8A43-B53EE6A2DD3A}</ProjectGuid>
+    <ProjectGuid>{9A8D19EA-9572-4121-991C-F1105403E43E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nonae.Core</RootNamespace>
-    <AssemblyName>Nonae.Core</AssemblyName>
+    <RootNamespace>Nonae.Tests.Unit</RootNamespace>
+    <AssemblyName>Nonae.Tests.Unit</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,10 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,31 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Endpoints\EndpointStore.cs" />
-    <Compile Include="Authentication\AnonymousCredentials.cs" />
-    <Compile Include="Handlers\AuthenticationHandler.cs" />
-    <Compile Include="Authentication\Credentials.cs" />
-    <Compile Include="Endpoints\Endpoint.cs" />
-    <Compile Include="Authentication\BasicCredentials.cs" />
-    <Compile Include="Handlers\AuthorizationHandler.cs" />
-    <Compile Include="Handlers\EndpointExistsHandler.cs" />
-    <Compile Include="Handlers\IHandler.cs" />
-    <Compile Include="Authentication\InvalidCredentials.cs" />
-    <Compile Include="Handlers\RequestDetails.cs" />
-    <Compile Include="HttpHandler.cs" />
-    <Compile Include="Handlers\MethodIsSupportedHandler.cs" />
-    <Compile Include="Handlers\OkHandler.cs" />
-    <Compile Include="Handlers\OptionsHandler.cs" />
-    <Compile Include="Endpoints\IEndpoint.cs" />
-    <Compile Include="Endpoints\NullEndpoint.cs" />
-    <Compile Include="Results\IResult.cs" />
-    <Compile Include="Results\MethodNotAllowedResult.cs" />
-    <Compile Include="Results\NotFoundResult.cs" />
-    <Compile Include="Results\OkResult.cs" />
-    <Compile Include="Results\OptionsResult.cs" />
+    <Compile Include="Handlers\AuthenticationHandlerTests.cs" />
+    <Compile Include="Handlers\OkHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Results\ResponseDetails.cs" />
-    <Compile Include="Results\UnauthorizedResult.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nonae.Core\Nonae.Core.csproj">
+      <Project>{8CA14BD8-A9CB-4DAC-8A43-B53EE6A2DD3A}</Project>
+      <Name>Nonae.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,8 +2,8 @@ using Nonae.Core.Results;
 
 namespace Nonae.Core.Handlers
 {
-	internal interface IHandler
+	public interface IHandler
 	{
-		IResult Handle(RequestDetails requestDetails);
+		IResult Handle(IRequestDetails requestDetails);
 	}
 }

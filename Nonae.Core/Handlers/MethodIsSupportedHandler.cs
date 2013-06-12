@@ -6,12 +6,12 @@ namespace Nonae.Core.Handlers
 	{
 		private readonly IHandler _successor;
 
-		public MethodIsSupportedHandler(IHandler okHandler)
+		public MethodIsSupportedHandler(IHandler successor)
 		{
-			_successor = okHandler;
+			_successor = successor;
 		}
 
-		public IResult Handle(RequestDetails requestDetails)
+		public IResult Handle(IRequestDetails requestDetails)
 		{
 			return requestDetails.MethodIsSupported
 				       ? _successor.Handle(requestDetails)

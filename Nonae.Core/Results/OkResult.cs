@@ -4,9 +4,9 @@ namespace Nonae.Core.Results
 {
 	internal class OkResult : IResult
 	{
-		private readonly RequestDetails _requestDetails;
+		private readonly IRequestDetails _requestDetails;
 
-		public OkResult(RequestDetails requestDetails)
+		public OkResult(IRequestDetails requestDetails)
 		{
 			_requestDetails = requestDetails;
 		}

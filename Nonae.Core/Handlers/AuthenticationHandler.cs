@@ -6,26 +6,26 @@ namespace Nonae.Core.Handlers
 	{
 		private readonly IHandler _successor;
 
-		public AuthenticationHandler(IHandler authorizationHandler)
+		public AuthenticationHandler(IHandler successor)
 		{
-			_successor = authorizationHandler;
+			_successor = successor;
 		}
 
-		public IResult Handle(RequestDetails requestDetails)
+		public IResult Handle(IRequestDetails requestDetails)
 		{
 			return requestDetails.HasAuthorization 
-				? _successor.Handle(requestDetails) 
-				: CheckAuthenticationFromHeader(requestDetails);
+				? CheckAuthenticationFromHeader(requestDetails) 
+				: _successor.Handle(requestDetails);
 		}
 
-		private IResult CheckAuthenticationFromHeader(RequestDetails requestDetails)
+		private IResult CheckAuthenticationFromHeader(IRequestDetails requestDetails)
 		{
 			return requestDetails.AuthorizationMethodIsSupported
 				       ? CheckCredentials(requestDetails)
 				       : UnauthorizedResult.ForUnsupportedAuthorizationMethod();
 		}
 
-		private IResult CheckCredentials(RequestDetails requestDetails)
+		private IResult CheckCredentials(IRequestDetails requestDetails)
 		{
 			return requestDetails.IsAuthenticated
 				       ? _successor.Handle(requestDetails)

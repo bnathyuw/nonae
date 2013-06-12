@@ -6,12 +6,12 @@ namespace Nonae.Core.Handlers
 	{
 		private readonly IHandler _successor;
 
-		public AuthorizationHandler(IHandler optionsHandler)
+		public AuthorizationHandler(IHandler successor)
 		{
-			_successor = optionsHandler;
+			_successor = successor;
 		}
 
-		public IResult Handle(RequestDetails requestDetails)
+		public IResult Handle(IRequestDetails requestDetails)
 		{
 			return requestDetails.IsAuthorized
 				       ? _successor.Handle(requestDetails)

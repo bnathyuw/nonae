@@ -5,9 +5,9 @@ namespace Nonae.Core.Results
 {
 	public class MethodNotAllowedResult : IResult
 	{
-		private readonly RequestDetails _requestDetails;
+		private readonly IRequestDetails _requestDetails;
 
-		public MethodNotAllowedResult(RequestDetails requestDetails)
+		public MethodNotAllowedResult(IRequestDetails requestDetails)
 		{
 			_requestDetails = requestDetails;
 		}

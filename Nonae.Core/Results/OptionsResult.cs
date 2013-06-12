@@ -5,9 +5,9 @@ namespace Nonae.Core.Results
 {
 	internal class OptionsResult : IResult
 	{
-		private readonly RequestDetails _requestDetails;
+		private readonly IRequestDetails _requestDetails;
 
-		public OptionsResult(RequestDetails requestDetails)
+		public OptionsResult(IRequestDetails requestDetails)
 		{
 			_requestDetails = requestDetails;
 		}

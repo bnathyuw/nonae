@@ -6,12 +6,12 @@ namespace Nonae.Core.Handlers
 	{
 		private readonly IHandler _successor;
 
-		public OptionsHandler(IHandler endpointExistsHandler)
+		public OptionsHandler(IHandler successor)
 		{
-			_successor = endpointExistsHandler;
+			_successor = successor;
 		}
 
-		public IResult Handle(RequestDetails requestDetails)
+		public IResult Handle(IRequestDetails requestDetails)
 		{
 			// TODO: Authorize against endpoint?
 
