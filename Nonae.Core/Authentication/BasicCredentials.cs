@@ -7,27 +7,35 @@ namespace Nonae.Core.Authentication
 {
 	public class BasicCredentials:Credentials
 	{
-		private readonly string _encodedCredentials;
 		private readonly IEnumerable<string> _users = new List<string> {"username:password", "admin:password"};
+		private readonly string _credentials;
 
 		internal BasicCredentials(string encodedCredentials)
 		{
-			_encodedCredentials = encodedCredentials;
+			var credentialBytes = Convert.FromBase64String(encodedCredentials);
+			_credentials = Encoding.Unicode.GetString(credentialBytes);
 		}
 
 		public override bool IsAuthenticated
 		{
 			get
 			{
-				var credentialBytes = Convert.FromBase64String(_encodedCredentials);
-				var credentials = Encoding.Unicode.GetString(credentialBytes);
-				return _users.Contains(credentials);
+				return _users.Contains(_credentials);
 			}
 		}
 
 		public override bool AuthorizationMethodIsSupported
 		{
 			get { return true; }
+		}
+
+		public override string Username
+		{
+			get
+			{
+				var bits = _credentials.Split(':');
+				return bits.First();
+			}
 		}
 	}
 }

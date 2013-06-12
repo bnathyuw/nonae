@@ -11,5 +11,10 @@ namespace Nonae.Core.Authentication
 		{
 			get { return false; }
 		}
+
+		public override string Username
+		{
+			get { return ""; }
+		}
 	}
 }

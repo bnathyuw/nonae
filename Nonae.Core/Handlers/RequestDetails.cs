@@ -67,5 +67,10 @@ namespace Nonae.Core.Handlers
 		{
 			get { return Matches(HttpMethod.Options); }
 		}
+
+		public bool IsAuthorized
+		{
+			get { return _endpoint.IsAuthorizedFor(_credentials); }
+		}
 	}
 }

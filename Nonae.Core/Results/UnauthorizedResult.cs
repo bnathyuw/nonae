@@ -51,6 +51,7 @@ namespace Nonae.Core.Results
 
 		private const string UnsupportedAuthorizationMethod = "Unsupported Authorization Method";
 		private const string InvalidCredentials = "Invalid credentials";
+		private const string InsufficientPrivileges = "Insufficient privileges";
 
 		public static UnauthorizedResult ForInvalidCredentials()
 		{
@@ -60,6 +61,11 @@ namespace Nonae.Core.Results
 		public static UnauthorizedResult ForUnsupportedAuthorizationMethod()
 		{
 			return new UnauthorizedResult(UnsupportedAuthorizationMethod);
+		}
+
+		public static IResult ForInsufficientPrivileges()
+		{
+			return new UnauthorizedResult(InsufficientPrivileges);
 		}
 	}
 }

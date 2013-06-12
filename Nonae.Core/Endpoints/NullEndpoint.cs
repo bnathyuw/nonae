@@ -1,3 +1,4 @@
+using Nonae.Core.Authentication;
 using Nonae.Core.Handlers;
 
 namespace Nonae.Core.Endpoints
@@ -12,5 +13,10 @@ namespace Nonae.Core.Endpoints
 		public string AllowHeader { get { return " "; } }
 
 		public bool Exists { get { return false; } }
+
+		public bool IsAuthorizedFor(Credentials credentials)
+		{
+			return true;
+		}
 	}
 }

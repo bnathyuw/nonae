@@ -6,6 +6,8 @@ namespace Nonae.Core.Authentication
 
 		public abstract bool AuthorizationMethodIsSupported { get; }
 
+		public abstract string Username { get; }
+
 		public static Credentials From(string authorizationHeader)
 		{
 			if (authorizationHeader == null) return new AnonymousCredentials();

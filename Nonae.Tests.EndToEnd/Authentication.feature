@@ -30,3 +30,9 @@ Scenario: Sufficient privileges
 	When I call GET on a protected resource
 	And I specify username 'admin' and password 'password' for Basic authentication
 	Then I get a 200 OK response
+
+Scenario: Insufficient privileges
+	When I call GET on a protected resource
+	And I specify username 'username' and password 'password' for Basic authentication
+	Then I get a 401 Unauthorized response
+	And the reason is 'Insufficient privileges'
