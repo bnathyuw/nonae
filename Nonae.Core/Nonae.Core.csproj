@@ -51,6 +51,7 @@
     <Compile Include="Handlers\EndpointExistsHandler.cs" />
     <Compile Include="Handlers\IHandler.cs" />
     <Compile Include="Authentication\InvalidCredentials.cs" />
+    <Compile Include="Handlers\IRequestDetails.cs" />
     <Compile Include="Handlers\RequestDetails.cs" />
     <Compile Include="HttpHandler.cs" />
     <Compile Include="Handlers\MethodIsSupportedHandler.cs" />

@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Handlers\AuthenticationHandlerTests.cs" />
     <Compile Include="Handlers\AuthorizationHandlerTests.cs" />
+    <Compile Include="Handlers\EndpointExistsHandlerTests.cs" />
     <Compile Include="Handlers\OkHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
