@@ -2,24 +2,26 @@ namespace Nonae.Core.Credentials
 {
 	public class InvalidCredentials : ICredentials
 	{
-		public bool IsAuthenticated
-		{
-			get { return false; }
-		}
+		private readonly string _message;
 
-		public bool AuthorizationMethodIsSupported
+		public InvalidCredentials(string message)
 		{
-			get { return false; }
+			_message = message;
 		}
 
 		public string Username
 		{
-			get { return ""; }
+			get { return null; }
 		}
 
 		public bool IsAnonymous
 		{
 			get { return false; }
+		}
+
+		public string Message
+		{
+			get { return _message; }
 		}
 	}
 }

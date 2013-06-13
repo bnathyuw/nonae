@@ -1,10 +1,11 @@
 ﻿using System.Net.Http;
+using Nonae.Core.Credentials;
 
 namespace Nonae.Web
 {
 	public class HttpHandler:Core.HttpHandler
 	{
-		public HttpHandler()
+		public HttpHandler() : base(new BasicAuthenticationProvider())
 		{
 			AddEndpoint("/nonae").WithMethods(HttpMethod.Get, HttpMethod.Head, HttpMethod.Options);
 			AddEndpoint("/nonae/users").WithMethods(HttpMethod.Get, HttpMethod.Head, HttpMethod.Post, HttpMethod.Options);

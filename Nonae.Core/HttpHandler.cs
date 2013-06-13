@@ -4,7 +4,6 @@ using Nonae.Core.Endpoints;
 using Nonae.Core.Handlers;
 using Nonae.Core.Requests;
 using Nonae.Core.Responses;
-using Nonae.Core.Results;
 
 namespace Nonae.Core
 {
@@ -12,11 +11,13 @@ namespace Nonae.Core
 	{
 		private readonly IHandler _handler;
 		private readonly EndpointStore _endpointStore;
+		private readonly CredentialsBuilder _credentialsBuilder;
 
-		protected HttpHandler()
+		protected HttpHandler(IAuthenticationProvider authenticationProvider)
 		{
 			_handler = GetHandler();
 			_endpointStore = new EndpointStore();
+			_credentialsBuilder = new CredentialsBuilder(authenticationProvider);
 		}
 
 		private static AuthenticationHandler GetHandler()
@@ -34,7 +35,7 @@ namespace Nonae.Core
 		{
 			var endpoint = _endpointStore.Get(context.Request.Path);
 			var request = context.Request;
-			var credentials = CredentialsBuilder.From(request.Headers["Authorization"]);
+			var credentials = _credentialsBuilder.From(request.Headers["Authorization"]);
 			var requestDetails = new RequestDetails(request, endpoint, credentials);
 			var result = _handler.Handle(requestDetails);
 

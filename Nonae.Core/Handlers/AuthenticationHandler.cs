@@ -14,23 +14,16 @@ namespace Nonae.Core.Handlers
 
 		public IResult Handle(IRequestDetails requestDetails)
 		{
-			return requestDetails.HasAuthorization 
-				? CheckAuthenticationFromHeader(requestDetails) 
+			return requestDetails.HasAuthorization
+				? CheckCredentials(requestDetails) 
 				: _successor.Handle(requestDetails);
-		}
-
-		private IResult CheckAuthenticationFromHeader(IRequestDetails requestDetails)
-		{
-			return requestDetails.AuthorizationMethodIsSupported
-				       ? CheckCredentials(requestDetails)
-				       : UnauthorizedResult.ForUnsupportedAuthorizationMethod();
 		}
 
 		private IResult CheckCredentials(IRequestDetails requestDetails)
 		{
 			return requestDetails.IsAuthenticated
 				       ? _successor.Handle(requestDetails)
-				       : UnauthorizedResult.ForInvalidCredentials();
+				       : new UnauthorizedResult(requestDetails.AuthenticationFailureMessage);
 		}
 	}
 }

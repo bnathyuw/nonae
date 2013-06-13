@@ -7,7 +7,7 @@ namespace Nonae.Core.Results
 	{
 		private readonly string _message;
 
-		private UnauthorizedResult(string message)
+		public UnauthorizedResult(string message)
 		{
 			_message = message;
 		}

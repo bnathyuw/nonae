@@ -1,4 +1,3 @@
-using Nonae.Core.Handlers;
 using Nonae.Core.Requests;
 
 namespace Nonae.Core.Endpoints

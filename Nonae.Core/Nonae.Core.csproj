@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Credentials\BasicAuthenticationProvider.cs" />
     <Compile Include="Credentials\CredentialsBuilder.cs" />
+    <Compile Include="Credentials\IAuthenticationProvider.cs" />
     <Compile Include="Endpoints\EndpointStore.cs" />
     <Compile Include="Credentials\AnonymousCredentials.cs" />
     <Compile Include="Handlers\AuthenticationHandler.cs" />

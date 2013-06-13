@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using Nonae.Core.Handlers;
 using Nonae.Core.Requests;
 using Nonae.Core.Responses;
 

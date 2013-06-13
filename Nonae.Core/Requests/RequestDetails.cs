@@ -31,14 +31,9 @@ namespace Nonae.Core.Requests
 			get { return !_credentials.IsAnonymous; }
 		}
 
-		public bool AuthorizationMethodIsSupported
-		{
-			get { return _credentials.AuthorizationMethodIsSupported; }
-		}
-
 		public bool IsAuthenticated
 		{
-			get { return _credentials.IsAuthenticated; }
+			get { return _credentials.Message == null; }
 		}
 
 		public bool MethodIsSupported
@@ -54,6 +49,11 @@ namespace Nonae.Core.Requests
 		public string AllowHeader
 		{
 			get { return _endpoint.AllowHeader; }
+		}
+
+		public string AuthenticationFailureMessage
+		{
+			get { return _credentials.Message; }
 		}
 
 		public bool IsOptionsRequest

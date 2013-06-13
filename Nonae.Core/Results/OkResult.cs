@@ -1,5 +1,4 @@
-﻿using Nonae.Core.Handlers;
-using Nonae.Core.Requests;
+﻿using Nonae.Core.Requests;
 using Nonae.Core.Responses;
 
 namespace Nonae.Core.Results
