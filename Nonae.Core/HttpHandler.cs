@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using Nonae.Core.Credentials;
 using Nonae.Core.Endpoints;
 using Nonae.Core.Handlers;
 using Nonae.Core.Requests;
@@ -32,7 +33,9 @@ namespace Nonae.Core
 		public void ProcessRequest(HttpContext context)
 		{
 			var endpoint = _endpointStore.Get(context.Request.Path);
-			var requestDetails = new RequestDetails(context.Request, endpoint);
+			var request = context.Request;
+			var credentials = CredentialsBuilder.From(request.Headers["Authorization"]);
+			var requestDetails = new RequestDetails(request, endpoint, credentials);
 			var result = _handler.Handle(requestDetails);
 
 			var responseDetails = new ResponseDetails(context.Response);

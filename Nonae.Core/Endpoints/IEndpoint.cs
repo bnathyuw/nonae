@@ -8,6 +8,6 @@ namespace Nonae.Core.Endpoints
 		bool Allows(RequestDetails requestDetails);
 		string AllowHeader { get; }
 		bool Exists { get; }
-		bool IsAuthorizedFor(Credentials.Credentials credentials);
+		bool IsAuthorizedFor(Credentials.ICredentials credentials);
 	}
 }

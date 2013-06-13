@@ -14,7 +14,7 @@ namespace Nonae.Core.Endpoints
 
 		public bool Exists { get { return false; } }
 
-		public bool IsAuthorizedFor(Credentials.Credentials credentials)
+		public bool IsAuthorizedFor(Credentials.ICredentials credentials)
 		{
 			return true;
 		}

@@ -1,20 +1,25 @@
 namespace Nonae.Core.Credentials
 {
-	public class AnonymousCredentials : Credentials
+	public class AnonymousCredentials : ICredentials
 	{
-		public override bool IsAuthenticated
+		public bool IsAuthenticated
 		{
 			get { return true; }
 		}
 
-		public override bool AuthorizationMethodIsSupported
+		public bool AuthorizationMethodIsSupported
 		{
 			get { return true; }
 		}
 
-		public override string Username
+		public string Username
 		{
-			get { return ""; }
+			get { return null; }
+		}
+
+		public bool IsAnonymous
+		{
+			get { return true; }
 		}
 	}
 }

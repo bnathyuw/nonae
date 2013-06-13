@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Nonae.Core.Credentials
 {
-	public class BasicCredentials:Credentials
+	public class BasicCredentials:ICredentials
 	{
 		private readonly IEnumerable<string> _users = new List<string> {"username:password", "admin:password"};
 		private readonly string _credentials;
@@ -16,7 +16,7 @@ namespace Nonae.Core.Credentials
 			_credentials = Encoding.Unicode.GetString(credentialBytes);
 		}
 
-		public override bool IsAuthenticated
+		public bool IsAuthenticated
 		{
 			get
 			{
@@ -24,18 +24,23 @@ namespace Nonae.Core.Credentials
 			}
 		}
 
-		public override bool AuthorizationMethodIsSupported
+		public bool AuthorizationMethodIsSupported
 		{
 			get { return true; }
 		}
 
-		public override string Username
+		public string Username
 		{
 			get
 			{
 				var bits = _credentials.Split(':');
 				return bits.First();
 			}
+		}
+
+		public bool IsAnonymous
+		{
+			get { return false; }
 		}
 	}
 }

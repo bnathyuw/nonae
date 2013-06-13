@@ -10,7 +10,7 @@ namespace Nonae.Core.Endpoints
 	{
 		private HttpMethod[] _methods;
 		private readonly string _url;
-		private Func<Credentials.Credentials, bool> _authorize = credentials => true;
+		private Func<Credentials.ICredentials, bool> _authorize = credentials => true;
 
 		public Endpoint(string url)
 		{
@@ -29,7 +29,7 @@ namespace Nonae.Core.Endpoints
 
 		public bool Exists { get { return true; } }
 
-		public bool IsAuthorizedFor(Credentials.Credentials credentials)
+		public bool IsAuthorizedFor(Credentials.ICredentials credentials)
 		{
 			return _authorize(credentials);
 		}
@@ -45,7 +45,7 @@ namespace Nonae.Core.Endpoints
 			return _url == path;
 		}
 
-		public Endpoint AuthorizedWhen(Func<Credentials.Credentials, bool> func)
+		public Endpoint AuthorizedWhen(Func<Credentials.ICredentials, bool> func)
 		{
 			_authorize = func;
 			return this;

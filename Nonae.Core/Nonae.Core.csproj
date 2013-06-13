@@ -41,10 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Credentials\CredentialsBuilder.cs" />
     <Compile Include="Endpoints\EndpointStore.cs" />
     <Compile Include="Credentials\AnonymousCredentials.cs" />
     <Compile Include="Handlers\AuthenticationHandler.cs" />
-    <Compile Include="Credentials\Credentials.cs" />
+    <Compile Include="Credentials\ICredentials.cs" />
     <Compile Include="Endpoints\Endpoint.cs" />
     <Compile Include="Credentials\BasicCredentials.cs" />
     <Compile Include="Handlers\AuthorizationHandler.cs" />

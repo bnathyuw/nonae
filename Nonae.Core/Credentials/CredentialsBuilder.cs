@@ -1,14 +1,8 @@
 namespace Nonae.Core.Credentials
 {
-	public abstract class Credentials
+	static internal class CredentialsBuilder
 	{
-		public abstract bool IsAuthenticated { get; }
-
-		public abstract bool AuthorizationMethodIsSupported { get; }
-
-		public abstract string Username { get; }
-
-		public static Credentials From(string authorizationHeader)
+		public static ICredentials From(string authorizationHeader)
 		{
 			if (authorizationHeader == null) return new AnonymousCredentials();
 

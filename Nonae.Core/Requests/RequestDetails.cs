@@ -1,5 +1,6 @@
 using System.Net.Http;
 using System.Web;
+using Nonae.Core.Credentials;
 using Nonae.Core.Endpoints;
 
 namespace Nonae.Core.Requests
@@ -8,24 +9,17 @@ namespace Nonae.Core.Requests
 	{
 		private readonly HttpRequest _request;
 
-		public RequestDetails(HttpRequest request, IEndpoint endpoint)
+		public RequestDetails(HttpRequest request, IEndpoint endpoint, ICredentials credentials)
 		{
 			_request = request;
 			_endpoint = endpoint;
-			_authorizationHeader = _request.Headers["Authorization"];
-			_credentials = Credentials.Credentials.From(_authorizationHeader);
+			_credentials = credentials;
 			_httpMethod = _request.HttpMethod;
 		}
 
 		private readonly IEndpoint _endpoint;
-		private readonly string _authorizationHeader;
-		private readonly Credentials.Credentials _credentials;
+		private readonly ICredentials _credentials;
 		private readonly string _httpMethod;
-
-		public bool Matches(string url)
-		{
-			return url == _request.Path;
-		}
 
 		public bool Matches(HttpMethod options)
 		{
@@ -34,7 +28,7 @@ namespace Nonae.Core.Requests
 
 		public bool HasAuthorization
 		{
-			get { return _authorizationHeader != null; }
+			get { return !_credentials.IsAnonymous; }
 		}
 
 		public bool AuthorizationMethodIsSupported
