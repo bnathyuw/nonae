@@ -16,7 +16,7 @@ namespace Nonae.Core.Authorization
 
 		public Credentials From(string authorizationHeader)
 		{
-			if (authorizationHeader == null) return Credentials.CreateAnonymousCredentials();
+			if (authorizationHeader == null) return Credentials.ForAnonymousUser();
 
 			var authorizationHeaderBits = authorizationHeader.Split(' ');
 
@@ -39,7 +39,7 @@ namespace Nonae.Core.Authorization
 			var username = strings.First();
 			var password = strings.ElementAt(1);
 			var authenticate = _authenticationProvider.Authenticate(username, password);
-			return authenticate ? Credentials.CreateBasicCredentials(username) : Credentials.ForUserNotFound();
+			return authenticate ? Credentials.ForAuthenticatedUser(username) : Credentials.ForUserNotFound();
 		}
 	}
 }

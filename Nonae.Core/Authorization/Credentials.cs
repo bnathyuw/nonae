@@ -16,12 +16,12 @@ namespace Nonae.Core.Authorization
 		public bool IsAnonymous { get; private set; }
 		public string Message { get; private set; }
 
-		public static Credentials CreateBasicCredentials(string username)
+		public static Credentials ForAuthenticatedUser(string username)
 		{
 			return new Credentials(false, username, null);
 		}
 
-		public static Credentials CreateAnonymousCredentials()
+		public static Credentials ForAnonymousUser()
 		{
 			return new Credentials(true, null, null);
 		}

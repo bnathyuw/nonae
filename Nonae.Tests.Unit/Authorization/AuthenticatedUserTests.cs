@@ -4,14 +4,15 @@ using Nonae.Core.Authorization;
 namespace Nonae.Tests.Unit.Authorization
 {
 	[TestFixture]
-	public class AnonymousCredentialsTests
+	public class AuthenticatedUserTests
 	{
+		private const string Username = "foo";
 		private Credentials _credentials;
 
 		[SetUp]
 		public void SetUp()
 		{
-			_credentials = Credentials.CreateAnonymousCredentials();
+			_credentials = Credentials.ForAuthenticatedUser(Username);
 		}
 
 		[Test]
@@ -21,15 +22,15 @@ namespace Nonae.Tests.Unit.Authorization
 		}
 
 		[Test]
-		public void Username_is_null()
+		public void Username_is_correct()
 		{
-			Assert.That(_credentials.Username, Is.Null);
+			Assert.That(_credentials.Username, Is.EqualTo(Username));
 		}
 
 		[Test]
 		public void Is_anonymous()
 		{
-			Assert.That(_credentials.IsAnonymous, Is.True);
+			Assert.That(_credentials.IsAnonymous, Is.False);
 		}
 	}
 }
