@@ -1,4 +1,4 @@
-namespace Nonae.Core.Credentials
+namespace Nonae.Core.Authorization
 {
 	public interface IAuthenticationProvider
 	{

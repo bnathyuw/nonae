@@ -45,9 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Credentials\AnonymousCredentialsTests.cs" />
-    <Compile Include="Credentials\BasicCredentialsTests.cs" />
-    <Compile Include="Credentials\InvalidCredentialsTests.cs" />
+    <Compile Include="Authorization\AnonymousCredentialsTests.cs" />
+    <Compile Include="Authorization\BasicCredentialsTests.cs" />
+    <Compile Include="Authorization\UnsupportedAuthorizationMethodTests.cs" />
+    <Compile Include="Authorization\UserNotFoundTests.cs" />
     <Compile Include="Handlers\AuthenticationHandlerTests.cs" />
     <Compile Include="Handlers\AuthorizationHandlerTests.cs" />
     <Compile Include="Handlers\EndpointExistsHandlerTests.cs" />

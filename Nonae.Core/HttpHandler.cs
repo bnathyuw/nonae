@@ -1,5 +1,5 @@
 ﻿using System.Web;
-using Nonae.Core.Credentials;
+using Nonae.Core.Authorization;
 using Nonae.Core.Endpoints;
 using Nonae.Core.Handlers;
 using Nonae.Core.Requests;

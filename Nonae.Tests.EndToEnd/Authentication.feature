@@ -12,7 +12,7 @@ Scenario: Incorrect credentials
 	When I call GET on the root
 	And I specify username 'username' and password 'not the password' for Basic authentication
 	Then I get a 401 Unauthorized response
-	And the reason is 'Invalid Credentials'
+	And the reason is 'User Not Found'
 	And I get a WWW-Authenticate header requesting Basic authentication
 
 Scenario: Incorrect authentication method

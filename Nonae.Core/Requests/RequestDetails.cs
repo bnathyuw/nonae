@@ -1,6 +1,6 @@
 using System.Net.Http;
 using System.Web;
-using Nonae.Core.Credentials;
+using Nonae.Core.Authorization;
 using Nonae.Core.Endpoints;
 
 namespace Nonae.Core.Requests
@@ -9,7 +9,7 @@ namespace Nonae.Core.Requests
 	{
 		private readonly HttpRequest _request;
 
-		public RequestDetails(HttpRequest request, IEndpoint endpoint, ICredentials credentials)
+		public RequestDetails(HttpRequest request, IEndpoint endpoint, Credentials credentials)
 		{
 			_request = request;
 			_endpoint = endpoint;
@@ -18,7 +18,7 @@ namespace Nonae.Core.Requests
 		}
 
 		private readonly IEndpoint _endpoint;
-		private readonly ICredentials _credentials;
+		private readonly Credentials _credentials;
 		private readonly string _httpMethod;
 
 		public bool Matches(HttpMethod options)

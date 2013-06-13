@@ -19,19 +19,7 @@ namespace Nonae.Core.Results
 			responseDetails.Body = _message;
 		}
 
-		private const string UnsupportedAuthorizationMethod = "Unsupported Authorization Method";
-		private const string InvalidCredentials = "Invalid credentials";
 		private const string InsufficientPrivileges = "Insufficient privileges";
-
-		public static UnauthorizedResult ForInvalidCredentials()
-		{
-			return new UnauthorizedResult(InvalidCredentials);
-		}
-
-		public static UnauthorizedResult ForUnsupportedAuthorizationMethod()
-		{
-			return new UnauthorizedResult(UnsupportedAuthorizationMethod);
-		}
 
 		public static IResult ForInsufficientPrivileges()
 		{

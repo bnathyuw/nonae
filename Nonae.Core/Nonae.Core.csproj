@@ -41,19 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Credentials\BasicAuthenticationProvider.cs" />
-    <Compile Include="Credentials\CredentialsBuilder.cs" />
-    <Compile Include="Credentials\IAuthenticationProvider.cs" />
+    <Compile Include="Authorization\BasicAuthenticationProvider.cs" />
+    <Compile Include="Authorization\CredentialsBuilder.cs" />
+    <Compile Include="Authorization\IAuthenticationProvider.cs" />
     <Compile Include="Endpoints\EndpointStore.cs" />
-    <Compile Include="Credentials\AnonymousCredentials.cs" />
     <Compile Include="Handlers\AuthenticationHandler.cs" />
-    <Compile Include="Credentials\ICredentials.cs" />
+    <Compile Include="Authorization\Credentials.cs" />
     <Compile Include="Endpoints\Endpoint.cs" />
-    <Compile Include="Credentials\BasicCredentials.cs" />
     <Compile Include="Handlers\AuthorizationHandler.cs" />
     <Compile Include="Handlers\EndpointExistsHandler.cs" />
     <Compile Include="Handlers\IHandler.cs" />
-    <Compile Include="Credentials\InvalidCredentials.cs" />
     <Compile Include="Requests\IRequestDetails.cs" />
     <Compile Include="Requests\RequestDetails.cs" />
     <Compile Include="HttpHandler.cs" />

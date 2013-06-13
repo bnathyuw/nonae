@@ -1,18 +1,18 @@
 ﻿using NUnit.Framework;
-using Nonae.Core.Credentials;
+using Nonae.Core.Authorization;
 
-namespace Nonae.Tests.Unit.Credentials
+namespace Nonae.Tests.Unit.Authorization
 {
 	[TestFixture]
 	public class BasicCredentialsTests
 	{
 		private const string Username = "foo";
-		private BasicCredentials _credentials;
+		private Credentials _credentials;
 
 		[SetUp]
 		public void SetUp()
 		{
-			_credentials = new BasicCredentials(Username);
+			_credentials = Credentials.CreateBasicCredentials(Username);
 		}
 
 		[Test]

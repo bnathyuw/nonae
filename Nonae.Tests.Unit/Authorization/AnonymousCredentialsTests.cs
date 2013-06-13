@@ -1,17 +1,17 @@
 ﻿using NUnit.Framework;
-using Nonae.Core.Credentials;
+using Nonae.Core.Authorization;
 
-namespace Nonae.Tests.Unit.Credentials
+namespace Nonae.Tests.Unit.Authorization
 {
 	[TestFixture]
 	public class AnonymousCredentialsTests
 	{
-		private AnonymousCredentials _credentials;
+		private Credentials _credentials;
 
 		[SetUp]
 		public void SetUp()
 		{
-			_credentials = new AnonymousCredentials();
+			_credentials = Credentials.CreateAnonymousCredentials();
 		}
 
 		[Test]

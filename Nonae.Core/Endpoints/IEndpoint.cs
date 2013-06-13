@@ -1,4 +1,5 @@
-﻿using Nonae.Core.Requests;
+﻿using Nonae.Core.Authorization;
+using Nonae.Core.Requests;
 
 namespace Nonae.Core.Endpoints
 {
@@ -7,6 +8,6 @@ namespace Nonae.Core.Endpoints
 		bool Allows(RequestDetails requestDetails);
 		string AllowHeader { get; }
 		bool Exists { get; }
-		bool IsAuthorizedFor(Credentials.ICredentials credentials);
+		bool IsAuthorizedFor(Credentials credentials);
 	}
 }

@@ -1,5 +1,5 @@
 ﻿using System.Net.Http;
-using Nonae.Core.Credentials;
+using Nonae.Core.Authorization;
 
 namespace Nonae.Web
 {

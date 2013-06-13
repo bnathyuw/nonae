@@ -1,3 +1,4 @@
+using Nonae.Core.Authorization;
 using Nonae.Core.Requests;
 
 namespace Nonae.Core.Endpoints
@@ -13,7 +14,7 @@ namespace Nonae.Core.Endpoints
 
 		public bool Exists { get { return false; } }
 
-		public bool IsAuthorizedFor(Credentials.ICredentials credentials)
+		public bool IsAuthorizedFor(Credentials credentials)
 		{
 			return true;
 		}

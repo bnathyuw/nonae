@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Nonae.Core.Credentials
+namespace Nonae.Core.Authorization
 {
 	internal class CredentialsBuilder
 	{
@@ -14,9 +14,9 @@ namespace Nonae.Core.Credentials
 			_authenticationProvider = authenticationProvider;
 		}
 
-		public ICredentials From(string authorizationHeader)
+		public Credentials From(string authorizationHeader)
 		{
-			if (authorizationHeader == null) return new AnonymousCredentials();
+			if (authorizationHeader == null) return Credentials.CreateAnonymousCredentials();
 
 			var authorizationHeaderBits = authorizationHeader.Split(' ');
 
@@ -27,11 +27,11 @@ namespace Nonae.Core.Credentials
 				case "Basic":
 					return BuildBasicCredentials(authorizationHeaderBits);
 				default:
-					return new InvalidCredentials("Unsupported Authorization Method");
+					return Credentials.ForUnsupportedAuthorizationMethod();
 			}
 		}
 
-		private ICredentials BuildBasicCredentials(IList<string> authorizationHeaderBits)
+		private Credentials BuildBasicCredentials(IList<string> authorizationHeaderBits)
 		{
 			var credentialBytes = Convert.FromBase64String(authorizationHeaderBits[1]);
 			var getString = Encoding.Unicode.GetString(credentialBytes);
@@ -39,7 +39,7 @@ namespace Nonae.Core.Credentials
 			var username = strings.First();
 			var password = strings.ElementAt(1);
 			var authenticate = _authenticationProvider.Authenticate(username, password);
-			return authenticate ? (ICredentials) new BasicCredentials(username) : new InvalidCredentials("Invalid Credentials");
+			return authenticate ? Credentials.CreateBasicCredentials(username) : Credentials.ForUserNotFound();
 		}
 	}
 }

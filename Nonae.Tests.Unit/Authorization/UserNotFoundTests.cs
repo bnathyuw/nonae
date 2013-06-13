@@ -1,24 +1,23 @@
 ﻿using NUnit.Framework;
-using Nonae.Core.Credentials;
+using Nonae.Core.Authorization;
 
-namespace Nonae.Tests.Unit.Credentials
+namespace Nonae.Tests.Unit.Authorization
 {
 	[TestFixture]
-	public class InvalidCredentialsTests
+	public class UserNotFoundTests
 	{
-		private InvalidCredentials _credentials;
-		private const string FailureMessage = "Something has gone wrong";
+		private Credentials _credentials;
 
 		[SetUp]
 		public void SetUp()
 		{
-			_credentials = new InvalidCredentials(FailureMessage);
+			_credentials = Credentials.ForUserNotFound();
 		}
 
 		[Test]
 		public void Is_not_authenticated()
 		{
-			Assert.That(_credentials.Message, Is.EqualTo(FailureMessage));
+			Assert.That(_credentials.Message, Is.EqualTo("User Not Found"));
 		}
 
 		[Test]

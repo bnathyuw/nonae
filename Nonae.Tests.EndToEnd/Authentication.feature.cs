@@ -97,7 +97,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 14
  testRunner.Then("I get a 401 Unauthorized response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 15
- testRunner.And("the reason is \'Invalid Credentials\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("the reason is \'User Not Found\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 16
  testRunner.And("I get a WWW-Authenticate header requesting Basic authentication", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
