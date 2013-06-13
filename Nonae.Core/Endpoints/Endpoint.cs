@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
-using Nonae.Core.Authentication;
 using Nonae.Core.Handlers;
+using Nonae.Core.Requests;
 
 namespace Nonae.Core.Endpoints
 {
@@ -10,7 +10,7 @@ namespace Nonae.Core.Endpoints
 	{
 		private HttpMethod[] _methods;
 		private readonly string _url;
-		private Func<Credentials, bool> _authorize = credentials => true;
+		private Func<Credentials.Credentials, bool> _authorize = credentials => true;
 
 		public Endpoint(string url)
 		{
@@ -29,7 +29,7 @@ namespace Nonae.Core.Endpoints
 
 		public bool Exists { get { return true; } }
 
-		public bool IsAuthorizedFor(Credentials credentials)
+		public bool IsAuthorizedFor(Credentials.Credentials credentials)
 		{
 			return _authorize(credentials);
 		}
@@ -45,7 +45,7 @@ namespace Nonae.Core.Endpoints
 			return _url == path;
 		}
 
-		public Endpoint AuthorizedWhen(Func<Credentials, bool> func)
+		public Endpoint AuthorizedWhen(Func<Credentials.Credentials, bool> func)
 		{
 			_authorize = func;
 			return this;

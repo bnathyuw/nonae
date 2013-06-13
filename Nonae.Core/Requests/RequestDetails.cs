@@ -1,9 +1,8 @@
 using System.Net.Http;
 using System.Web;
-using Nonae.Core.Authentication;
 using Nonae.Core.Endpoints;
 
-namespace Nonae.Core.Handlers
+namespace Nonae.Core.Requests
 {
 	public class RequestDetails : IRequestDetails
 	{
@@ -14,13 +13,13 @@ namespace Nonae.Core.Handlers
 			_request = request;
 			_endpoint = endpoint;
 			_authorizationHeader = _request.Headers["Authorization"];
-			_credentials = Credentials.From(_authorizationHeader);
+			_credentials = Credentials.Credentials.From(_authorizationHeader);
 			_httpMethod = _request.HttpMethod;
 		}
 
 		private readonly IEndpoint _endpoint;
 		private readonly string _authorizationHeader;
-		private readonly Credentials _credentials;
+		private readonly Credentials.Credentials _credentials;
 		private readonly string _httpMethod;
 
 		public bool Matches(string url)

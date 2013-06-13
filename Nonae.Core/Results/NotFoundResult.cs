@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Nonae.Core.Responses;
 
 namespace Nonae.Core.Results
 {

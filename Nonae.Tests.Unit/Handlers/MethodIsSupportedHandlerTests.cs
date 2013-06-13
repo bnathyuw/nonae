@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Nonae.Core.Handlers;
+using Nonae.Core.Requests;
 using Nonae.Core.Results;
 using Rhino.Mocks;
 

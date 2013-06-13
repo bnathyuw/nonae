@@ -1,4 +1,4 @@
-namespace Nonae.Core.Handlers
+namespace Nonae.Core.Requests
 {
 	public interface IRequestDetails
 	{

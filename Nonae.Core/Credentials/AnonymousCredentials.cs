@@ -1,4 +1,4 @@
-namespace Nonae.Core.Authentication
+namespace Nonae.Core.Credentials
 {
 	public class AnonymousCredentials : Credentials
 	{

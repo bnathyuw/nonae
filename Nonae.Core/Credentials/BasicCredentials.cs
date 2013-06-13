@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Nonae.Core.Authentication
+namespace Nonae.Core.Credentials
 {
 	public class BasicCredentials:Credentials
 	{
