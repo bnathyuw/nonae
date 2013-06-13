@@ -17,7 +17,7 @@ namespace Nonae.Tests.Unit.Authorization
 		[Test]
 		public void Is_not_authenticated()
 		{
-			Assert.That(_credentials.Message, Is.EqualTo("User Not Found"));
+			Assert.That(_credentials.FailureMessage, Is.EqualTo("User Not Found"));
 		}
 
 		[Test]

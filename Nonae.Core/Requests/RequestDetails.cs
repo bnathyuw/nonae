@@ -33,7 +33,7 @@ namespace Nonae.Core.Requests
 
 		public bool IsAuthenticated
 		{
-			get { return _credentials.Message == null; }
+			get { return _credentials.IsAuthenticated; }
 		}
 
 		public bool MethodIsSupported
@@ -53,7 +53,7 @@ namespace Nonae.Core.Requests
 
 		public string AuthenticationFailureMessage
 		{
-			get { return _credentials.Message; }
+			get { return _credentials.FailureMessage; }
 		}
 
 		public bool IsOptionsRequest

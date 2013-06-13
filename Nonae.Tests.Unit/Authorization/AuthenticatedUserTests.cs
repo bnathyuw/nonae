@@ -18,7 +18,7 @@ namespace Nonae.Tests.Unit.Authorization
 		[Test]
 		public void Is_authenticated()
 		{
-			Assert.That(_credentials.Message, Is.Null);
+			Assert.That(_credentials.FailureMessage, Is.Null);
 		}
 
 		[Test]

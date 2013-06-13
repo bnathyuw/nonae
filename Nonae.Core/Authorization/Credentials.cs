@@ -6,7 +6,7 @@ namespace Nonae.Core.Authorization
 		{
 			IsAnonymous = isAnonymous;
 			Username = username;
-			Message = message;
+			FailureMessage = message;
 		}
 
 		private const string UnsupportedAuthorizationMethod = "Unsupported Authorization Method";
@@ -14,7 +14,12 @@ namespace Nonae.Core.Authorization
 
 		public string Username { get; private set;  }
 		public bool IsAnonymous { get; private set; }
-		public string Message { get; private set; }
+		public string FailureMessage { get; private set; }
+
+		public bool IsAuthenticated
+		{
+			get { return FailureMessage == null; }
+		}
 
 		public static Credentials ForAuthenticatedUser(string username)
 		{

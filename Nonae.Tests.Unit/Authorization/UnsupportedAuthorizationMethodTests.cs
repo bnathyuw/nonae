@@ -17,7 +17,7 @@ namespace Nonae.Tests.Unit.Authorization
 		[Test]
 		public void Is_not_authenticated()
 		{
-			Assert.That(_credentials.Message, Is.EqualTo("Unsupported Authorization Method"));
+			Assert.That(_credentials.FailureMessage, Is.EqualTo("Unsupported Authorization Method"));
 		}
 
 		[Test]

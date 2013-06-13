@@ -15,8 +15,8 @@ namespace Nonae.Core.Handlers
 		public IResult Handle(IRequestDetails requestDetails)
 		{
 			return requestDetails.HasAuthorization
-				? CheckCredentials(requestDetails) 
-				: _successor.Handle(requestDetails);
+				       ? CheckCredentials(requestDetails)
+				       : _successor.Handle(requestDetails);
 		}
 
 		private IResult CheckCredentials(IRequestDetails requestDetails)
