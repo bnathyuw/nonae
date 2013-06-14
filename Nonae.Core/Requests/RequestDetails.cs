@@ -9,7 +9,7 @@ namespace Nonae.Core.Requests
 	{
 		private readonly HttpRequest _request;
 
-		public RequestDetails(HttpRequest request, IEndpoint endpoint, Credentials credentials)
+		public RequestDetails(HttpRequest request, Endpoint endpoint, Credentials credentials)
 		{
 			_request = request;
 			_endpoint = endpoint;
@@ -17,7 +17,7 @@ namespace Nonae.Core.Requests
 			_httpMethod = _request.HttpMethod;
 		}
 
-		private readonly IEndpoint _endpoint;
+		private readonly Endpoint _endpoint;
 		private readonly Credentials _credentials;
 		private readonly string _httpMethod;
 

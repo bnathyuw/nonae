@@ -56,8 +56,6 @@
     <Compile Include="Handlers\MethodIsSupportedHandler.cs" />
     <Compile Include="Handlers\OkHandler.cs" />
     <Compile Include="Handlers\OptionsHandler.cs" />
-    <Compile Include="Endpoints\IEndpoint.cs" />
-    <Compile Include="Endpoints\NullEndpoint.cs" />
     <Compile Include="Results\IResult.cs" />
     <Compile Include="Results\MethodNotAllowedResult.cs" />
     <Compile Include="Results\NotFoundResult.cs" />

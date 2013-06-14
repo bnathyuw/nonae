@@ -7,17 +7,15 @@ namespace Nonae.Core.Endpoints
 	{
 		private readonly List<Endpoint> _endpoints = new List<Endpoint>();
 
-		public IEndpoint Get(string path)
+		public Endpoint Get(string path)
 		{
 			var endpoint = _endpoints.FirstOrDefault(e => e.IsAt(path));
-			return (IEndpoint) endpoint ?? new NullEndpoint();
+			return endpoint ?? Endpoint.Null();
 		}
 
-		public Endpoint Add(string url)
+		public void Add(Endpoint endpoint)
 		{
-			var endpoint = new Endpoint(url);
 			_endpoints.Add(endpoint);
-			return endpoint;
 		}
 	}
 }

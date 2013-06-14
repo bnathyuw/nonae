@@ -29,7 +29,7 @@ namespace Nonae.Core.Responses
 
 		public string Allow
 		{
-			set { _response.Headers.Add("Allow", value); }
+			set { _response.Headers.Add("Allow", string.IsNullOrEmpty(value) ? " " : value); }
 		}
 	}
 }

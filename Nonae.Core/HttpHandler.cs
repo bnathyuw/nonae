@@ -48,9 +48,9 @@ namespace Nonae.Core
 			get { return true; }
 		}
 
-		protected Endpoint AddEndpoint(string url)
+		protected void Add(Endpoint endpoint)
 		{
-			return _endpointStore.Add(url);
+			_endpointStore.Add(endpoint);
 		}
 	}
 }

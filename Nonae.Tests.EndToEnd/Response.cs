@@ -42,7 +42,8 @@ namespace Nonae.Tests.EndToEnd
 
 		private IEnumerable<string> GetHeaderValues(string headerName)
 		{
-			return _headers[headerName].Split(new[] {',', ' '}, StringSplitOptions.RemoveEmptyEntries);
+			var header = _headers[headerName];
+			return header.Split(new[] {',', ' '}, StringSplitOptions.RemoveEmptyEntries);
 		}
 
 		public string ETag
