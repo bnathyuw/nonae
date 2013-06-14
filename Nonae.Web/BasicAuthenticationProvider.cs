@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using Nonae.Core.Authorization;
 
-namespace Nonae.Core.Authorization
+namespace Nonae.Web
 {
 	public class BasicAuthenticationProvider : IAuthenticationProvider
 	{

@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authorization\BasicAuthenticationProvider.cs" />
     <Compile Include="Authorization\CredentialsBuilder.cs" />
     <Compile Include="Authorization\IAuthenticationProvider.cs" />
     <Compile Include="Endpoints\EndpointStore.cs" />
