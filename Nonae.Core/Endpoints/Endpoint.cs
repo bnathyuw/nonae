@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using Nonae.Core.Authorization;
-using Nonae.Core.Requests;
 
 namespace Nonae.Core.Endpoints
 {
@@ -42,9 +41,9 @@ namespace Nonae.Core.Endpoints
 			_url = url;
 		}
 
-		public bool Allows(RequestDetails requestDetails)
+		public bool Allows(HttpMethod httpMethod)
 		{
-			return _methods.Any(requestDetails.Matches);
+			return _methods.Any(method => method == httpMethod);
 		}
 
 		public string AllowHeader

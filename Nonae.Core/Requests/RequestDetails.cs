@@ -14,16 +14,16 @@ namespace Nonae.Core.Requests
 			_request = request;
 			_endpoint = endpoint;
 			_credentials = credentials;
-			_httpMethod = _request.HttpMethod;
+			_httpMethod = new HttpMethod(_request.HttpMethod);
 		}
 
 		private readonly Endpoint _endpoint;
 		private readonly Credentials _credentials;
-		private readonly string _httpMethod;
+		private readonly HttpMethod _httpMethod;
 
-		public bool Matches(HttpMethod options)
+		private bool Matches(HttpMethod httpMethod)
 		{
-			return _httpMethod == options.ToString();
+			return _httpMethod == httpMethod;
 		}
 
 		public bool HasAuthorization
@@ -38,7 +38,7 @@ namespace Nonae.Core.Requests
 
 		public bool MethodIsSupported
 		{
-			get { return _endpoint.Allows(this); }
+			get { return _endpoint.Allows(_httpMethod); }
 		}
 
 		public bool EndpointExists
