@@ -19,7 +19,7 @@ namespace Nonae.Core.Responses
 
 		public string WwwAuthenticate
 		{
-			set { _response.Headers["WWW-Authenticate"] = value; }
+			set { _response.Headers.Add("WWW-Authenticate", value); }
 		}
 
 		public string Body

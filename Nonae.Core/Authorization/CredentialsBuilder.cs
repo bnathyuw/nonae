@@ -7,6 +7,8 @@ namespace Nonae.Core.Authorization
 {
 	internal class CredentialsBuilder
 	{
+		private const string UnsupportedAuthorizationMethod = "Unsupported Authorization Method";
+		private const string UserNotFound = "User Not Found";
 		private readonly IAuthenticationProvider _authenticationProvider;
 
 		public CredentialsBuilder(IAuthenticationProvider authenticationProvider)
@@ -16,7 +18,7 @@ namespace Nonae.Core.Authorization
 
 		public Credentials From(string authorizationHeader)
 		{
-			if (authorizationHeader == null) return Credentials.ForAnonymousUser();
+			if (authorizationHeader == null) return AnonymousUserCredentials();
 
 			var authorizationHeaderBits = authorizationHeader.Split(' ');
 
@@ -27,7 +29,7 @@ namespace Nonae.Core.Authorization
 				case "Basic":
 					return BuildBasicCredentials(authorizationHeaderBits);
 				default:
-					return Credentials.ForUnsupportedAuthorizationMethod();
+					return UnsupportedAuthorizationMethodCredentials();
 			}
 		}
 
@@ -39,7 +41,27 @@ namespace Nonae.Core.Authorization
 			var username = strings.First();
 			var password = strings.ElementAt(1);
 			var authenticate = _authenticationProvider.Authenticate(username, password);
-			return authenticate ? Credentials.ForAuthenticatedUser(username) : Credentials.ForUserNotFound();
+			return authenticate ? AuthenticatedUserCredentials(username) : UserNotFoundCredentials();
+		}
+
+		private static Credentials AuthenticatedUserCredentials(string username)
+		{
+			return new Credentials(false, username, null);
+		}
+
+		private static Credentials AnonymousUserCredentials()
+		{
+			return new Credentials(true, null, null);
+		}
+
+		private static Credentials UnsupportedAuthorizationMethodCredentials()
+		{
+			return new Credentials(false, null, UnsupportedAuthorizationMethod);
+		}
+
+		private static Credentials UserNotFoundCredentials()
+		{
+			return new Credentials(false, null, UserNotFound);
 		}
 	}
 }
