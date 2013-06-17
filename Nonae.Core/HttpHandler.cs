@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Net.Http;
+using System.Web;
 using Nonae.Core.Authorization;
 using Nonae.Core.Endpoints;
 using Nonae.Core.Handlers;
@@ -36,7 +37,7 @@ namespace Nonae.Core
 			var endpoint = _endpointStore.Get(context.Request.Path);
 			var request = context.Request;
 			var credentials = _credentialsBuilder.From(request.Headers["Authorization"]);
-			var requestDetails = new RequestDetails(request, endpoint, credentials);
+			var requestDetails = new RequestDetails(endpoint, credentials, new HttpMethod(request.HttpMethod));
 			var result = _handler.Handle(requestDetails);
 
 			var responseDetails = new ResponseDetails(context.Response);

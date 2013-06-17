@@ -1,5 +1,4 @@
 using System.Net.Http;
-using System.Web;
 using Nonae.Core.Authorization;
 using Nonae.Core.Endpoints;
 
@@ -7,24 +6,16 @@ namespace Nonae.Core.Requests
 {
 	public class RequestDetails : IRequestDetails
 	{
-		private readonly HttpRequest _request;
-
-		public RequestDetails(HttpRequest request, Endpoint endpoint, Credentials credentials)
+		public RequestDetails(Endpoint endpoint, Credentials credentials, HttpMethod httpMethod)
 		{
-			_request = request;
 			_endpoint = endpoint;
 			_credentials = credentials;
-			_httpMethod = new HttpMethod(_request.HttpMethod);
+			_httpMethod = httpMethod;
 		}
 
 		private readonly Endpoint _endpoint;
 		private readonly Credentials _credentials;
 		private readonly HttpMethod _httpMethod;
-
-		private bool Matches(HttpMethod httpMethod)
-		{
-			return _httpMethod == httpMethod;
-		}
 
 		public bool HasAuthorization
 		{
@@ -58,7 +49,7 @@ namespace Nonae.Core.Requests
 
 		public bool IsOptionsRequest
 		{
-			get { return Matches(HttpMethod.Options); }
+			get { return _httpMethod == HttpMethod.Options; }
 		}
 
 		public bool IsAuthorized
