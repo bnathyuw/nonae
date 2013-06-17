@@ -12,18 +12,17 @@ namespace Nonae.Tests.Unit.Results
 		private NotFoundResult _result;
 		private IResponseDetails _responseDetails;
 
-		[SetUp]
-		public void SetUp()
+		[TestFixtureSetUp]
+		public void TestFixtureSetUp()
 		{
 			_result = new NotFoundResult();
 			_responseDetails = MockRepository.GenerateStub<IResponseDetails>();
+			_result.Update(_responseDetails);
 		}
 
 		[Test]
 		public void Sets_status_code_to_not_found()
 		{
-			_result.Update(_responseDetails);
-
 			_responseDetails.AssertWasCalled(rd => rd.StatusCode = HttpStatusCode.NotFound);
 		}
 	}

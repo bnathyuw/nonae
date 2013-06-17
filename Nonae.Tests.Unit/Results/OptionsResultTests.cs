@@ -10,36 +10,33 @@ namespace Nonae.Tests.Unit.Results
 	[TestFixture]
 	public class OptionsResultTests
 	{
+		private const string AllowAllTheThings = "Allow all the things";
 		private OptionsResult _result;
 		private IResponseDetails _responseDetails;
 		private IRequestDetails _requestDetails;
 
-		[SetUp]
-		public void SetUp()
+		[TestFixtureSetUp]
+		public void TestFixtureSetUp()
 		{
 			_requestDetails = MockRepository.GenerateStub<IRequestDetails>();
 			_result = new OptionsResult(_requestDetails);
 			_responseDetails = MockRepository.GenerateStub<IResponseDetails>();
+			_requestDetails.Stub(rd => rd.AllowHeader).Return(AllowAllTheThings);
+
+			_result.Update(_responseDetails);
 		}
 
 		[Test]
 		public void Sets_status_code_to_ok()
 		{
-			_result.Update(_responseDetails);
-
 			_responseDetails.AssertWasCalled(rd => rd.StatusCode = HttpStatusCode.OK);
 		}
 
 		[Test]
 		public void Sets_allow_header_to_value_from_request_details()
 		{
-			const string allowHeader = "Allow all the things";
-			_requestDetails.Stub(rd => rd.AllowHeader).Return(allowHeader);
-
-			_result.Update(_responseDetails);
-
 			_requestDetails.AssertWasCalled(rd => rd.AllowHeader);
-			_responseDetails.AssertWasCalled(rd => rd.Allow = allowHeader);
+			_responseDetails.AssertWasCalled(rd => rd.Allow = AllowAllTheThings);
 		}
 	}
 }
