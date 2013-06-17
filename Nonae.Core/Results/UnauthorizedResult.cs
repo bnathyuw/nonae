@@ -12,7 +12,7 @@ namespace Nonae.Core.Results
 			_message = message;
 		}
 
-		public void Update(ResponseDetails responseDetails)
+		public void Update(IResponseDetails responseDetails)
 		{
 			responseDetails.StatusCode = HttpStatusCode.Unauthorized;
 			responseDetails.WwwAuthenticate = "Basic realm=\"foo\"";

@@ -3,7 +3,7 @@ using System.Web;
 
 namespace Nonae.Core.Responses
 {
-	public class ResponseDetails
+	public class ResponseDetails : IResponseDetails
 	{
 		private readonly HttpResponse _response;
 

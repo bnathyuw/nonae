@@ -56,6 +56,7 @@
     <Compile Include="Handlers\MethodIsSupportedHandler.cs" />
     <Compile Include="Handlers\OkHandler.cs" />
     <Compile Include="Handlers\OptionsHandler.cs" />
+    <Compile Include="Responses\IResponseDetails.cs" />
     <Compile Include="Results\IResult.cs" />
     <Compile Include="Results\MethodNotAllowedResult.cs" />
     <Compile Include="Results\NotFoundResult.cs" />

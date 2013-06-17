@@ -13,7 +13,7 @@ namespace Nonae.Core.Results
 			_requestDetails = requestDetails;
 		}
 
-		public void Update(ResponseDetails responseDetails)
+		public void Update(IResponseDetails responseDetails)
 		{
 			responseDetails.StatusCode = HttpStatusCode.MethodNotAllowed;
 			responseDetails.Allow = _requestDetails.AllowHeader;
