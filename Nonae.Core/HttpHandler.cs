@@ -34,10 +34,11 @@ namespace Nonae.Core
 
 		public void ProcessRequest(HttpContext context)
 		{
-			var endpoint = _endpointStore.Get(context.Request.Path);
 			var request = context.Request;
+			var endpoint = _endpointStore.Get(request.Path);
 			var credentials = _credentialsBuilder.From(request.Headers["Authorization"]);
 			var requestDetails = new RequestDetails(endpoint, credentials, new HttpMethod(request.HttpMethod));
+			
 			var result = _handler.Handle(requestDetails);
 
 			var responseDetails = new ResponseDetails(context.Response);

@@ -56,6 +56,7 @@
     <Compile Include="Handlers\MethodIsSupportedHandlerTests.cs" />
     <Compile Include="Handlers\OkHandlerTests.cs" />
     <Compile Include="Handlers\OptionsHandlerTests.cs" />
+    <Compile Include="Handlers\ResourceExistsHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\RequestDetailsTests.cs" />
     <Compile Include="Results\OkResultTests.cs" />

@@ -9,7 +9,7 @@ namespace Nonae.Tests.Unit.Endpoints
 	{
 		private Endpoint _nullEndpoint;
 		private Endpoint _endpoint;
-		private const string Url = "Url";
+		private const string UrlPattern = "^/resources/(?<id>\\d*)$";
 
 		[Test]
 		public void Null_endpoint_does_not_exist()
@@ -21,7 +21,7 @@ namespace Nonae.Tests.Unit.Endpoints
 		public void SetUp()
 		{
 			_nullEndpoint = Endpoint.Null();
-			_endpoint = Endpoint.AtUrl(Url);
+			_endpoint = Endpoint.AtUrl(UrlPattern);
 		}
 
 		[Test]
@@ -53,9 +53,15 @@ namespace Nonae.Tests.Unit.Endpoints
 		}
 
 		[Test]
-		public void Endpoint_is_at_configured_url()
+		public void Endpoint_is_at_url_that_matches_given_pattern()
 		{
-			Assert.That(_endpoint.IsAt(Url), Is.True);
+			Assert.That(_endpoint.IsAt("/resources/123"), Is.True);
+		}
+
+		[Test]
+		public void Endpoint_is_not_at_a_url_that_does_not_match_given_pattern()
+		{
+			Assert.That(_endpoint.IsAt("/resources/abc"), Is.False);
 		}
 
 		[Test]

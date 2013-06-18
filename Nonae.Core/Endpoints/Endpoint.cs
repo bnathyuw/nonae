@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using Nonae.Core.Authorization;
 
 namespace Nonae.Core.Endpoints
@@ -31,14 +32,14 @@ namespace Nonae.Core.Endpoints
 		}
 
 		private readonly List<HttpMethod> _methods;
-		private readonly string _url;
 		private Func<Credentials, bool> _authorize;
+		private readonly Regex _pattern;
 
 		private Endpoint(string url)
 		{
 			_authorize = credentials => true;
 			_methods = new List<HttpMethod>();
-			_url = url;
+			_pattern = url == null ? null : new Regex(url);
 		}
 
 		public bool Allows(HttpMethod httpMethod)
@@ -53,7 +54,7 @@ namespace Nonae.Core.Endpoints
 
 		public bool Exists
 		{
-			get { return _url != null; }
+			get { return _pattern != null; }
 		}
 
 		public bool IsAuthorizedFor(Credentials credentials)
@@ -63,7 +64,7 @@ namespace Nonae.Core.Endpoints
 
 		public bool IsAt(string path)
 		{
-			return _url == path;
+			return _pattern != null && _pattern.IsMatch(path);
 		}
 	}
 }

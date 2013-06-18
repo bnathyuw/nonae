@@ -16,7 +16,7 @@ namespace Nonae.Core.Handlers
 		{
 			return requestDetails.EndpointExists
 				       ? _successor.Handle(requestDetails)
-				       : new NotFoundResult();
+				       : NotFoundResult.ForUnknownAddress();
 		}
 	}
 }

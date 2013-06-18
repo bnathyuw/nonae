@@ -50,6 +50,7 @@
     <Compile Include="Handlers\AuthorizationHandler.cs" />
     <Compile Include="Handlers\EndpointExistsHandler.cs" />
     <Compile Include="Handlers\IHandler.cs" />
+    <Compile Include="Handlers\ResourceExistsHandler.cs" />
     <Compile Include="Requests\IRequestDetails.cs" />
     <Compile Include="Requests\RequestDetails.cs" />
     <Compile Include="HttpHandler.cs" />
