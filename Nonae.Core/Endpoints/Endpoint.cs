@@ -47,7 +47,7 @@ namespace Nonae.Core.Endpoints
 			return new Regex(_url).IsMatch(path);
 		}
 		
-		internal EndpointDetails GetEndpoint(string path)
+		internal EndpointDetails GetEndpointDetails(string path)
 		{
 			return new EndpointDetails(_url, _methods, _authorize, _resourceRepository, path);
 		}

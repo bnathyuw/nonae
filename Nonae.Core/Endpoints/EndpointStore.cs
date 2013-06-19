@@ -10,7 +10,7 @@ namespace Nonae.Core.Endpoints
 		internal EndpointDetails Get(string path)
 		{
 			var endpoint = _endpoints.FirstOrDefault(e => e.IsAt(path));
-			return endpoint == null ? EndpointDetails.Null() : endpoint.GetEndpoint(path);
+			return endpoint == null ? EndpointDetails.Null() : endpoint.GetEndpointDetails(path);
 		}
 
 		public void Add(Endpoint endpoint)

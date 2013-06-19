@@ -53,10 +53,15 @@ namespace Nonae.Core.Endpoints
 			}
 		}
 
+		public bool IsAuthorizedFor(Credentials credentials)
+		{
+			return _authorize(credentials);
+		}
+
 		private Dictionary<string, string> GetAddressParts(string path)
 		{
-			if (_pattern == null) return null;
 			if (path == null) return null;
+			if (_pattern == null) return null;
 			var match = _pattern.Match(path);
 
 			var addressParts = new Dictionary<string, string>();
@@ -68,11 +73,6 @@ namespace Nonae.Core.Endpoints
 				addressParts.Add(key, value);
 			}
 			return addressParts;
-		}
-
-		public bool IsAuthorizedFor(Credentials credentials)
-		{
-			return _authorize(credentials);
 		}
 	}
 }
