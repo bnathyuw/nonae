@@ -66,20 +66,11 @@ namespace Nonae.Core.Endpoints
 			get { return _pattern != null; }
 		}
 
-		public Dictionary<string,string> AddressParts
-		{
-			get
-			{
-				
-				return _addressParts;
-			}
-		}
-
 		public bool ResourceExists
 		{
 			get
 			{
-				return _resourceRepository == null || _resourceRepository.Exists(AddressParts);
+				return _resourceRepository == null || _resourceRepository.Exists(_addressParts);
 			}
 		}
 

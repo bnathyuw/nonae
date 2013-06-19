@@ -1,6 +1,9 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using NUnit.Framework;
 using Nonae.Core.Endpoints;
+using Nonae.Core.Handlers;
+using Rhino.Mocks;
 
 namespace Nonae.Tests.Unit.Endpoints
 {
@@ -102,6 +105,25 @@ namespace Nonae.Tests.Unit.Endpoints
 			Assert.That(endpoint.Allows(HttpMethod.Head), Is.False);
 			Assert.That(endpoint.Allows(HttpMethod.Post), Is.False);
 			Assert.That(endpoint.Allows(HttpMethod.Put), Is.False);
+		}
+
+		[Test]
+		public void Endpoint_with_no_repository_has_existent_resource()
+		{
+			Assert.That(_endpoint.ResourceExists, Is.True);
+		}
+
+		[Test]
+		public void Endpoint_with_repository_checks_repository_to_see_if_resource_exists()
+		{
+			var repository = MockRepository.GenerateStub<IResourceRepository>();
+			repository.Stub(r => r.Exists(Arg<Dictionary<string, string>>.Matches(d => d["id"] == "123"))).Return(true);
+			var endpoint = _endpoint.At("/resources/123").StoredAt(repository);
+
+			var resourceExists = endpoint.ResourceExists;
+
+			repository.AssertWasCalled(r => r.Exists(Arg<Dictionary<string,string>>.Matches(d => d["id"] == "123")));
+			Assert.That(resourceExists, Is.True);
 		}
 	}
 }
