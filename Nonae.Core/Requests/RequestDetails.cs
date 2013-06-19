@@ -47,6 +47,11 @@ namespace Nonae.Core.Requests
 			get { return _credentials.FailureMessage; }
 		}
 
+		public bool ResourceExists
+		{
+			get { return _endpoint.ResourceExists; }
+		}
+
 		public bool IsOptionsRequest
 		{
 			get { return _httpMethod == HttpMethod.Options; }

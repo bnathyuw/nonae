@@ -11,14 +11,12 @@ namespace Nonae.Tests.Unit.Handlers
 		private IHandler _successor;
 		private ResourceExistsHandler _handler;
 		private IRequestDetails _requestDetails;
-		private IResourceRepository _resourceRepository;
 
 		[SetUp]
 		public void SetUp()
 		{
 			_successor = MockRepository.GenerateStub<IHandler>();
-			_resourceRepository = MockRepository.GenerateStub<IResourceRepository>();
-			_handler = new ResourceExistsHandler(_successor, _resourceRepository);
+			_handler = new ResourceExistsHandler(_successor);
 			_requestDetails = MockRepository.GenerateStub<IRequestDetails>();
 		}
 
@@ -26,12 +24,11 @@ namespace Nonae.Tests.Unit.Handlers
 		public void Returns_result_from_successor_if_the_resource_exists()
 		{
 			var expectedResult = MockRepository.GenerateStub<IResult>();
+			_requestDetails.Stub(rd => rd.ResourceExists).Return(true);
 			_successor.Stub(s => s.Handle(_requestDetails)).Return(expectedResult);
-			_resourceRepository.Stub(rr => rr.Exists(Arg<dynamic>.Is.Anything)).Return(true);
 
 			var result = _handler.Handle(_requestDetails);
 
-			_resourceRepository.AssertWasCalled(rr => rr.Exists(Arg<dynamic>.Is.Anything));
 			_successor.AssertWasCalled(s => s.Handle(_requestDetails));
 			Assert.That(result, Is.EqualTo(expectedResult));
 		}
@@ -39,7 +36,7 @@ namespace Nonae.Tests.Unit.Handlers
 		[Test]
 		public void Returns_not_found_if_the_resource_does_not_exist()
 		{
-			_resourceRepository.Stub(rr => rr.Exists(Arg<dynamic>.Is.Anything)).Return(false);
+			_requestDetails.Stub(rd => rd.ResourceExists).Return(false);
 
 			var result = _handler.Handle(_requestDetails);
 

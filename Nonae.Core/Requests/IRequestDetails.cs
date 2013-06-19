@@ -10,5 +10,6 @@ namespace Nonae.Core.Requests
 		bool IsOptionsRequest { get; }
 		string AllowHeader { get; }
 		string AuthenticationFailureMessage { get; }
+		bool ResourceExists { get; }
 	}
 }

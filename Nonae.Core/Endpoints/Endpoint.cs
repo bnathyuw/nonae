@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using Nonae.Core.Authorization;
+using Nonae.Core.Handlers;
 
 namespace Nonae.Core.Endpoints
 {
@@ -31,9 +32,17 @@ namespace Nonae.Core.Endpoints
 			return this;
 		}
 
+		public Endpoint StoredAt(IResourceRepository resourceRepository)
+		{
+			_resourceRepository = resourceRepository;
+			return this;
+		}
+
 		private readonly List<HttpMethod> _methods;
 		private Func<Credentials, bool> _authorize;
 		private readonly Regex _pattern;
+		private Dictionary<string, string> _addressParts;
+		private IResourceRepository _resourceRepository;
 
 		private Endpoint(string url)
 		{
@@ -57,6 +66,39 @@ namespace Nonae.Core.Endpoints
 			get { return _pattern != null; }
 		}
 
+		public Dictionary<string,string> AddressParts
+		{
+			get
+			{
+				
+				return _addressParts;
+			}
+		}
+
+		public bool ResourceExists
+		{
+			get
+			{
+				return _resourceRepository == null || _resourceRepository.Exists(AddressParts);
+			}
+		}
+
+		private Dictionary<string, string> GetAddressParts(string path)
+		{
+			if (_pattern == null) return null;
+			var match = _pattern.Match(path);
+
+			var addressParts = new Dictionary<string, string>();
+			var groupCollection = match.Groups;
+			for (var i = 1; i <= groupCollection.Count; i++)
+			{
+				var key = _pattern.GroupNameFromNumber(i);
+				var value = groupCollection[i].Value;
+				addressParts.Add(key, value);
+			}
+			return addressParts;
+		}
+
 		public bool IsAuthorizedFor(Credentials credentials)
 		{
 			return _authorize(credentials);
@@ -65,6 +107,12 @@ namespace Nonae.Core.Endpoints
 		public bool IsAt(string path)
 		{
 			return _pattern != null && _pattern.IsMatch(path);
+		}
+
+		public Endpoint At(string path)
+		{
+			_addressParts = GetAddressParts(path);
+			return this;
 		}
 	}
 }

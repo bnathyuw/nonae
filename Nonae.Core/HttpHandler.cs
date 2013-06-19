@@ -25,7 +25,8 @@ namespace Nonae.Core
 		{
 			var okHandler = new OkHandler();
 			var methodIsSupportedHandler = new MethodIsSupportedHandler(okHandler);
-			var endpointExistsHandler = new EndpointExistsHandler(methodIsSupportedHandler);
+			var resourceExistsHandler = new ResourceExistsHandler(methodIsSupportedHandler);
+			var endpointExistsHandler = new EndpointExistsHandler(resourceExistsHandler);
 			var optionsHandler = new OptionsHandler(endpointExistsHandler);
 			var authorizationHandler = new AuthorizationHandler(optionsHandler);
 			var authenticationHandler = new AuthenticationHandler(authorizationHandler);
