@@ -48,8 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authorization\CredentialsBuilderTests.cs" />
-    <Compile Include="Endpoints\EndpointStoreTests.cs" />
     <Compile Include="Endpoints\EndpointTests.cs" />
+    <Compile Include="Endpoints\EndpointStoreTests.cs" />
+    <Compile Include="Endpoints\EndpointDetailsTests.cs" />
     <Compile Include="Handlers\AuthenticationHandlerTests.cs" />
     <Compile Include="Handlers\AuthorizationHandlerTests.cs" />
     <Compile Include="Handlers\EndpointExistsHandlerTests.cs" />

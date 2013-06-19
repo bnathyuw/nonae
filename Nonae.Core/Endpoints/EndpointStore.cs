@@ -5,17 +5,17 @@ namespace Nonae.Core.Endpoints
 {
 	public class EndpointStore
 	{
-		private readonly List<Endpoint> _endpoints = new List<Endpoint>();
+		private readonly List<Endpoint> _endpointSpecs = new List<Endpoint>();
 
-		public Endpoint Get(string path)
+		internal EndpointDetails Get(string path)
 		{
-			var endpoint = _endpoints.FirstOrDefault(e => e.IsAt(path));
-			return endpoint == null ? Endpoint.Null() : endpoint.At(path);
+			var endpointSpec = _endpointSpecs.FirstOrDefault(e => e.IsAt(path));
+			return endpointSpec == null ? EndpointDetails.Null() : endpointSpec.GetEndpoint(path);
 		}
 
 		public void Add(Endpoint endpoint)
 		{
-			_endpoints.Add(endpoint);
+			_endpointSpecs.Add(endpoint);
 		}
 	}
 }

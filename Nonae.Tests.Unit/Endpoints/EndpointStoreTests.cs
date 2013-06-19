@@ -22,7 +22,8 @@ namespace Nonae.Tests.Unit.Endpoints
 
 			var foundEndpoint = _endpointStore.Get("/test/url");
 
-			Assert.That(foundEndpoint, Is.EqualTo(createdEndpoint));
+			Assert.That(foundEndpoint.Exists, Is.True);
+			Assert.That(foundEndpoint.Exists, Is.True);
 		}
 
 		[Test]

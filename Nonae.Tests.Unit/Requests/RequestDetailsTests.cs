@@ -10,20 +10,20 @@ namespace Nonae.Tests.Unit.Requests
 	[TestFixture]
 	public class RequestDetailsTests
 	{
-		private Endpoint _endpoint;
+		private EndpointDetails _endpointDetails;
 		private Credentials _credentials;
 
 		[TestFixtureSetUp]
 		public void TestFixtureSetUp()
 		{
-			_endpoint = null;
+			_endpointDetails = null;
 			_credentials = null;
 		}
 
 		[Test]
 		public void Identifies_itself_correctly_when_options_request()
 		{
-			var requestDetails = new RequestDetails(_endpoint, _credentials, HttpMethod.Options);
+			var requestDetails = new RequestDetails(_endpointDetails, _credentials, HttpMethod.Options);
 
 			Assert.That(requestDetails.IsOptionsRequest, Is.EqualTo(true));
 		}
@@ -31,7 +31,7 @@ namespace Nonae.Tests.Unit.Requests
 		[Test]
 		public void Identifies_itself_correctly_when_not_options_request()
 		{
-			var requestDetails = new RequestDetails(_endpoint, _credentials, HttpMethod.Get);
+			var requestDetails = new RequestDetails(_endpointDetails, _credentials, HttpMethod.Get);
 
 			Assert.That(requestDetails.IsOptionsRequest, Is.EqualTo(false));
 		}

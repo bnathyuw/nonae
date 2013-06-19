@@ -43,10 +43,11 @@
   <ItemGroup>
     <Compile Include="Authorization\CredentialsBuilder.cs" />
     <Compile Include="Authorization\IAuthenticationProvider.cs" />
+    <Compile Include="Endpoints\Endpoint.cs" />
     <Compile Include="Endpoints\EndpointStore.cs" />
     <Compile Include="Handlers\AuthenticationHandler.cs" />
     <Compile Include="Authorization\Credentials.cs" />
-    <Compile Include="Endpoints\Endpoint.cs" />
+    <Compile Include="Endpoints\EndpointDetails.cs" />
     <Compile Include="Handlers\AuthorizationHandler.cs" />
     <Compile Include="Handlers\EndpointExistsHandler.cs" />
     <Compile Include="Handlers\IHandler.cs" />

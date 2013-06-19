@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using Nonae.Core.Authorization;
@@ -13,11 +12,6 @@ namespace Nonae.Core.Endpoints
 		public static Endpoint AtUrl(string url)
 		{
 			return new Endpoint(url);
-		}
-
-		internal static Endpoint Null()
-		{
-			return new Endpoint(null);
 		}
 
 		public Endpoint WithMethods(params HttpMethod[] methods)
@@ -38,72 +32,24 @@ namespace Nonae.Core.Endpoints
 			return this;
 		}
 
-		private readonly List<HttpMethod> _methods;
-		private Func<Credentials, bool> _authorize;
-		private readonly Regex _pattern;
-		private Dictionary<string, string> _addressParts;
-		private IResourceRepository _resourceRepository;
-
 		private Endpoint(string url)
 		{
-			_authorize = credentials => true;
-			_methods = new List<HttpMethod>();
-			_pattern = url == null ? null : new Regex(url);
+			_url = url;
 		}
 
-		public bool Allows(HttpMethod httpMethod)
-		{
-			return _methods.Any(method => method == httpMethod);
-		}
-
-		public string AllowHeader
-		{
-			get { return String.Join(", ", _methods.ToList()); }
-		}
-
-		public bool Exists
-		{
-			get { return _pattern != null; }
-		}
-
-		public bool ResourceExists
-		{
-			get
-			{
-				return _resourceRepository == null || _resourceRepository.Exists(_addressParts);
-			}
-		}
-
-		private Dictionary<string, string> GetAddressParts(string path)
-		{
-			if (_pattern == null) return null;
-			var match = _pattern.Match(path);
-
-			var addressParts = new Dictionary<string, string>();
-			var groupCollection = match.Groups;
-			for (var i = 1; i <= groupCollection.Count; i++)
-			{
-				var key = _pattern.GroupNameFromNumber(i);
-				var value = groupCollection[i].Value;
-				addressParts.Add(key, value);
-			}
-			return addressParts;
-		}
-
-		public bool IsAuthorizedFor(Credentials credentials)
-		{
-			return _authorize(credentials);
-		}
+		private readonly List<HttpMethod> _methods = new List<HttpMethod>();
+		private Func<Credentials, bool> _authorize = credentials => true;
+		private IResourceRepository _resourceRepository;
+		private readonly string _url;
 
 		public bool IsAt(string path)
 		{
-			return _pattern != null && _pattern.IsMatch(path);
+			return new Regex(_url).IsMatch(path);
 		}
-
-		public Endpoint At(string path)
+		
+		internal EndpointDetails GetEndpoint(string path)
 		{
-			_addressParts = GetAddressParts(path);
-			return this;
+			return new EndpointDetails(_url, _methods, _authorize, _resourceRepository, path);
 		}
 	}
 }
