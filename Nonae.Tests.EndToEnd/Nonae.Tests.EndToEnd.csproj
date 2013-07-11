@@ -53,6 +53,11 @@
     </Compile>
     <Compile Include="Configuration.cs" />
     <Compile Include="Context.cs" />
+    <Compile Include="Created.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Created.feature</DependentUpon>
+    </Compile>
     <Compile Include="MethodNotAllowed.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,6 +88,10 @@
     <None Include="Authentication.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Authentication.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Created.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Created.feature.cs</LastGenOutput>
     </None>
     <None Include="MethodNotAllowed.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

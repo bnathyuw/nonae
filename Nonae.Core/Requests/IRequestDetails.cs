@@ -13,5 +13,6 @@ namespace Nonae.Core.Requests
 		string AuthenticationFailureMessage { get; }
 		bool ResourceExists { get; }
 		bool Answers(HttpMethod httpMethod);
+		bool Save();
 	}
 }

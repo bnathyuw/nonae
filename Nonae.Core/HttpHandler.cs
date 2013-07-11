@@ -24,7 +24,8 @@ namespace Nonae.Core
 		private static AuthenticationHandler GetHandler()
 		{
 			var okHandler = new OkHandler();
-			IHandler notFoundHandler = new NotFoundHandler(okHandler);
+			var putHandler = new PutHandler();
+			var notFoundHandler = new NotFoundHandler(putHandler);
 			var methodIsSupportedHandler = new MethodIsSupportedHandler(okHandler);
 			var resourceExistsHandler = new ResourceExistsHandler(methodIsSupportedHandler, notFoundHandler);
 			var endpointExistsHandler = new EndpointExistsHandler(resourceExistsHandler);

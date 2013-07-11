@@ -57,6 +57,11 @@ namespace Nonae.Core.Requests
 			return _httpMethod == httpMethod;
 		}
 
+		public bool Save()
+		{
+			throw new System.NotImplementedException();
+		}
+
 		public bool IsAuthorized
 		{
 			get { return _endpointDetails.IsAuthorizedFor(_credentials); }

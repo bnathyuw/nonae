@@ -52,6 +52,7 @@
     <Compile Include="Handlers\EndpointExistsHandler.cs" />
     <Compile Include="Handlers\IHandler.cs" />
     <Compile Include="Handlers\IResourceRepository.cs" />
+    <Compile Include="Handlers\PutHandler.cs" />
     <Compile Include="Handlers\ResourceExistsHandler.cs" />
     <Compile Include="Handlers\NotFoundHandler.cs" />
     <Compile Include="Requests\IRequestDetails.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Handlers\OkHandler.cs" />
     <Compile Include="Handlers\OptionsHandler.cs" />
     <Compile Include="Responses\IResponseDetails.cs" />
+    <Compile Include="Results\CreatedResult.cs" />
     <Compile Include="Results\IResult.cs" />
     <Compile Include="Results\MethodNotAllowedResult.cs" />
     <Compile Include="Results\NotFoundResult.cs" />
