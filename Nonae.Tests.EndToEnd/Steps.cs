@@ -56,6 +56,13 @@ namespace Nonae.Tests.EndToEnd
 			Assert.That(_context.Response.StatusCode, Is.EqualTo(expectedStatusCode));
 		}
 
+		[Then(@"I do not get a (.*) Not Found response")]
+		public void ThenIDoNotGetSuchAndSuchAResponse(HttpStatusCode expectedStatusCode)
+		{
+			Assert.That(_context.Response.StatusCode, Is.Not.EqualTo(expectedStatusCode));
+		}
+
+
 
 		[Then(@"I am told I can ([A-Z]*)")]
 		public void ThenIAmToldICanDo(string verb)

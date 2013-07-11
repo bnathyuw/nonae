@@ -70,6 +70,7 @@ namespace Nonae.Tests.EndToEnd
         [NUnit.Framework.TestCaseAttribute("DELETE", null)]
         [NUnit.Framework.TestCaseAttribute("GET", null)]
         [NUnit.Framework.TestCaseAttribute("POST", null)]
+        [NUnit.Framework.TestCaseAttribute("PUT", null)]
         public virtual void CallVerbOnASillyUrl(string verb, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call verb on a silly url", exampleTags);
@@ -90,47 +91,61 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void CallHEADOnASillyUrl()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call HEAD on a silly url", ((string[])(null)));
-#line 17
-this.ScenarioSetup(scenarioInfo);
 #line 18
- testRunner.When("I call HEAD on a silly url", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 19
+ testRunner.When("I call HEAD on a silly url", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 20
  testRunner.Then("I get a 404 Not Found response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Call verb on a resource that doesn\'t exist")]
+        [NUnit.Framework.DescriptionAttribute("Call verb on a resource that does not exist")]
         [NUnit.Framework.TestCaseAttribute("DELETE", null)]
         [NUnit.Framework.TestCaseAttribute("GET", null)]
-        [NUnit.Framework.TestCaseAttribute("POST", null)]
-        public virtual void CallVerbOnAResourceThatDoesnTExist(string verb, string[] exampleTags)
+        public virtual void CallVerbOnAResourceThatDoesNotExist(string verb, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call verb on a resource that doesn\'t exist", exampleTags);
-#line 21
-this.ScenarioSetup(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call verb on a resource that does not exist", exampleTags);
 #line 22
- testRunner.When(string.Format("I call {0} on a resource that doesn\'t exist", verb), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+this.ScenarioSetup(scenarioInfo);
 #line 23
- testRunner.Then("I get a 404 Not Found response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When(string.Format("I call {0} on a resource that does not exist", verb), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 24
+ testRunner.Then("I get a 404 Not Found response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 25
  testRunner.And("the reason is \'Resource Not Found\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Call HEAD on a resource that doesn\'t exist")]
-        public virtual void CallHEADOnAResourceThatDoesnTExist()
+        [NUnit.Framework.DescriptionAttribute("Call HEAD on a resource that does not exist")]
+        public virtual void CallHEADOnAResourceThatDoesNotExist()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call HEAD on a resource that doesn\'t exist", ((string[])(null)));
-#line 33
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call HEAD on a resource that does not exist", ((string[])(null)));
+#line 32
 this.ScenarioSetup(scenarioInfo);
+#line 33
+ testRunner.When("I call HEAD on a resource that does not exist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 34
- testRunner.When("I call HEAD on a resource that doesn\'t exist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 35
  testRunner.Then("I get a 404 Not Found response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Call put on a resource that does not exist")]
+        public virtual void CallPutOnAResourceThatDoesNotExist()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Call put on a resource that does not exist", ((string[])(null)));
+#line 36
+this.ScenarioSetup(scenarioInfo);
+#line 37
+ testRunner.When("I call PUT on a resource that does not exist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 38
+ testRunner.Then("I do not get a 404 Not Found response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

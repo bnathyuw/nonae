@@ -11,7 +11,7 @@ namespace Nonae.Tests.EndToEnd
 				                                                         {"a collection", "http://localhost/nonae/users"},
 				                                                         {"a single resource", "http://localhost/nonae/users/1"},
 				                                                         {"a silly url", "http://localhost/nonae/i/am/a/teapot"},
-				                                                         {"a resource that doesn't exist", "http://localhost/nonae/users/666"},
+				                                                         {"a resource that does not exist", "http://localhost/nonae/users/666"},
 				                                                         {"a protected resource", "http://localhost/nonae/secrets"}
 			                                                         };
 
@@ -22,6 +22,7 @@ namespace Nonae.Tests.EndToEnd
 				                                                                                    {"HEAD", Request.Head},
 				                                                                                    {"OPTIONS", Request.Options},
 				                                                                                    {"POST", url => Request.Post(url, "")},
+				                                                                                    {"PUT", url => Request.Put(url, "")},
 			                                                                                    };
 	}
 }

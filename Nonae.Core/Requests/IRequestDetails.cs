@@ -11,5 +11,6 @@ namespace Nonae.Core.Requests
 		string AllowHeader { get; }
 		string AuthenticationFailureMessage { get; }
 		bool ResourceExists { get; }
+		bool IsPutRequest { get; }
 	}
 }

@@ -35,5 +35,21 @@ namespace Nonae.Tests.Unit.Requests
 
 			Assert.That(requestDetails.IsOptionsRequest, Is.EqualTo(false));
 		}
+
+		[Test]
+		public void Identifies_itself_correctly_when_put_request()
+		{
+			var requestDetails = new RequestDetails(_endpointDetails, _credentials, HttpMethod.Put);
+
+			Assert.That(requestDetails.IsPutRequest, Is.EqualTo(true));
+		}
+
+		[Test]
+		public void Identifies_itself_correctly_when_not_put_request()
+		{
+			var requestDetails = new RequestDetails(_endpointDetails, _credentials, HttpMethod.Get);
+
+			Assert.That(requestDetails.IsPutRequest, Is.EqualTo(false));
+		}
 	}
 }

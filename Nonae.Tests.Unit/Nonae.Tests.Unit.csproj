@@ -55,6 +55,7 @@
     <Compile Include="Handlers\AuthorizationHandlerTests.cs" />
     <Compile Include="Handlers\EndpointExistsHandlerTests.cs" />
     <Compile Include="Handlers\MethodIsSupportedHandlerTests.cs" />
+    <Compile Include="Handlers\NotFoundHandlerTests.cs" />
     <Compile Include="Handlers\OkHandlerTests.cs" />
     <Compile Include="Handlers\OptionsHandlerTests.cs" />
     <Compile Include="Handlers\ResourceExistsHandlerTests.cs" />
