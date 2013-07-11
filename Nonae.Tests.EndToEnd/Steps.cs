@@ -9,6 +9,7 @@ namespace Nonae.Tests.EndToEnd
 	public class Steps
 	{
 		private readonly Context _context;
+		private string _lastUrl;
 
 		public Steps(Context context)
 		{
@@ -19,8 +20,11 @@ namespace Nonae.Tests.EndToEnd
 		public void WhenICallOptionsOnACollection(string httpMethod, string resourceKey)
 		{
 			var createRequest = Configuration.RequestFactories[httpMethod];
-			var url = Configuration.Urls[resourceKey];
-			_context.Request = createRequest(url);
+			if (resourceKey != "that resource")
+			{
+				_lastUrl = Configuration.GetUrl(resourceKey);
+			}
+			_context.Request = createRequest(_lastUrl);
 		}
 
 		[When(@"I do not specify credentials")]

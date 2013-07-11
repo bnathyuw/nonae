@@ -6,14 +6,14 @@ namespace Nonae.Core.Requests
 {
 	public class RequestDetails : IRequestDetails
 	{
-		internal RequestDetails(EndpointDetails endpointDetails, Credentials credentials, HttpMethod httpMethod)
+		internal RequestDetails(IEndpointDetails endpointDetails, Credentials credentials, HttpMethod httpMethod)
 		{
 			_endpointDetails = endpointDetails;
 			_credentials = credentials;
 			_httpMethod = httpMethod;
 		}
 
-		private readonly EndpointDetails _endpointDetails;
+		private readonly IEndpointDetails _endpointDetails;
 		private readonly Credentials _credentials;
 		private readonly HttpMethod _httpMethod;
 
@@ -59,7 +59,7 @@ namespace Nonae.Core.Requests
 
 		public bool Save()
 		{
-			throw new System.NotImplementedException();
+			return _endpointDetails.Save();
 		}
 
 		public bool IsAuthorized

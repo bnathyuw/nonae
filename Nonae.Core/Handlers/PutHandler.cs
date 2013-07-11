@@ -7,6 +7,7 @@ namespace Nonae.Core.Handlers
 	{
 		public IResult Handle(IRequestDetails requestDetails)
 		{
+			requestDetails.Save();
 			return new CreatedResult(requestDetails);
 		}
 	}

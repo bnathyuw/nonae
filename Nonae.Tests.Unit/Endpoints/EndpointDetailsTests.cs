@@ -113,5 +113,16 @@ namespace Nonae.Tests.Unit.Endpoints
 			_resourceRepository.AssertWasCalled(r => r.Exists(Arg<Dictionary<string,string>>.Matches(d => d["id"] == "123")));
 			Assert.That(resourceExists, Is.True);
 		}
+
+		[Test]
+		public void Endpoint_with_repository_returns_success_from_repository()
+		{
+			_resourceRepository.Stub(rr => rr.Save(Arg<Dictionary<string, string>>.Is.Anything)).Return(true);
+
+			var result = _endpointDetails.Save();
+
+			_resourceRepository.AssertWasCalled(rr => rr.Save(Arg<Dictionary<string,string>>.Is.Anything));
+			Assert.That(result, Is.True);
+		}
 	}
 }

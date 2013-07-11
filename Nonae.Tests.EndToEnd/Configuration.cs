@@ -5,13 +5,13 @@ namespace Nonae.Tests.EndToEnd
 {
 	public static class Configuration
 	{
-		public static readonly Dictionary<string, string> Urls = new Dictionary<string, string>
+		private static readonly Dictionary<string, string> Urls = new Dictionary<string, string>
 			                                                         {
 				                                                         {"the root", "http://localhost/nonae"},
 				                                                         {"a collection", "http://localhost/nonae/users"},
 				                                                         {"a single resource", "http://localhost/nonae/users/1"},
 				                                                         {"a silly url", "http://localhost/nonae/i/am/a/teapot"},
-				                                                         {"a resource that does not exist", "http://localhost/nonae/users/666"},
+				                                                         {"a resource that does not exist", "http://localhost/nonae/users/{0}"},
 				                                                         {"a protected resource", "http://localhost/nonae/secrets"}
 			                                                         };
 
@@ -24,5 +24,13 @@ namespace Nonae.Tests.EndToEnd
 				                                                                                    {"POST", url => Request.Post(url, "")},
 				                                                                                    {"PUT", url => Request.Put(url, "")},
 			                                                                                    };
+
+		private static readonly Random Random = new Random(DateTime.Now.Millisecond);
+
+		public static string GetUrl(string resourceKey)
+		{
+			var url = Urls[resourceKey];
+			return url.Contains("{0}") ? string.Format(url, Random.Next()) : url;
+		}
 	}
 }

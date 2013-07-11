@@ -8,7 +8,7 @@ using Nonae.Core.Handlers;
 
 namespace Nonae.Core.Endpoints
 {
-	internal class EndpointDetails
+	internal class EndpointDetails : IEndpointDetails
 	{
 		internal static EndpointDetails Null()
 		{
@@ -73,6 +73,11 @@ namespace Nonae.Core.Endpoints
 				addressParts.Add(key, value);
 			}
 			return addressParts;
+		}
+
+		public bool Save()
+		{
+			return _resourceRepository.Save(_addressParts);
 		}
 	}
 }
