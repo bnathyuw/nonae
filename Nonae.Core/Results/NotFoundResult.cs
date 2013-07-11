@@ -6,6 +6,7 @@ namespace Nonae.Core.Results
 	public class NotFoundResult : IResult
 	{
 		private const string UnknownAddress = "Unknown Address";
+		private const string ResourceNotFound = "Resource Not Found";
 		private readonly string _message;
 
 		public NotFoundResult(string message)
@@ -22,6 +23,11 @@ namespace Nonae.Core.Results
 		public static NotFoundResult ForUnknownAddress()
 		{
 			return new NotFoundResult(UnknownAddress);
+		}
+
+		public static NotFoundResult ForNonexistentResource()
+		{
+			return new NotFoundResult(ResourceNotFound);
 		}
 	}
 }
