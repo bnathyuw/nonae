@@ -1,3 +1,4 @@
+using System.Net.Http;
 using Nonae.Core.Requests;
 using Nonae.Core.Results;
 
@@ -16,7 +17,7 @@ namespace Nonae.Core.Handlers
 		{
 			// TODO: Authorize against endpoint?
 
-			return requestDetails.IsOptionsRequest
+			return requestDetails.Answers(HttpMethod.Options)
 				       ? new OptionsResult(requestDetails)
 				       : _successor.Handle(requestDetails);
 		}

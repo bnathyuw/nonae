@@ -1,4 +1,5 @@
-﻿using Nonae.Core.Requests;
+﻿using System.Net.Http;
+using Nonae.Core.Requests;
 using Nonae.Core.Results;
 
 namespace Nonae.Core.Handlers
@@ -7,7 +8,7 @@ namespace Nonae.Core.Handlers
 	{
 		public IResult Handle(IRequestDetails requestDetails)
 		{
-			return requestDetails.IsPutRequest ? (IResult) new OkResult(requestDetails) : new NotFoundResult("Resource Not Found");
+			return requestDetails.Answers(HttpMethod.Put) ? (IResult) new OkResult(requestDetails) : new NotFoundResult("Resource Not Found");
 		}
 	}
 }

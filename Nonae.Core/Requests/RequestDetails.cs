@@ -52,14 +52,9 @@ namespace Nonae.Core.Requests
 			get { return _endpointDetails.ResourceExists; }
 		}
 
-		public bool IsPutRequest
+		public bool Answers(HttpMethod httpMethod)
 		{
-			get { return _httpMethod == HttpMethod.Put; }
-		}
-
-		public bool IsOptionsRequest
-		{
-			get { return _httpMethod == HttpMethod.Options; }
+			return _httpMethod == httpMethod;
 		}
 
 		public bool IsAuthorized

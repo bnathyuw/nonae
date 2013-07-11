@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Net.Http;
+using NUnit.Framework;
 using Nonae.Core.Handlers;
 using Nonae.Core.Requests;
 using Nonae.Core.Results;
@@ -24,7 +25,7 @@ namespace Nonae.Tests.Unit.Handlers
 		[Test]
 		public void Returns_options_result_if_the_request_method_is_options()
 		{
-			_requestDetails.Stub(rd => rd.IsOptionsRequest).Return(true);
+			_requestDetails.Stub(rd => rd.Answers(HttpMethod.Options)).Return(true);
 
 			var result = _handler.Handle(_requestDetails);
 
@@ -34,7 +35,7 @@ namespace Nonae.Tests.Unit.Handlers
 		[Test]
 		public void Returns_result_from_successor_if_the_request_method_is_not_options()
 		{
-			_requestDetails.Stub(rd => rd.IsOptionsRequest).Return(false);
+			_requestDetails.Stub(rd => rd.Answers(HttpMethod.Options)).Return(false);
 			var expectedResult = MockRepository.GenerateStub<IResult>();
 			_successor.Stub(s => s.Handle(_requestDetails)).Return(expectedResult);
 

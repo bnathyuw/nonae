@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Net.Http;
+using NUnit.Framework;
 using Nonae.Core.Handlers;
 using Nonae.Core.Requests;
 using Nonae.Core.Results;
@@ -26,7 +27,7 @@ namespace Nonae.Tests.Unit.Handlers
 			var notFoundHandler = new NotFoundHandler();
 
 			var requestDetails = MockRepository.GenerateStub<IRequestDetails>();
-			requestDetails.Stub(rd => rd.IsPutRequest).Return(true);
+			requestDetails.Stub(rd => rd.Answers(HttpMethod.Put)).Return(true);
 			var result = notFoundHandler.Handle(requestDetails);
 
 			Assert.That(result, Is.TypeOf<OkResult>());
