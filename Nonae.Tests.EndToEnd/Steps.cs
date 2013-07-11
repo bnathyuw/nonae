@@ -41,7 +41,7 @@ namespace Nonae.Tests.EndToEnd
 
 
 		[Then(@"I get a WWW-Authenticate header requesting Basic authentication")]
-		public void ThenIGetAWWW_AuthenticateHeaderRequestingBasicAuthentication()
+		public void ThenIGetAWwwAuthenticateHeaderRequestingBasicAuthentication()
 		{
 			Assert.That(_context.Response.WwwAuthenticate, Is.StringStarting("Basic"));
 		}
