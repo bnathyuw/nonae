@@ -13,7 +13,7 @@ namespace Nonae.Tests.Unit.Handlers
 		[Test]
 		public void Returns_not_found_result()
 		{
-			var notFoundHandler = new NotFoundHandler();
+			var notFoundHandler = new NotFoundHandler(null);
 
 			var requestDetails = MockRepository.GenerateStub<IRequestDetails>();
 			var result = notFoundHandler.Handle(requestDetails);
@@ -22,15 +22,19 @@ namespace Nonae.Tests.Unit.Handlers
 		}
 
 		[Test]
-		public void Returns_ok_for_put()
+		public void Returns_result_from_put_handler()
 		{
-			var notFoundHandler = new NotFoundHandler();
-
+			var putHandler = MockRepository.GenerateStub<IHandler>();
 			var requestDetails = MockRepository.GenerateStub<IRequestDetails>();
+			var expectedResult = MockRepository.GenerateStub<IResult>();
+			putHandler.Stub(ph => ph.Handle(requestDetails)).Return(expectedResult);
+			var notFoundHandler = new NotFoundHandler(putHandler);
 			requestDetails.Stub(rd => rd.Answers(HttpMethod.Put)).Return(true);
+
 			var result = notFoundHandler.Handle(requestDetails);
 
-			Assert.That(result, Is.TypeOf<OkResult>());
+			putHandler.AssertWasCalled(ph => ph.Handle(requestDetails));
+			Assert.That(result, Is.EqualTo(expectedResult));
 		}
 	}
 }

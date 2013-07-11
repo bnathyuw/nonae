@@ -6,9 +6,18 @@ namespace Nonae.Core.Handlers
 {
 	internal class NotFoundHandler : IHandler
 	{
+		private readonly IHandler _putHandler;
+
+		public NotFoundHandler(IHandler putHandler)
+		{
+			_putHandler = putHandler;
+		}
+
 		public IResult Handle(IRequestDetails requestDetails)
 		{
-			return requestDetails.Answers(HttpMethod.Put) ? (IResult) new OkResult(requestDetails) : NotFoundResult.ForNonexistentResource();
+			return requestDetails.Answers(HttpMethod.Put) 
+				? _putHandler.Handle(requestDetails) 
+				: NotFoundResult.ForNonexistentResource();
 		}
 	}
 }
