@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Nonae.Core.Authorization;
 using Nonae.Core.Endpoints;
 using Nonae.Core.Handlers;
 using Nonae.Core.Requests;
@@ -14,6 +15,7 @@ namespace Nonae.Tests.Unit.Handlers
 		private MethodIsSupportedHandler _handler;
 		private IRequestDetails _requestDetails;
 	    private IEndpointDetails _endpointDetails;
+	    private ICredentials _credentials;
 
 	    [SetUp]
 		public void SetUp()
@@ -22,6 +24,7 @@ namespace Nonae.Tests.Unit.Handlers
 			_handler = new MethodIsSupportedHandler(_successor);
 			_requestDetails = MockRepository.GenerateStub<IRequestDetails>();
 		    _endpointDetails = MockRepository.GenerateStub<IEndpointDetails>();
+	        _credentials = MockRepository.GenerateStub<ICredentials>();
 		}
 
 		[Test]
@@ -29,11 +32,11 @@ namespace Nonae.Tests.Unit.Handlers
 		{
 			_requestDetails.Stub(rd => rd.GetMethodIsSupported(_endpointDetails)).Return(true);
 			var expectedResult = MockRepository.GenerateStub<IResult>();
-            _successor.Stub(s => s.Handle(_requestDetails, _endpointDetails)).Return(expectedResult);
+            _successor.Stub(s => s.Handle(_requestDetails, _endpointDetails, _credentials)).Return(expectedResult);
 
-            var result = _handler.Handle(_requestDetails, _endpointDetails);
+            var result = _handler.Handle(_requestDetails, _endpointDetails, _credentials);
 
-            _successor.AssertWasCalled(s => s.Handle(_requestDetails, _endpointDetails));
+            _successor.AssertWasCalled(s => s.Handle(_requestDetails, _endpointDetails, _credentials));
 			Assert.That(result, Is.EqualTo(expectedResult));
 		}
 
@@ -42,7 +45,7 @@ namespace Nonae.Tests.Unit.Handlers
 		{
 			_requestDetails.Stub(rd => rd.GetMethodIsSupported(_endpointDetails)).Return(false);
 
-            var result = _handler.Handle(_requestDetails, _endpointDetails);
+            var result = _handler.Handle(_requestDetails, _endpointDetails, _credentials);
 
 			Assert.That(result, Is.TypeOf<MethodNotAllowedResult>());
 		}

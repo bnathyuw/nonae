@@ -1,6 +1,6 @@
 namespace Nonae.Core.Authorization
 {
-	public class Credentials
+	public class Credentials : ICredentials
 	{
 		public Credentials(bool isAnonymous, string username, string message)
 		{

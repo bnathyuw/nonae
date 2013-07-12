@@ -5,8 +5,7 @@ namespace Nonae.Core.Requests
 {
 	public interface IRequestDetails
 	{
-		bool HasAuthorization { get; }
-		bool IsAuthenticated { get; }
+	    bool IsAuthenticated { get; }
 	    bool GetIsAuthorized(IEndpointDetails endpointDetails);
 	    bool GetMethodIsSupported(IEndpointDetails endpointDetails);
 	    string AuthenticationFailureMessage { get; }

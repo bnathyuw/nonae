@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Authorization\CredentialsBuilder.cs" />
     <Compile Include="Authorization\IAuthenticationProvider.cs" />
+    <Compile Include="Authorization\ICredentials.cs" />
     <Compile Include="Endpoints\Endpoint.cs" />
     <Compile Include="Endpoints\EndpointStore.cs" />
     <Compile Include="Endpoints\IEndpointDetails.cs" />

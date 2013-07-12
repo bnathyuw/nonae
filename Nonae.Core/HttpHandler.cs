@@ -28,7 +28,7 @@ namespace Nonae.Core
 			var credentials = _credentialsBuilder.From(request.Headers["Authorization"]);
 			var requestDetails = new RequestDetails(credentials, new HttpMethod(request.HttpMethod));
 			
-			var result = _handler.Handle(requestDetails, endpoint);
+			var result = _handler.Handle(requestDetails, endpoint, credentials);
 
 			var responseDetails = new ResponseDetails(context.Response);
 			result.Update(responseDetails);

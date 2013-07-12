@@ -15,12 +15,7 @@ namespace Nonae.Core.Requests
 	    private readonly Credentials _credentials;
 		private readonly HttpMethod _httpMethod;
 
-		public bool HasAuthorization
-		{
-			get { return !_credentials.IsAnonymous; }
-		}
-
-		public bool IsAuthenticated
+	    public bool IsAuthenticated
 		{
 			get { return _credentials.IsAuthenticated; }
 		}

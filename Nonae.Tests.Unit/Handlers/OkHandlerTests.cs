@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Nonae.Core.Authorization;
 using Nonae.Core.Endpoints;
 using Nonae.Core.Handlers;
 using Nonae.Core.Requests;
@@ -17,7 +18,8 @@ namespace Nonae.Tests.Unit.Handlers
 
 			var requestDetails = MockRepository.GenerateStub<IRequestDetails>();
 		    var endpointDetails = MockRepository.GenerateStub<IEndpointDetails>();
-			var result = okHandler.Handle(requestDetails, endpointDetails);
+		    var credentials = MockRepository.GenerateStub<ICredentials>();
+            var result = okHandler.Handle(requestDetails, endpointDetails, credentials);
 
 			Assert.That(result, Is.TypeOf<OkResult>());
 		}
