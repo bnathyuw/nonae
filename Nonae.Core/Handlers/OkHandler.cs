@@ -8,7 +8,7 @@ namespace Nonae.Core.Handlers
 	{
 		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint)
 		{
-			return new OkResult(requestDetails);
+			return new OkResult(endpoint);
 		}
 	}
 }

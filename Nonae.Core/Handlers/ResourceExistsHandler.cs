@@ -17,7 +17,7 @@ namespace Nonae.Core.Handlers
 
 		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint)
 		{
-			return requestDetails.ResourceExists
+            return endpoint.ResourceExists
 				? _resourceFoundSuccessor.Handle(requestDetails, endpoint) 
 				: _resourceNotFoundSuccessor.Handle(requestDetails, endpoint);
 		}

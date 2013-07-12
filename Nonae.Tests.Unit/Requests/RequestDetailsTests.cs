@@ -3,7 +3,6 @@ using NUnit.Framework;
 using Nonae.Core.Authorization;
 using Nonae.Core.Endpoints;
 using Nonae.Core.Requests;
-using Rhino.Mocks;
 
 namespace Nonae.Tests.Unit.Requests
 {
@@ -34,17 +33,6 @@ namespace Nonae.Tests.Unit.Requests
 			var requestDetails = new RequestDetails(_endpointDetails, _credentials, HttpMethod.Get);
 
 			Assert.That(requestDetails.Answers(HttpMethod.Options), Is.EqualTo(false));
-		}
-
-		[Test]
-		public void Save_calls_save_on_the_endpoint_details()
-		{
-			_endpointDetails = MockRepository.GenerateStub<IEndpointDetails>();
-			var requestDetails = new RequestDetails(_endpointDetails, _credentials, HttpMethod.Put);
-
-			requestDetails.Save();
-
-			_endpointDetails.AssertWasCalled(ed => ed.Save());
 		}
 	}
 }

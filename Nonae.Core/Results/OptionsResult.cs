@@ -1,22 +1,22 @@
 ﻿using System.Net;
-using Nonae.Core.Requests;
+using Nonae.Core.Endpoints;
 using Nonae.Core.Responses;
 
 namespace Nonae.Core.Results
 {
 	internal class OptionsResult : IResult
 	{
-		private readonly IRequestDetails _requestDetails;
+	    private readonly IEndpointDetails _endpointDetails;
 
-		public OptionsResult(IRequestDetails requestDetails)
+	    public OptionsResult(IEndpointDetails endpointDetails)
 		{
-			_requestDetails = requestDetails;
+	        _endpointDetails = endpointDetails;
 		}
 
-		public void Update(IResponseDetails responseDetails)
+	    public void Update(IResponseDetails responseDetails)
 		{
 			responseDetails.StatusCode = HttpStatusCode.OK;
-			responseDetails.Allow = _requestDetails.AllowHeader;
+            responseDetails.Allow = _endpointDetails.AllowHeader;
 		}
 	}
 }

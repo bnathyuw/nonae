@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using NUnit.Framework;
-using Nonae.Core.Requests;
+using Nonae.Core.Endpoints;
 using Nonae.Core.Responses;
 using Nonae.Core.Results;
 using Rhino.Mocks;
@@ -13,17 +13,17 @@ namespace Nonae.Tests.Unit.Results
 		private const string AllowAllTheThings = "Allow all the things";
 		private OptionsResult _result;
 		private IResponseDetails _responseDetails;
-		private IRequestDetails _requestDetails;
+	    private IEndpointDetails _endpointDetails;
 
-		[TestFixtureSetUp]
+	    [TestFixtureSetUp]
 		public void TestFixtureSetUp()
 		{
-			_requestDetails = MockRepository.GenerateStub<IRequestDetails>();
-			_result = new OptionsResult(_requestDetails);
-			_responseDetails = MockRepository.GenerateStub<IResponseDetails>();
-			_requestDetails.Stub(rd => rd.AllowHeader).Return(AllowAllTheThings);
+		    _endpointDetails = MockRepository.GenerateStub<IEndpointDetails>();
+		    _endpointDetails.Stub(ed => ed.AllowHeader).Return(AllowAllTheThings);
+		    _result = new OptionsResult(_endpointDetails);
+		    _responseDetails = MockRepository.GenerateStub<IResponseDetails>();
 
-			_result.Update(_responseDetails);
+		    _result.Update(_responseDetails);
 		}
 
 		[Test]
@@ -35,7 +35,7 @@ namespace Nonae.Tests.Unit.Results
 		[Test]
 		public void Sets_allow_header_to_value_from_request_details()
 		{
-			_requestDetails.AssertWasCalled(rd => rd.AllowHeader);
+            _endpointDetails.AssertWasCalled(ed => ed.AllowHeader);
 			_responseDetails.AssertWasCalled(rd => rd.Allow = AllowAllTheThings);
 		}
 	}

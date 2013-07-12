@@ -29,7 +29,7 @@ namespace Nonae.Tests.Unit.Handlers
 		public void Returns_result_from_resource_exists_successor_if_the_resource_exists()
 		{
 			var expectedResult = MockRepository.GenerateStub<IResult>();
-			_requestDetails.Stub(rd => rd.ResourceExists).Return(true);
+            _endpointDetails.Stub(rd => rd.ResourceExists).Return(true);
 			_resourceFoundSuccessor.Stub(s => s.Handle(_requestDetails, _endpointDetails)).Return(expectedResult);
 
 			var result = _handler.Handle(_requestDetails, _endpointDetails);
@@ -42,7 +42,7 @@ namespace Nonae.Tests.Unit.Handlers
 		public void Returns_result_from_resource_not_found_successor_if_the_resource_does_not_exist()
 		{
 			var expectedResult = MockRepository.GenerateStub<IResult>();
-			_requestDetails.Stub(rd => rd.ResourceExists).Return(false);
+            _endpointDetails.Stub(rd => rd.ResourceExists).Return(false);
 			_resourceNotFoundSuccessor.Stub(s => s.Handle(_requestDetails, _endpointDetails)).Return(expectedResult);
 
 			var result = _handler.Handle(_requestDetails, _endpointDetails);

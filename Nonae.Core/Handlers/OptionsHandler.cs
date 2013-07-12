@@ -19,7 +19,7 @@ namespace Nonae.Core.Handlers
 			// _endpointDetails: Authorize against endpoint?
 
 			return requestDetails.Answers(HttpMethod.Options)
-				       ? new OptionsResult(requestDetails)
+				       ? new OptionsResult(endpoint)
 				       : _successor.Handle(requestDetails, endpoint);
 		}
 	}

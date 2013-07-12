@@ -1,22 +1,22 @@
 ﻿using System.Net;
-using Nonae.Core.Requests;
+using Nonae.Core.Endpoints;
 using Nonae.Core.Responses;
 
 namespace Nonae.Core.Results
 {
 	public class CreatedResult : IResult
 	{
-		private readonly IRequestDetails _requestDetails;
+	    private readonly IEndpointDetails _endpointDetails;
 
-		public CreatedResult(IRequestDetails requestDetails)
+	    public CreatedResult(IEndpointDetails endpointDetails)
 		{
-			_requestDetails = requestDetails;
+	        _endpointDetails = endpointDetails;
 		}
 
-		public void Update(IResponseDetails responseDetails)
+	    public void Update(IResponseDetails responseDetails)
 		{
 			responseDetails.StatusCode = HttpStatusCode.Created;
-			responseDetails.Allow = _requestDetails.AllowHeader;
+			responseDetails.Allow = _endpointDetails.AllowHeader;
 
 		}
 	}

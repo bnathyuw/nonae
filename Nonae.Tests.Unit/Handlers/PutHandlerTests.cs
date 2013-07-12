@@ -15,12 +15,12 @@ namespace Nonae.Tests.Unit.Handlers
 		{
 			var putHandler = new PutHandler();
 			var requestDetails = MockRepository.GenerateStub<IRequestDetails>();
-			requestDetails.Stub(rd => rd.Save()).Return(true);
 		    var endpointDetails = MockRepository.GenerateStub<IEndpointDetails>();
+            endpointDetails.Stub(ed => ed.Save()).Return(true);
 
-			var result = putHandler.Handle(requestDetails, endpointDetails);
+		    var result = putHandler.Handle(requestDetails, endpointDetails);
 
-			requestDetails.AssertWasCalled(rd => rd.Save());
+            endpointDetails.AssertWasCalled(rd => rd.Save());
 			Assert.That(result, Is.TypeOf<CreatedResult>());
 		}
 	}

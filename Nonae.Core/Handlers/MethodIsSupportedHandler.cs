@@ -17,7 +17,7 @@ namespace Nonae.Core.Handlers
 		{
 			return requestDetails.MethodIsSupported
 				       ? _successor.Handle(requestDetails, endpoint)
-				       : new MethodNotAllowedResult(requestDetails);
+				       : new MethodNotAllowedResult(endpoint);
 		}
 	}
 }

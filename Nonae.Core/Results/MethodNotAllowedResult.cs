@@ -1,22 +1,22 @@
 ﻿using System.Net;
-using Nonae.Core.Requests;
+using Nonae.Core.Endpoints;
 using Nonae.Core.Responses;
 
 namespace Nonae.Core.Results
 {
 	public class MethodNotAllowedResult : IResult
 	{
-		private readonly IRequestDetails _requestDetails;
+	    private readonly IEndpointDetails _endpointDetails;
 
-		public MethodNotAllowedResult(IRequestDetails requestDetails)
+	    public MethodNotAllowedResult(IEndpointDetails endpointDetails)
 		{
-			_requestDetails = requestDetails;
+	        _endpointDetails = endpointDetails;
 		}
 
-		public void Update(IResponseDetails responseDetails)
+	    public void Update(IResponseDetails responseDetails)
 		{
 			responseDetails.StatusCode = HttpStatusCode.MethodNotAllowed;
-			responseDetails.Allow = _requestDetails.AllowHeader;
+            responseDetails.Allow = _endpointDetails.AllowHeader;
 		}
 	}
 }

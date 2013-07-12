@@ -8,8 +8,8 @@ namespace Nonae.Core.Handlers
 	{
 		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint)
 		{
-			requestDetails.Save();
-			return new CreatedResult(requestDetails);
+			endpoint.Save();
+			return new CreatedResult(endpoint);
 		}
 	}
 }

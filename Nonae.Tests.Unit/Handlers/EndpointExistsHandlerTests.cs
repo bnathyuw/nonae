@@ -27,7 +27,7 @@ namespace Nonae.Tests.Unit.Handlers
 		[Test]
 		public void Returns_result_from_successor_if_the_endpoint_exists()
 		{
-			_requestDetails.Stub(rd => rd.EndpointExists).Return(true);
+            _endpointDetails.Stub(rd => rd.Exists).Return(true);
 			var expectedResult = MockRepository.GenerateStub<IResult>();
             _successor.Stub(s => s.Handle(_requestDetails, _endpointDetails)).Return(expectedResult);
 
@@ -40,7 +40,7 @@ namespace Nonae.Tests.Unit.Handlers
 		[Test]
 		public void Returns_not_found_if_then_endpoint_does_not_exist()
 		{
-			_requestDetails.Stub(rd => rd.EndpointExists).Return(false);
+            _endpointDetails.Stub(rd => rd.Exists).Return(false);
 
             var result = _handler.Handle(_requestDetails, _endpointDetails);
 

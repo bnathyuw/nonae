@@ -32,37 +32,17 @@ namespace Nonae.Core.Requests
 			get { return _endpointDetails.Allows(_httpMethod); }
 		}
 
-		public bool EndpointExists
-		{
-			get { return _endpointDetails.Exists; }
-		}
-
-		public string AllowHeader
-		{
-			get { return _endpointDetails.AllowHeader; }
-		}
-
-		public string AuthenticationFailureMessage
+	    public string AuthenticationFailureMessage
 		{
 			get { return _credentials.FailureMessage; }
 		}
 
-		public bool ResourceExists
-		{
-			get { return _endpointDetails.ResourceExists; }
-		}
-
-		public bool Answers(HttpMethod httpMethod)
+	    public bool Answers(HttpMethod httpMethod)
 		{
 			return _httpMethod == httpMethod;
 		}
 
-		public bool Save()
-		{
-			return _endpointDetails.Save();
-		}
-
-		public bool IsAuthorized
+	    public bool IsAuthorized
 		{
 			get { return _endpointDetails.IsAuthorizedFor(_credentials); }
 		}
