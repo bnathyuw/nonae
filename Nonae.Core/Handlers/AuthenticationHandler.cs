@@ -23,9 +23,9 @@ namespace Nonae.Core.Handlers
 
 		private IResult CheckCredentials(IRequestDetails requestDetails, IEndpointDetails endpoint, ICredentials credentials)
 		{
-			return requestDetails.IsAuthenticated
+			return credentials.IsAuthenticated
 				       ? _successor.Handle(requestDetails, endpoint, credentials)
-				       : new UnauthorizedResult(requestDetails.AuthenticationFailureMessage);
+				       : new UnauthorizedResult(credentials.FailureMessage);
 		}
 	}
 }

@@ -16,12 +16,12 @@ namespace Nonae.Core.Endpoints
 		}
 
 		private readonly List<HttpMethod> _methods;
-		private readonly Func<Credentials, bool> _authorize;
+		private readonly Func<ICredentials, bool> _authorize;
 		private readonly Regex _pattern;
 		private readonly Dictionary<string, string> _addressParts;
 		private readonly IResourceRepository _resourceRepository;
 
-		public EndpointDetails(string url, List<HttpMethod> methods, Func<Credentials, bool> authorize, IResourceRepository resourceRepository, string path)
+		public EndpointDetails(string url, List<HttpMethod> methods, Func<ICredentials, bool> authorize, IResourceRepository resourceRepository, string path)
 		{
 			_authorize = authorize;
 			_methods = methods;
@@ -53,7 +53,7 @@ namespace Nonae.Core.Endpoints
 			}
 		}
 
-		public bool IsAuthorizedFor(Credentials credentials)
+		public bool IsAuthorizedFor(ICredentials credentials)
 		{
 			return _authorize(credentials);
 		}

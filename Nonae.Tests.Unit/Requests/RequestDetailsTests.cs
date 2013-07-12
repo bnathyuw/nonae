@@ -22,7 +22,7 @@ namespace Nonae.Tests.Unit.Requests
 		[Test]
 		public void Identifies_itself_correctly_when_options_request()
 		{
-			var requestDetails = new RequestDetails(_credentials, HttpMethod.Options);
+			var requestDetails = new RequestDetails(HttpMethod.Options);
 
 			Assert.That(requestDetails.Answers(HttpMethod.Options), Is.EqualTo(true));
 		}
@@ -30,7 +30,7 @@ namespace Nonae.Tests.Unit.Requests
 		[Test]
 		public void Identifies_itself_correctly_when_not_options_request()
 		{
-			var requestDetails = new RequestDetails(_credentials, HttpMethod.Get);
+			var requestDetails = new RequestDetails(HttpMethod.Get);
 
 			Assert.That(requestDetails.Answers(HttpMethod.Options), Is.EqualTo(false));
 		}

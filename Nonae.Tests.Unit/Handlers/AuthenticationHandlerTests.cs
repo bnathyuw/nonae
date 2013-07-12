@@ -44,7 +44,7 @@ namespace Nonae.Tests.Unit.Handlers
 		public void Returns_unauthorized_if_the_request_is_not_authenticated()
 		{
             _credentials.Stub(c => c.IsAnonymous).Return(false);
-			_requestDetails.Stub(rd => rd.IsAuthenticated).Return(false);
+            _credentials.Stub(c => c.IsAuthenticated).Return(false);
 
             var handle = _handler.Handle(_requestDetails, _endpointDetails, _credentials);
 
@@ -55,7 +55,7 @@ namespace Nonae.Tests.Unit.Handlers
 		public void Returns_result_from_successor_if_the_request_is_authenticated()
 		{
             _credentials.Stub(c => c.IsAnonymous).Return(false);
-			_requestDetails.Stub(rd => rd.IsAuthenticated).Return(true);
+            _credentials.Stub(c => c.IsAuthenticated).Return(true);
 			var expectedResult = MockRepository.GenerateStub<IResult>();
             _successor.Stub(s => s.Handle(_requestDetails, _endpointDetails, _credentials)).Return(expectedResult);
 

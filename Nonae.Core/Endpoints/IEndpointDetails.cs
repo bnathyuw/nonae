@@ -9,7 +9,7 @@ namespace Nonae.Core.Endpoints
 		string AllowHeader { get; }
 		bool Exists { get; }
 		bool ResourceExists { get; }
-		bool IsAuthorizedFor(Credentials credentials);
+		bool IsAuthorizedFor(ICredentials credentials);
 		bool Save();
 	}
 }

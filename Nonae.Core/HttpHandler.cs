@@ -26,7 +26,7 @@ namespace Nonae.Core
 			var request = context.Request;
 			var endpoint = _endpointStore.Get(request.Path);
 			var credentials = _credentialsBuilder.From(request.Headers["Authorization"]);
-			var requestDetails = new RequestDetails(credentials, new HttpMethod(request.HttpMethod));
+			var requestDetails = new RequestDetails(new HttpMethod(request.HttpMethod));
 			
 			var result = _handler.Handle(requestDetails, endpoint, credentials);
 

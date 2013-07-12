@@ -20,7 +20,7 @@ namespace Nonae.Core.Endpoints
 			return this;
 		}
 
-		public Endpoint AuthorizedWhen(Func<Credentials, bool> func)
+		public Endpoint AuthorizedWhen(Func<ICredentials, bool> func)
 		{
 			_authorize = func;
 			return this;
@@ -38,7 +38,7 @@ namespace Nonae.Core.Endpoints
 		}
 
 		private readonly List<HttpMethod> _methods = new List<HttpMethod>();
-		private Func<Credentials, bool> _authorize = credentials => true;
+		private Func<ICredentials, bool> _authorize = credentials => true;
 		private IResourceRepository _resourceRepository;
 		private readonly string _url;
 
