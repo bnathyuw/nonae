@@ -1,7 +1,6 @@
 ﻿using System.Net.Http;
 using Nonae.Core.Authorization;
 using Nonae.Core.Endpoints;
-using Nonae.Core.Requests;
 using Nonae.Core.Results;
 
 namespace Nonae.Core.Handlers
