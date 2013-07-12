@@ -16,26 +16,12 @@ namespace Nonae.Core
 
 		protected HttpHandler(IAuthenticationProvider authenticationProvider)
 		{
-			_handler = GetHandler();
+			_handler = HandlerFactory.Build();
 			_endpointStore = new EndpointStore();
 			_credentialsBuilder = new CredentialsBuilder(authenticationProvider);
 		}
 
-		private static AuthenticationHandler GetHandler()
-		{
-			var okHandler = new OkHandler();
-			var putHandler = new PutHandler();
-			var notFoundHandler = new NotFoundHandler(putHandler);
-			var methodIsSupportedHandler = new MethodIsSupportedHandler(okHandler);
-			var resourceExistsHandler = new ResourceExistsHandler(methodIsSupportedHandler, notFoundHandler);
-			var endpointExistsHandler = new EndpointExistsHandler(resourceExistsHandler);
-			var optionsHandler = new OptionsHandler(endpointExistsHandler);
-			var authorizationHandler = new AuthorizationHandler(optionsHandler);
-			var authenticationHandler = new AuthenticationHandler(authorizationHandler);
-			return authenticationHandler;
-		}
-
-		public void ProcessRequest(HttpContext context)
+	    public void ProcessRequest(HttpContext context)
 		{
 			var request = context.Request;
 			var endpoint = _endpointStore.Get(request.Path);

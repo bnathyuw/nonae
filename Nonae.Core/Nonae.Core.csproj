@@ -46,6 +46,7 @@
     <Compile Include="Endpoints\Endpoint.cs" />
     <Compile Include="Endpoints\EndpointStore.cs" />
     <Compile Include="Endpoints\IEndpointDetails.cs" />
+    <Compile Include="Handlers\HandlerFactory.cs" />
     <Compile Include="Handlers\AuthenticationHandler.cs" />
     <Compile Include="Authorization\Credentials.cs" />
     <Compile Include="Endpoints\EndpointDetails.cs" />
