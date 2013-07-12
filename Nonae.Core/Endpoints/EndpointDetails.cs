@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text.RegularExpressions;
 using Nonae.Core.Authorization;
 using Nonae.Core.Handlers;
 
@@ -17,7 +16,7 @@ namespace Nonae.Core.Endpoints
 
 		private readonly List<HttpMethod> _methods;
 		private readonly Func<ICredentials, bool> _authorize;
-		private readonly Regex _pattern;
+		private readonly string _url;
 		private readonly Dictionary<string, string> _addressParts;
 		private readonly IResourceRepository _resourceRepository;
 
@@ -25,9 +24,9 @@ namespace Nonae.Core.Endpoints
 		{
 			_authorize = authorize;
 			_methods = methods;
-			_pattern = url == null ? null : new Regex(url);
+			_url = url;
 			_resourceRepository = resourceRepository;
-			_addressParts = GetAddressParts(path);
+			_addressParts = new PathAnalyser(url).GetAddressParts(path);
 		}
 
 		public bool Allows(HttpMethod httpMethod)
@@ -42,7 +41,7 @@ namespace Nonae.Core.Endpoints
 
 		public bool Exists
 		{
-			get { return _pattern != null; }
+			get { return _url != null; }
 		}
 
 		public bool ResourceExists
@@ -56,23 +55,6 @@ namespace Nonae.Core.Endpoints
 		public bool IsAuthorizedFor(ICredentials credentials)
 		{
 			return _authorize(credentials);
-		}
-
-		private Dictionary<string, string> GetAddressParts(string path)
-		{
-			if (path == null) return null;
-			if (_pattern == null) return null;
-			var match = _pattern.Match(path);
-
-			var addressParts = new Dictionary<string, string>();
-			var groupCollection = match.Groups;
-			for (var i = 1; i <= groupCollection.Count; i++)
-			{
-				var key = _pattern.GroupNameFromNumber(i);
-				var value = groupCollection[i].Value;
-				addressParts.Add(key, value);
-			}
-			return addressParts;
 		}
 
 		public bool Save()
