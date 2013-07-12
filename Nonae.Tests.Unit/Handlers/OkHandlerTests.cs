@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Nonae.Core.Endpoints;
 using Nonae.Core.Handlers;
 using Nonae.Core.Requests;
 using Nonae.Core.Results;
@@ -15,7 +16,8 @@ namespace Nonae.Tests.Unit.Handlers
 			var okHandler = new OkHandler();
 
 			var requestDetails = MockRepository.GenerateStub<IRequestDetails>();
-			var result = okHandler.Handle(requestDetails);
+		    var endpointDetails = MockRepository.GenerateStub<IEndpointDetails>();
+			var result = okHandler.Handle(requestDetails, endpointDetails);
 
 			Assert.That(result, Is.TypeOf<OkResult>());
 		}

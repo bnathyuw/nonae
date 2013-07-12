@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using Nonae.Core.Endpoints;
 using Nonae.Core.Requests;
 using Nonae.Core.Results;
 
@@ -13,10 +14,10 @@ namespace Nonae.Core.Handlers
 			_putHandler = putHandler;
 		}
 
-		public IResult Handle(IRequestDetails requestDetails)
+		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint)
 		{
 			return requestDetails.Answers(HttpMethod.Put) 
-				? _putHandler.Handle(requestDetails) 
+				? _putHandler.Handle(requestDetails, endpoint) 
 				: NotFoundResult.ForNonexistentResource();
 		}
 	}

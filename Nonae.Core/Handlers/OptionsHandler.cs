@@ -1,4 +1,5 @@
 using System.Net.Http;
+using Nonae.Core.Endpoints;
 using Nonae.Core.Requests;
 using Nonae.Core.Results;
 
@@ -13,13 +14,13 @@ namespace Nonae.Core.Handlers
 			_successor = successor;
 		}
 
-		public IResult Handle(IRequestDetails requestDetails)
+		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint)
 		{
-			// TODO: Authorize against endpoint?
+			// _endpointDetails: Authorize against endpoint?
 
 			return requestDetails.Answers(HttpMethod.Options)
 				       ? new OptionsResult(requestDetails)
-				       : _successor.Handle(requestDetails);
+				       : _successor.Handle(requestDetails, endpoint);
 		}
 	}
 }

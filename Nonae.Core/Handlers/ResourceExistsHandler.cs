@@ -1,4 +1,5 @@
-﻿using Nonae.Core.Requests;
+﻿using Nonae.Core.Endpoints;
+using Nonae.Core.Requests;
 using Nonae.Core.Results;
 
 namespace Nonae.Core.Handlers
@@ -14,11 +15,11 @@ namespace Nonae.Core.Handlers
 			_resourceNotFoundSuccessor = resourceNotFoundSuccessor;
 		}
 
-		public IResult Handle(IRequestDetails requestDetails)
+		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint)
 		{
 			return requestDetails.ResourceExists
-				? _resourceFoundSuccessor.Handle(requestDetails) 
-				: _resourceNotFoundSuccessor.Handle(requestDetails);
+				? _resourceFoundSuccessor.Handle(requestDetails, endpoint) 
+				: _resourceNotFoundSuccessor.Handle(requestDetails, endpoint);
 		}
 	}
 }

@@ -1,3 +1,4 @@
+using Nonae.Core.Endpoints;
 using Nonae.Core.Requests;
 using Nonae.Core.Results;
 
@@ -12,17 +13,17 @@ namespace Nonae.Core.Handlers
 			_successor = successor;
 		}
 
-		public IResult Handle(IRequestDetails requestDetails)
+		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint)
 		{
 			return requestDetails.HasAuthorization
-				       ? CheckCredentials(requestDetails)
-				       : _successor.Handle(requestDetails);
+				       ? CheckCredentials(requestDetails,endpoint)
+				       : _successor.Handle(requestDetails, endpoint);
 		}
 
-		private IResult CheckCredentials(IRequestDetails requestDetails)
+		private IResult CheckCredentials(IRequestDetails requestDetails, IEndpointDetails endpoint)
 		{
 			return requestDetails.IsAuthenticated
-				       ? _successor.Handle(requestDetails)
+				       ? _successor.Handle(requestDetails, endpoint)
 				       : new UnauthorizedResult(requestDetails.AuthenticationFailureMessage);
 		}
 	}
