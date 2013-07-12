@@ -27,7 +27,7 @@ namespace Nonae.Tests.Unit.Handlers
 		[Test]
 		public void Returns_result_from_successor_if_the_request_is_authorized()
 		{
-			_requestDetails.Stub(rd => rd.IsAuthorized).Return(true);
+			_requestDetails.Stub(rd => rd.GetIsAuthorized(_endpointDetails)).Return(true);
 			var expectedResult = MockRepository.GenerateStub<IResult>();
             _successor.Stub(s => s.Handle(_requestDetails, _endpointDetails)).Return(expectedResult);
 
@@ -40,7 +40,7 @@ namespace Nonae.Tests.Unit.Handlers
 		[Test]
 		public void Returns_unauthorized_if_the_request_is_not_authorized()
 		{
-			_requestDetails.Stub(rd => rd.IsAuthorized).Return(false);
+			_requestDetails.Stub(rd => rd.GetIsAuthorized(_endpointDetails)).Return(false);
 
             var result = _handler.Handle(_requestDetails, _endpointDetails);
 

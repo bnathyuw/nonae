@@ -15,7 +15,7 @@ namespace Nonae.Core.Handlers
 
 		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint)
 		{
-			return requestDetails.IsAuthorized
+			return requestDetails.GetIsAuthorized(endpoint)
 				       ? _successor.Handle(requestDetails, endpoint)
 				       : UnauthorizedResult.ForInsufficientPrivileges();
 		}

@@ -1,4 +1,5 @@
 using System.Net.Http;
+using Nonae.Core.Endpoints;
 
 namespace Nonae.Core.Requests
 {
@@ -6,8 +7,8 @@ namespace Nonae.Core.Requests
 	{
 		bool HasAuthorization { get; }
 		bool IsAuthenticated { get; }
-		bool IsAuthorized { get; }
-	    bool MethodIsSupported { get; }
+	    bool GetIsAuthorized(IEndpointDetails endpointDetails);
+	    bool GetMethodIsSupported(IEndpointDetails endpointDetails);
 	    string AuthenticationFailureMessage { get; }
 	    bool Answers(HttpMethod httpMethod);
 	}

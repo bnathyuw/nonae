@@ -27,7 +27,7 @@ namespace Nonae.Tests.Unit.Handlers
 		[Test]
 		public void Returns_result_from_successor_if_the_method_is_supported()
 		{
-			_requestDetails.Stub(rd => rd.MethodIsSupported).Return(true);
+			_requestDetails.Stub(rd => rd.GetMethodIsSupported(_endpointDetails)).Return(true);
 			var expectedResult = MockRepository.GenerateStub<IResult>();
             _successor.Stub(s => s.Handle(_requestDetails, _endpointDetails)).Return(expectedResult);
 
@@ -40,7 +40,7 @@ namespace Nonae.Tests.Unit.Handlers
 		[Test]
 		public void Returns_method_not_allows_if_the_method_is_not_supported()
 		{
-			_requestDetails.Stub(rd => rd.MethodIsSupported).Return(false);
+			_requestDetails.Stub(rd => rd.GetMethodIsSupported(_endpointDetails)).Return(false);
 
             var result = _handler.Handle(_requestDetails, _endpointDetails);
 

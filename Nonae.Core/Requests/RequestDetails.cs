@@ -6,15 +6,13 @@ namespace Nonae.Core.Requests
 {
 	public class RequestDetails : IRequestDetails
 	{
-		internal RequestDetails(IEndpointDetails endpointDetails, Credentials credentials, HttpMethod httpMethod)
+		internal RequestDetails(Credentials credentials, HttpMethod httpMethod)
 		{
-			_endpointDetails = endpointDetails;
-			_credentials = credentials;
+		    _credentials = credentials;
 			_httpMethod = httpMethod;
 		}
 
-		private readonly IEndpointDetails _endpointDetails;
-		private readonly Credentials _credentials;
+	    private readonly Credentials _credentials;
 		private readonly HttpMethod _httpMethod;
 
 		public bool HasAuthorization
@@ -27,10 +25,10 @@ namespace Nonae.Core.Requests
 			get { return _credentials.IsAuthenticated; }
 		}
 
-		public bool MethodIsSupported
-		{
-			get { return _endpointDetails.Allows(_httpMethod); }
-		}
+	    public bool GetMethodIsSupported(IEndpointDetails endpointDetails)
+	    {
+	        return endpointDetails.Allows(_httpMethod);
+	    }
 
 	    public string AuthenticationFailureMessage
 		{
@@ -42,9 +40,9 @@ namespace Nonae.Core.Requests
 			return _httpMethod == httpMethod;
 		}
 
-	    public bool IsAuthorized
-		{
-			get { return _endpointDetails.IsAuthorizedFor(_credentials); }
-		}
+	    public bool GetIsAuthorized(IEndpointDetails endpointDetails)
+	    {
+	        return endpointDetails.IsAuthorizedFor(_credentials);
+	    }
 	}
 }

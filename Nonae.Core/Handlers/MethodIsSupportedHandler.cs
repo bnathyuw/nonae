@@ -15,7 +15,7 @@ namespace Nonae.Core.Handlers
 
 		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint)
 		{
-			return requestDetails.MethodIsSupported
+			return requestDetails.GetMethodIsSupported(endpoint)
 				       ? _successor.Handle(requestDetails, endpoint)
 				       : new MethodNotAllowedResult(endpoint);
 		}
