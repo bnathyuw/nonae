@@ -59,7 +59,6 @@
     <Compile Include="Handlers\ResourceExistsHandler.cs" />
     <Compile Include="Handlers\NotFoundHandler.cs" />
     <Compile Include="Requests\IRequestDetails.cs" />
-    <Compile Include="Requests\RequestDetails.cs" />
     <Compile Include="HttpHandler.cs" />
     <Compile Include="Handlers\MethodIsSupportedHandler.cs" />
     <Compile Include="Handlers\OkHandler.cs" />

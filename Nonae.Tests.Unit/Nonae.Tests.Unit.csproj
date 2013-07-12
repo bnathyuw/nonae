@@ -61,7 +61,6 @@
     <Compile Include="Handlers\PutHandlerTests.cs" />
     <Compile Include="Handlers\ResourceExistsHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Requests\RequestDetailsTests.cs" />
     <Compile Include="Results\CreatedTests.cs" />
     <Compile Include="Results\OkResultTests.cs" />
     <Compile Include="Results\MethodNotAllowedResultTests.cs" />
@@ -77,6 +76,9 @@
       <Project>{8CA14BD8-A9CB-4DAC-8A43-B53EE6A2DD3A}</Project>
       <Name>Nonae.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Requests\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

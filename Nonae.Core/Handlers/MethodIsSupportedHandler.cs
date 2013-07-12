@@ -1,3 +1,4 @@
+using System.Net.Http;
 using Nonae.Core.Authorization;
 using Nonae.Core.Endpoints;
 using Nonae.Core.Requests;
@@ -14,10 +15,10 @@ namespace Nonae.Core.Handlers
 			_successor = successor;
 		}
 
-		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint, ICredentials credentials)
+		public IResult Handle(IEndpointDetails endpoint, ICredentials credentials, HttpMethod httpMethod)
 		{
-			return requestDetails.GetMethodIsSupported(endpoint)
-				       ? _successor.Handle(requestDetails, endpoint, credentials)
+			return endpoint.Allows(httpMethod)
+				       ? _successor.Handle(endpoint, credentials, httpMethod)
 				       : new MethodNotAllowedResult(endpoint);
 		}
 	}

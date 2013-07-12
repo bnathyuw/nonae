@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Net.Http;
+using NUnit.Framework;
 using Nonae.Core.Authorization;
 using Nonae.Core.Endpoints;
 using Nonae.Core.Handlers;
@@ -13,7 +14,6 @@ namespace Nonae.Tests.Unit.Handlers
 	{
 		private IHandler _successor;
 		private MethodIsSupportedHandler _handler;
-		private IRequestDetails _requestDetails;
 	    private IEndpointDetails _endpointDetails;
 	    private ICredentials _credentials;
 
@@ -22,7 +22,6 @@ namespace Nonae.Tests.Unit.Handlers
 		{
 			_successor = MockRepository.GenerateStub<IHandler>();
 			_handler = new MethodIsSupportedHandler(_successor);
-			_requestDetails = MockRepository.GenerateStub<IRequestDetails>();
 		    _endpointDetails = MockRepository.GenerateStub<IEndpointDetails>();
 	        _credentials = MockRepository.GenerateStub<ICredentials>();
 		}
@@ -30,22 +29,24 @@ namespace Nonae.Tests.Unit.Handlers
 		[Test]
 		public void Returns_result_from_successor_if_the_method_is_supported()
 		{
-			_requestDetails.Stub(rd => rd.GetMethodIsSupported(_endpointDetails)).Return(true);
+		    var httpMethod = HttpMethod.Delete;
+		    _endpointDetails.Stub(ed => ed.Allows(httpMethod)).Return(true);
 			var expectedResult = MockRepository.GenerateStub<IResult>();
-            _successor.Stub(s => s.Handle(_requestDetails, _endpointDetails, _credentials)).Return(expectedResult);
+            _successor.Stub(s => s.Handle(_endpointDetails, _credentials, httpMethod)).Return(expectedResult);
 
-            var result = _handler.Handle(_requestDetails, _endpointDetails, _credentials);
+            var result = _handler.Handle(_endpointDetails, _credentials, httpMethod);
 
-            _successor.AssertWasCalled(s => s.Handle(_requestDetails, _endpointDetails, _credentials));
+            _successor.AssertWasCalled(s => s.Handle(_endpointDetails, _credentials, httpMethod));
 			Assert.That(result, Is.EqualTo(expectedResult));
 		}
 
 		[Test]
 		public void Returns_method_not_allows_if_the_method_is_not_supported()
 		{
-			_requestDetails.Stub(rd => rd.GetMethodIsSupported(_endpointDetails)).Return(false);
+            var httpMethod = HttpMethod.Delete;
+            _endpointDetails.Stub(ed => ed.Allows(httpMethod)).Return(false);
 
-            var result = _handler.Handle(_requestDetails, _endpointDetails, _credentials);
+            var result = _handler.Handle(_endpointDetails, _credentials, null);
 
 			Assert.That(result, Is.TypeOf<MethodNotAllowedResult>());
 		}

@@ -13,7 +13,6 @@ namespace Nonae.Tests.Unit.Handlers
 		private IHandler _resourceFoundSuccessor;
 		private IHandler _resourceNotFoundSuccessor;
 		private ResourceExistsHandler _handler;
-		private IRequestDetails _requestDetails;
 	    private IEndpointDetails _endpointDetails;
 	    private ICredentials _credentials;
 
@@ -23,7 +22,6 @@ namespace Nonae.Tests.Unit.Handlers
 			_resourceFoundSuccessor = MockRepository.GenerateStub<IHandler>();
 			_resourceNotFoundSuccessor = MockRepository.GenerateStub<IHandler>();
 			_handler = new ResourceExistsHandler(_resourceFoundSuccessor, _resourceNotFoundSuccessor);
-			_requestDetails = MockRepository.GenerateStub<IRequestDetails>();
 		    _endpointDetails = MockRepository.GenerateStub<IEndpointDetails>();
 	        _credentials = MockRepository.GenerateStub<ICredentials>();
 		}
@@ -33,11 +31,11 @@ namespace Nonae.Tests.Unit.Handlers
 		{
 			var expectedResult = MockRepository.GenerateStub<IResult>();
             _endpointDetails.Stub(rd => rd.ResourceExists).Return(true);
-            _resourceFoundSuccessor.Stub(s => s.Handle(_requestDetails, _endpointDetails, _credentials)).Return(expectedResult);
+            _resourceFoundSuccessor.Stub(s => s.Handle(_endpointDetails, _credentials, null)).Return(expectedResult);
 
-            var result = _handler.Handle(_requestDetails, _endpointDetails, _credentials);
+            var result = _handler.Handle(_endpointDetails, _credentials, null);
 
-            _resourceFoundSuccessor.AssertWasCalled(s => s.Handle(_requestDetails, _endpointDetails, _credentials));
+            _resourceFoundSuccessor.AssertWasCalled(s => s.Handle(_endpointDetails, _credentials, null));
 			Assert.That(result, Is.EqualTo(expectedResult));
 		}
 
@@ -46,11 +44,11 @@ namespace Nonae.Tests.Unit.Handlers
 		{
 			var expectedResult = MockRepository.GenerateStub<IResult>();
             _endpointDetails.Stub(rd => rd.ResourceExists).Return(false);
-            _resourceNotFoundSuccessor.Stub(s => s.Handle(_requestDetails, _endpointDetails, _credentials)).Return(expectedResult);
+            _resourceNotFoundSuccessor.Stub(s => s.Handle(_endpointDetails, _credentials, null)).Return(expectedResult);
 
-            var result = _handler.Handle(_requestDetails, _endpointDetails, _credentials);
+            var result = _handler.Handle(_endpointDetails, _credentials, null);
 
-            _resourceNotFoundSuccessor.AssertWasCalled(s => s.Handle(_requestDetails, _endpointDetails, _credentials));
+            _resourceNotFoundSuccessor.AssertWasCalled(s => s.Handle(_endpointDetails, _credentials, null));
 			Assert.That(result, Is.EqualTo(expectedResult));
 		} 
 	}

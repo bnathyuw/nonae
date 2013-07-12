@@ -13,7 +13,6 @@ namespace Nonae.Tests.Unit.Handlers
 	{
 		private IHandler _successor;
 		private EndpointExistsHandler _handler;
-		private IRequestDetails _requestDetails;
 	    private IEndpointDetails _endpointDetails;
 	    private ICredentials _credentials;
 
@@ -22,7 +21,6 @@ namespace Nonae.Tests.Unit.Handlers
 		{
 			_successor = MockRepository.GenerateStub<IHandler>();
 			_handler = new EndpointExistsHandler(_successor);
-			_requestDetails = MockRepository.GenerateStub<IRequestDetails>();
 		    _endpointDetails = MockRepository.GenerateStub<IEndpointDetails>();
 	        _credentials = MockRepository.GenerateStub<ICredentials>();
 		}
@@ -32,11 +30,11 @@ namespace Nonae.Tests.Unit.Handlers
 		{
             _endpointDetails.Stub(rd => rd.Exists).Return(true);
 			var expectedResult = MockRepository.GenerateStub<IResult>();
-            _successor.Stub(s => s.Handle(_requestDetails, _endpointDetails, _credentials)).Return(expectedResult);
+            _successor.Stub(s => s.Handle(_endpointDetails, _credentials, null)).Return(expectedResult);
 
-            var result = _handler.Handle(_requestDetails, _endpointDetails, _credentials);
+            var result = _handler.Handle(_endpointDetails, _credentials, null);
 
-            _successor.AssertWasCalled(s => s.Handle(_requestDetails, _endpointDetails, _credentials));
+            _successor.AssertWasCalled(s => s.Handle(_endpointDetails, _credentials, null));
 			Assert.That(result, Is.EqualTo(expectedResult));
 		}
 
@@ -45,7 +43,7 @@ namespace Nonae.Tests.Unit.Handlers
 		{
             _endpointDetails.Stub(rd => rd.Exists).Return(false);
 
-            var result = _handler.Handle(_requestDetails, _endpointDetails, _credentials);
+            var result = _handler.Handle(_endpointDetails, _credentials, null);
 
 			Assert.That(result, Is.TypeOf<NotFoundResult>());
 		}

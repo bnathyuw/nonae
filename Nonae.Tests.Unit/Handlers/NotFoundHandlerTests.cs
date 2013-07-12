@@ -13,7 +13,6 @@ namespace Nonae.Tests.Unit.Handlers
 	public class NotFoundHandlerTests
 	{
 	    private IEndpointDetails _endpointDetails;
-	    private IRequestDetails _requestDetails;
 	    private NotFoundHandler _notFoundHandler;
 	    private ICredentials _credentials;
 
@@ -21,11 +20,10 @@ namespace Nonae.Tests.Unit.Handlers
 		public void Returns_not_found_result()
 		{
 			_notFoundHandler = new NotFoundHandler(null);
-            _requestDetails = MockRepository.GenerateStub<IRequestDetails>();
 		    _endpointDetails = MockRepository.GenerateStub<IEndpointDetails>();
 	        _credentials = MockRepository.GenerateStub<ICredentials>();
 
-            var result = _notFoundHandler.Handle(_requestDetails, _endpointDetails, _credentials);
+            var result = _notFoundHandler.Handle(_endpointDetails, _credentials, null);
 
 			Assert.That(result, Is.TypeOf<NotFoundResult>());
 		}
@@ -34,15 +32,13 @@ namespace Nonae.Tests.Unit.Handlers
 		public void Returns_result_from_put_handler()
 		{
 			var putHandler = MockRepository.GenerateStub<IHandler>();
-			var requestDetails = MockRepository.GenerateStub<IRequestDetails>();
 			var expectedResult = MockRepository.GenerateStub<IResult>();
-            putHandler.Stub(ph => ph.Handle(requestDetails, _endpointDetails, _credentials)).Return(expectedResult);
+            putHandler.Stub(ph => ph.Handle(_endpointDetails, _credentials, HttpMethod.Put)).Return(expectedResult);
 			var notFoundHandler = new NotFoundHandler(putHandler);
-			requestDetails.Stub(rd => rd.Answers(HttpMethod.Put)).Return(true);
 
-            var result = notFoundHandler.Handle(requestDetails, _endpointDetails, _credentials);
+            var result = notFoundHandler.Handle(_endpointDetails, _credentials, HttpMethod.Put);
 
-            putHandler.AssertWasCalled(ph => ph.Handle(requestDetails, _endpointDetails, _credentials));
+            putHandler.AssertWasCalled(ph => ph.Handle(_endpointDetails, _credentials, HttpMethod.Put));
 			Assert.That(result, Is.EqualTo(expectedResult));
 		}
 	}

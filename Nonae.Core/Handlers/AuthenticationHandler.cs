@@ -1,6 +1,6 @@
+using System.Net.Http;
 using Nonae.Core.Authorization;
 using Nonae.Core.Endpoints;
-using Nonae.Core.Requests;
 using Nonae.Core.Results;
 
 namespace Nonae.Core.Handlers
@@ -14,17 +14,17 @@ namespace Nonae.Core.Handlers
 			_successor = successor;
 		}
 
-		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint, ICredentials credentials)
+		public IResult Handle(IEndpointDetails endpoint, ICredentials credentials, HttpMethod httpMethod)
 		{
 		    return !credentials.IsAnonymous
-		               ? CheckCredentials(requestDetails, endpoint, credentials)
-		               : _successor.Handle(requestDetails, endpoint, credentials);
+		               ? CheckCredentials(endpoint, credentials, httpMethod)
+		               : _successor.Handle(endpoint, credentials, httpMethod);
 		}
 
-		private IResult CheckCredentials(IRequestDetails requestDetails, IEndpointDetails endpoint, ICredentials credentials)
+		private IResult CheckCredentials(IEndpointDetails endpoint, ICredentials credentials, HttpMethod httpMethod)
 		{
 			return credentials.IsAuthenticated
-				       ? _successor.Handle(requestDetails, endpoint, credentials)
+                       ? _successor.Handle(endpoint, credentials, httpMethod)
 				       : new UnauthorizedResult(credentials.FailureMessage);
 		}
 	}

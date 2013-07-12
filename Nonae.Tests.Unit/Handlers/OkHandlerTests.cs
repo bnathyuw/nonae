@@ -16,10 +16,9 @@ namespace Nonae.Tests.Unit.Handlers
 		{
 			var okHandler = new OkHandler();
 
-			var requestDetails = MockRepository.GenerateStub<IRequestDetails>();
 		    var endpointDetails = MockRepository.GenerateStub<IEndpointDetails>();
 		    var credentials = MockRepository.GenerateStub<ICredentials>();
-            var result = okHandler.Handle(requestDetails, endpointDetails, credentials);
+            var result = okHandler.Handle(endpointDetails, credentials, null);
 
 			Assert.That(result, Is.TypeOf<OkResult>());
 		}

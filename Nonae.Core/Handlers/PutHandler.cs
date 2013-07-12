@@ -1,4 +1,5 @@
-﻿using Nonae.Core.Authorization;
+﻿using System.Net.Http;
+using Nonae.Core.Authorization;
 using Nonae.Core.Endpoints;
 using Nonae.Core.Requests;
 using Nonae.Core.Results;
@@ -7,7 +8,7 @@ namespace Nonae.Core.Handlers
 {
 	public class PutHandler:IHandler
 	{
-		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint, ICredentials credentials)
+		public IResult Handle(IEndpointDetails endpoint, ICredentials credentials, HttpMethod httpMethod)
 		{
 			endpoint.Save();
 			return new CreatedResult(endpoint);

@@ -1,3 +1,4 @@
+using System.Net.Http;
 using Nonae.Core.Authorization;
 using Nonae.Core.Endpoints;
 using Nonae.Core.Requests;
@@ -7,6 +8,6 @@ namespace Nonae.Core.Handlers
 {
 	public interface IHandler
 	{
-		IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint, ICredentials credentials);
+		IResult Handle(IEndpointDetails endpoint, ICredentials credentials, HttpMethod httpMethod);
 	}
 }

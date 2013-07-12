@@ -15,13 +15,13 @@ namespace Nonae.Core.Handlers
 			_successor = successor;
 		}
 
-		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint, ICredentials credentials)
+		public IResult Handle(IEndpointDetails endpoint, ICredentials credentials, HttpMethod httpMethod)
 		{
 			// _endpointDetails: Authorize against endpoint?
 
-			return requestDetails.Answers(HttpMethod.Options)
+			return httpMethod == HttpMethod.Options
 				       ? new OptionsResult(endpoint)
-				       : _successor.Handle(requestDetails, endpoint, credentials);
+				       : _successor.Handle(endpoint, credentials, httpMethod);
 		}
 	}
 }

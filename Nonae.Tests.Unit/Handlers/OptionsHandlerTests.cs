@@ -14,7 +14,6 @@ namespace Nonae.Tests.Unit.Handlers
 	{
 		private IHandler _successor;
 		private OptionsHandler _handler;
-		private IRequestDetails _requestDetails;
 	    private IEndpointDetails _endpointDetails;
 	    private ICredentials _credentials;
 
@@ -23,7 +22,6 @@ namespace Nonae.Tests.Unit.Handlers
 		{
 			_successor = MockRepository.GenerateStub<IHandler>();
 			_handler = new OptionsHandler(_successor);
-			_requestDetails = MockRepository.GenerateStub<IRequestDetails>();
 		    _endpointDetails = MockRepository.GenerateStub<IEndpointDetails>();
 	        _credentials = MockRepository.GenerateStub<ICredentials>();
 		}
@@ -31,9 +29,7 @@ namespace Nonae.Tests.Unit.Handlers
 		[Test]
 		public void Returns_options_result_if_the_request_method_is_options()
 		{
-			_requestDetails.Stub(rd => rd.Answers(HttpMethod.Options)).Return(true);
-
-            var result = _handler.Handle(_requestDetails, _endpointDetails, _credentials);
+            var result = _handler.Handle(_endpointDetails, _credentials, HttpMethod.Options);
 
 			Assert.That(result, Is.TypeOf<OptionsResult>());
 		}
@@ -41,13 +37,12 @@ namespace Nonae.Tests.Unit.Handlers
 		[Test]
 		public void Returns_result_from_successor_if_the_request_method_is_not_options()
 		{
-			_requestDetails.Stub(rd => rd.Answers(HttpMethod.Options)).Return(false);
 			var expectedResult = MockRepository.GenerateStub<IResult>();
-            _successor.Stub(s => s.Handle(_requestDetails, _endpointDetails, _credentials)).Return(expectedResult);
+            _successor.Stub(s => s.Handle(_endpointDetails, _credentials, HttpMethod.Get)).Return(expectedResult);
 
-            var result = _handler.Handle(_requestDetails, _endpointDetails, _credentials);
+            var result = _handler.Handle(_endpointDetails, _credentials, HttpMethod.Get);
 
-            _successor.AssertWasCalled(s => s.Handle(_requestDetails, _endpointDetails, _credentials));
+            _successor.AssertWasCalled(s => s.Handle(_endpointDetails, _credentials, HttpMethod.Get));
 			Assert.That(result, Is.EqualTo(expectedResult));
 		}
 	}

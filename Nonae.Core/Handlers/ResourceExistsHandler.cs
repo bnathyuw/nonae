@@ -1,4 +1,5 @@
-﻿using Nonae.Core.Authorization;
+﻿using System.Net.Http;
+using Nonae.Core.Authorization;
 using Nonae.Core.Endpoints;
 using Nonae.Core.Requests;
 using Nonae.Core.Results;
@@ -16,11 +17,11 @@ namespace Nonae.Core.Handlers
 			_resourceNotFoundSuccessor = resourceNotFoundSuccessor;
 		}
 
-		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint, ICredentials credentials)
+		public IResult Handle(IEndpointDetails endpoint, ICredentials credentials, HttpMethod httpMethod)
 		{
             return endpoint.ResourceExists
-				? _resourceFoundSuccessor.Handle(requestDetails, endpoint, credentials) 
-				: _resourceNotFoundSuccessor.Handle(requestDetails, endpoint, credentials);
+				? _resourceFoundSuccessor.Handle(endpoint, credentials, httpMethod) 
+				: _resourceNotFoundSuccessor.Handle(endpoint, credentials, httpMethod);
 		}
 	}
 }

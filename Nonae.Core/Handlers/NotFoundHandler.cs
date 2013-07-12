@@ -15,10 +15,10 @@ namespace Nonae.Core.Handlers
 			_putHandler = putHandler;
 		}
 
-		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint, ICredentials credentials)
+		public IResult Handle(IEndpointDetails endpoint, ICredentials credentials, HttpMethod httpMethod)
 		{
-			return requestDetails.Answers(HttpMethod.Put) 
-				? _putHandler.Handle(requestDetails, endpoint, credentials) 
+			return httpMethod == HttpMethod.Put 
+				? _putHandler.Handle(endpoint, credentials, httpMethod) 
 				: NotFoundResult.ForNonexistentResource();
 		}
 	}

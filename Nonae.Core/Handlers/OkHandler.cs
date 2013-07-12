@@ -1,3 +1,4 @@
+using System.Net.Http;
 using Nonae.Core.Authorization;
 using Nonae.Core.Endpoints;
 using Nonae.Core.Requests;
@@ -7,7 +8,7 @@ namespace Nonae.Core.Handlers
 {
 	internal class OkHandler : IHandler
 	{
-		public IResult Handle(IRequestDetails requestDetails, IEndpointDetails endpoint, ICredentials credentials)
+		public IResult Handle(IEndpointDetails endpoint, ICredentials credentials, HttpMethod httpMethod)
 		{
 			return new OkResult(endpoint);
 		}
